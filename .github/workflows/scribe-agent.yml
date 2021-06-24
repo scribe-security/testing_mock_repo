@@ -1,5 +1,8 @@
 name: scribe agent
 
+env:
+  SCRIBE_DEFAULT_URL: https://api.scribesecurity.com
+
 on:
   push:
   pull_request:
@@ -7,7 +10,7 @@ on:
     inputs:
       url:
         description: 'Scribe url'
-        required: true
+        required: false
         default: 'https://api.scribesecurity.com'
 
 jobs:
@@ -26,4 +29,4 @@ jobs:
        fetch-depth: 0
     - run: agent --version
     - run: printenv
-    - run: agent snapshot -vv -n github-push -u ${{ github.event.inputs.url }} -t ${{ secrets.scribe_backend_token_id }} -H github
+    - run: agent snapshot -vv -n github-push -u ${{ github.event.inputs.url || env.SCRIBE_DEFAULT_URL }} -t ${{ secrets.scribe_backend_token_id }} -H github
