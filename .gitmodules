@@ -1,0 +1,3 @@
+[submodule "integrations"]
+	path = integrations
+	url = git@github.com:scribe-security/integrations.git
