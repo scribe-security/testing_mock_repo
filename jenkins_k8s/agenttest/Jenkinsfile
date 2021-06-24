@@ -1,0 +1,98 @@
+def Agent_snapshot(String name) {
+    def out_data = sh(script: """agent snapshot -r=true  -vv -n ${name}""",returnStdout: true)
+    println out_data
+}
+
+pipeline {
+  agent {
+    kubernetes {
+      yamlFile 'jenkins_k8s/agenttest/KubernetesPod.yaml'
+    }
+  }
+
+  parameters {
+      gitParameter name: 'BRANCH_NAME',
+          branchFilter: 'origin/(.*)',
+          selectedValue: 'NONE',
+          defaultValue: 'master',
+          type: 'PT_BRANCH'
+  }
+
+    environment {
+        GIT_AUTHOR_NAME = 'jenkins_git_user'
+        GIT_AUTHOR_EMAIL = 'jenkins_git_user@mail.com'
+    }
+
+  stages {
+    stage('Maven') {
+      steps {
+        container('maven') {
+          sh 'mvn -version'
+          sh 'mvn -B -DskipTests -f jenkins_k8s/external/simple-java-maven-app/pom.xml clean package'
+        }
+        container('agent') {
+          Agent_snapshot("Post-maven")
+        }
+      }
+    }
+    stage('Busybox') {
+       steps {
+        container('busybox') {
+            sh 'echo BUSYBOX_CONTAINER_ENV_VAR = ${CONTAINER_ENV_VAR}'
+            // sh 'help'
+            sh 'echo test > some_stage_create_file.txt'
+          }
+        container('agent') {
+          Agent_snapshot("Post-Busybox")
+        }        
+      }
+    }
+    stage('Git') {
+      steps {
+        container('git') {
+            sh 'git version'
+            script {
+                  env.GIT_TEST_VARIABLE = "some git stage test value"
+            }
+            sh "git config --global user.name ${env.GIT_AUTHOR_NAME}"
+            sh "git config --global user.email ${env.GIT_AUTHOR_EMAIL}"
+            sh '''echo test2 > some_stage_create_file.txt            
+            git add some_stage_create_file.txt
+            git commit -m "Added some file some_stage_create_file.txt"'''
+        }
+        container('agent') {
+          Agent_snapshot("Post-git")
+        }
+      }
+    }
+    stage('Node') {
+       steps {
+        container('node12') {
+            sh 'whoami'
+            sh 'hostname -i'
+            sh '''#!/bin/bash 
+            set -x
+            cd jenkins_k8s/external/simple-hello-world-example-npm/
+            npm i'''
+        }
+        container('agent') {
+          Agent_snapshot("Post-node")
+         }
+       }
+    }
+    stage('Kaniko') {
+      steps {
+        container(name: 'kaniko', shell: '/busybox/sh') {
+           sh '''#!/busybox/sh
+            set -x
+            echo "FROM jenkins/inbound-agent:latest" > Dockerfile
+            /kaniko/executor -f `pwd`/Dockerfile --verbosity debug -c `pwd` --insecure --skip-tls-verify --cache=false --destination=image --no-push --tarPath=`pwd`/jenkins_inbound-agent.tar
+          '''
+        }
+        container('agent') {
+          Agent_snapshot("Post-kaniko")
+        }
+      }
+    }
+  }
+}

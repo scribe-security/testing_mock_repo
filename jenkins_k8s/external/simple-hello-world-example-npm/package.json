@@ -1,0 +1,39 @@
+{
+  "name": "simple-hello-world-example",
+  "version": "1.0.6",
+  "description": "a simple hello world example",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test.js"
+  },
+  "license": "MIT",
+  "keywords": [
+    "hello world"
+  ],
+  "author": "Manav shrivastava <manavshrivastava@hotmail.com>",
+  "engines": {
+    "node": ">4.0"
+  },
+  "homepage": "http://github.com/manavshrivastavagit/simple-hello-world-example-npm",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://github.com/manavshrivastavagit/simple-hello-world-example-npm/LICENSE"
+    }
+  ],
+  "contributors": [
+    {
+      "name": "Manav Shrivastava",
+      "email": "manavshrivastava@hotmail.com",
+      "url": "https://github.com/manavshrivastavagit"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/manavshrivastavagit/simple-hello-world-example-npm.git"
+  },
+  "devDependencies": {
+    "chai": "4.1.2",
+    "mocha": "5.0.5"
+  }
+}

@@ -1,0 +1,71 @@
+metadata:
+  labels:
+    some-label: agenttest
+spec:
+  imagePullSecrets:
+  - name: artifactory-cred-id
+  hostAliases:
+  - ip: "127.0.0.1"
+    hostnames:
+    - "scribe.local"
+    - "scribe.local.com"
+  - ip: "192.168.49.1"
+    hostnames:
+    - "host.minikube.internal"
+  containers:
+  - name: jnlp
+    env:
+    - name: CONTAINER_ENV_VAR
+      value: jnlp
+  - name: agent
+    image: scribesecuriy.jfrog.io/scribe-docker-local/agent:latest
+    command:
+    - cat
+    tty: true
+    env:
+    - name: CONTAINER_ENV_VAR
+      value: agent
+  - name: maven
+    image: maven:3.3.9-jdk-8-alpine
+    command:
+    - cat
+    tty: true
+    env:
+    - name: CONTAINER_ENV_VAR
+      value: maven
+  - name: busybox
+    image: busybox
+    command:
+    - cat
+    tty: true
+    env:
+    - name: CONTAINER_ENV_VAR
+      value: busybox
+  - name: git
+    image: alpine/git
+    command:
+      - cat
+    tty: true
+    env:
+    - name: CONTAINER_ENV_VAR
+      value: git
+  - name: node12
+    image: node:12-buster
+    command:
+      - cat
+    tty: true
+    env:
+    - name: CONTAINER_ENV_VAR
+      value: node12
+  - name: kaniko
+    workingDir: /home/jenkins/agent
+    image: gcr.io/kaniko-project/executor:debug
+    imagePullPolicy: Always
+    command:
+    - /busybox/cat
+    tty: true
+    env:
+    - name: CONTAINER_ENV_VAR
+      value: kaniko
+
+  
