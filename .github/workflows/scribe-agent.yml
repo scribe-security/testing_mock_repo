@@ -7,7 +7,7 @@ on:
     inputs:
       url:
         description: 'Scribe url'
-        required: false
+        required: true
         default: 'https://api.scribesecurity.com'
 
 jobs:
