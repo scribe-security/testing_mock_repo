@@ -1,5 +1,5 @@
 def Agent_snapshot(String name) {
-    def out_data = sh(script: """agent snapshot -r=true  -vv -n ${name}""",returnStdout: true)
+    def out_data = sh(script: """agent snapshot -r=true  -vv -u ${params.SCRIBE_URL} -n ${name}""",returnStdout: true)
     println out_data
 }
 
@@ -11,11 +11,15 @@ pipeline {
   }
 
   parameters {
-      gitParameter name: 'BRANCH_NAME',
+      gitParameter(name: 'BRANCH_NAME',
           branchFilter: 'origin/(.*)',
           selectedValue: 'NONE',
           defaultValue: 'master',
-          type: 'PT_BRANCH'
+          type: 'PT_BRANCH')
+
+      string(defaultValue: 'https://api.scribesecurity.com', 
+        name: 'SCRIBE_URL', 
+        trim: true)
   }
 
     environment {
