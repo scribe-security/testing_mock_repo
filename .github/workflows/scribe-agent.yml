@@ -19,6 +19,7 @@ jobs:
         username: github
         password: ${{ secrets.scribe_artifactory_cred_id }}
     steps:
+    - run: echo "Hello ${{ github.event.inputs.url }}!"
     - name: Checkout source
       uses: actions/checkout@v2
       with:
