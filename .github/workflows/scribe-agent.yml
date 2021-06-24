@@ -5,14 +5,10 @@ on:
   pull_request:
   workflow_dispatch:
     inputs:
-      name:
-        description: 'Person to greet'
-        required: true
-        default: 'Mona the Octocat'
-      home:
-        description: 'location'
+      url:
+        description: 'Scribe url'
         required: false
-        default: 'The Octoverse'
+        default: 'https://api.scribesecurity.com'
 
 jobs:
   scribe-agent:
