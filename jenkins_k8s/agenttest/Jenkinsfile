@@ -1,6 +1,8 @@
 def Agent_snapshot(String name) {
-    def out_data = sh(script: """agent snapshot -r=true  -vv -u ${params.SCRIBE_URL} -n ${name}""",returnStdout: true)
-    println out_data
+    withCredentials([usernamePassword(credentialsId: 'scribe-backend-basic-id', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+      def out_data = sh(script: """agent snapshot -r=true  -vv -u ${params.SCRIBE_URL} -n ${name} -U ${USERNAME} -P ${PASSWORD}""",returnStdout: true)
+      println out_data
+    }
 }
 
 pipeline {
@@ -9,7 +11,7 @@ pipeline {
       yamlFile 'jenkins_k8s/agenttest/KubernetesPod.yaml'
     }
   }
-
+  
   parameters {
       gitParameter(name: 'BRANCH_NAME',
           branchFilter: 'origin/(.*)',
