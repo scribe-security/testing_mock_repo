@@ -36,6 +36,7 @@ pipeline {
             sh 'echo BUSYBOX_CONTAINER_ENV_VAR = ${CONTAINER_ENV_VAR}'
             // sh 'help'
             sh 'echo test > some_stage_create_file.txt'
+            sh 'echo test > some_stage_create_file2.txt'
           }
         container('agent') {
           Agent_snapshot("Post-Busybox")
@@ -62,7 +63,8 @@ pipeline {
             }
             sh "git config --global user.name ${env.GIT_AUTHOR_NAME}"
             sh "git config --global user.email ${env.GIT_AUTHOR_EMAIL}"
-            sh '''echo test2 > some_stage_create_file.txt            
+            sh '''echo test_something_else > some_stage_create_file.txt
+            echo test_something_else > some_stage_create_file2.txt      
             git add some_stage_create_file.txt
             git commit -m "Added some file some_stage_create_file.txt"'''
         }
