@@ -29,4 +29,4 @@ jobs:
        fetch-depth: 0
     - run: agent --version
     - run: printenv
-    - run: agent snapshot -vv -n github-push -u ${{ github.event.inputs.url || env.SCRIBE_DEFAULT_URL }} -t ${{ secrets.scribe_backend_token_id }} -H github
+    - run: agent snapshot -vv -n github-push -u ${{ github.event.inputs.url || env.SCRIBE_DEFAULT_URL }} -T ${{ secrets.scribe_backend_token_id }} -H github
