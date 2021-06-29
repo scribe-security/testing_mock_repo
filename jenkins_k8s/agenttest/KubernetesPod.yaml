@@ -3,7 +3,7 @@ metadata:
     some-label: agenttest
 spec:
   imagePullSecrets:
-  - name: artifactory-cred-id
+  - name: scribe-artifactory-cred-id
   hostAliases:
   - ip: "127.0.0.1"
     hostnames:
@@ -25,14 +25,14 @@ spec:
     env:
     - name: CONTAINER_ENV_VAR
       value: agent
-  # - name: maven
-  #   image: maven:3.3.9-jdk-8-alpine
-  #   command:
-  #   - cat
-  #   tty: true
-  #   env:
-  #   - name: CONTAINER_ENV_VAR
-  #     value: maven
+  - name: maven
+    image: maven:3.3.9-jdk-8-alpine
+    command:
+    - cat
+    tty: true
+    env:
+    - name: CONTAINER_ENV_VAR
+      value: maven
   - name: busybox
     image: busybox
     command:
