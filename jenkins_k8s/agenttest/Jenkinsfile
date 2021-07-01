@@ -19,7 +19,10 @@ pipeline {
           defaultValue: 'master',
           type: 'PT_BRANCH')
 
-      string(defaultValue: 'https://api.scribesecurity.com', 
+      // string(defaultValue: 'https://api.scribesecurity.com', 
+      //   name: 'SCRIBE_URL', 
+      //   trim: true)
+       string(defaultValue: 'http://host.minikube.internal:4000', 
         name: 'SCRIBE_URL', 
         trim: true)
   }

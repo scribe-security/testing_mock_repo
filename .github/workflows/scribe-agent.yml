@@ -11,7 +11,8 @@ on:
       url:
         description: 'Scribe url'
         required: false
-        default: 'https://api.scribesecurity.com'
+        default : 'http://hqzxx4bpayrk4sdrfifigq.webrelay.io'
+        # default: 'https://api.scribesecurity.com'
 
 jobs:
   scribe-agent:
