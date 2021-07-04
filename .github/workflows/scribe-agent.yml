@@ -17,7 +17,7 @@ jobs:
   scribe-agent:
     runs-on: ubuntu-latest
     container:
-      image: scribesecuriy.jfrog.io/scribe-docker-local/agent:latest
+      image: scribesecuriy.jfrog.io/scribe-docker-local/agent:0.0.18
       credentials:
         username: github
         password: ${{ secrets.scribe_artifactory_cred_id }}

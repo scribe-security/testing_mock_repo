@@ -18,7 +18,7 @@ spec:
     - name: CONTAINER_ENV_VAR
       value: jnlp
   - name: agent
-    image: scribesecuriy.jfrog.io/scribe-docker-local/agent:latest
+    image: scribesecuriy.jfrog.io/scribe-docker-local/agent:0.0.18
     command:
     - cat
     tty: true

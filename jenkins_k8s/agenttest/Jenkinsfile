@@ -16,7 +16,7 @@ pipeline {
       gitParameter(name: 'BRANCH_NAME',
           branchFilter: 'origin/(.*)',
           selectedValue: 'NONE',
-          defaultValue: 'master',
+          defaultValue: 'demo/0.0.18',
           type: 'PT_BRANCH')
 
       string(defaultValue: 'https://api.scribesecurity.com', 
