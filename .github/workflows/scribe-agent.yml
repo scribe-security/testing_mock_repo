@@ -1,7 +1,7 @@
 name: scribe agent
 
 env:
-  SCRIBE_DEFAULT_URL: https://api.scribesecurity.com
+  SCRIBE_DEFAULT_URL: https://api.dev.scribesecurity.com
 
 on:
   push:
@@ -11,7 +11,7 @@ on:
       url:
         description: 'Scribe url'
         required: false
-        default: 'https://api.scribesecurity.com'
+        default: 'https://api.dev.scribesecurity.com'
 
 jobs:
   scribe-agent:

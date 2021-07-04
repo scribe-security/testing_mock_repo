@@ -19,7 +19,7 @@ pipeline {
           defaultValue: 'demo/0.0.18',
           type: 'PT_BRANCH')
 
-      string(defaultValue: 'https://api.scribesecurity.com', 
+      string(defaultValue: 'https://api.dev.scribesecurity.com', 
         name: 'SCRIBE_URL', 
         trim: true)
   }
