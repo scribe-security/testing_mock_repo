@@ -1,8 +1,7 @@
 name: scribe agent
 
 env:
-  SCRIBE_DEFAULT_URL: http://hqzxx4bpayrk4sdrfifigq.webrelay.io
-  # SCRIBE_DEFAULT_URL: https://api.scribesecurity.com
+  SCRIBE_DEFAULT_URL: https://api.scribesecurity.com
 
 on:
   push:
