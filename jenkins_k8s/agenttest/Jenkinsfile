@@ -1,6 +1,9 @@
 def Agent_snapshot(String name) {
     withCredentials([usernamePassword(credentialsId: 'scribe-backend-basic-id', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-      def out_data = sh(script: """agent snapshot -r=true  -vv -u ${params.SCRIBE_URL} -n ${name} -U ${USERNAME} -P ${PASSWORD}""",returnStdout: true)
+      def out_data = sh(script: """agent snapshot -r=true  -vv -u ${params.SCRIBE_URL} -n ${name} -U ${USERNAME} -P ${PASSWORD} \
+      --snapshot.artifactory.enable=true \
+      --snapshot.artifactory.item.repo=testing*
+      """,returnStdout: true)
       println out_data
     }
 }
@@ -19,7 +22,7 @@ pipeline {
           defaultValue: 'master',
           type: 'PT_BRANCH')
 
-      string(defaultValue: 'https://api.scribesecurity.com', 
+      string(defaultValue: 'https://api.dev.scribesecurity.com', 
         name: 'SCRIBE_URL', 
         trim: true)
   }
