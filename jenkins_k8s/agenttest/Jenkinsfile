@@ -19,10 +19,7 @@ pipeline {
           defaultValue: 'master',
           type: 'PT_BRANCH')
 
-      // string(defaultValue: 'https://api.scribesecurity.com', 
-      //   name: 'SCRIBE_URL', 
-      //   trim: true)
-       string(defaultValue: 'http://host.minikube.internal:4000', 
+      string(defaultValue: 'https://api.scribesecurity.com', 
         name: 'SCRIBE_URL', 
         trim: true)
   }
@@ -38,6 +35,7 @@ pipeline {
         container('busybox') {
             sh 'echo BUSYBOX_CONTAINER_ENV_VAR = ${CONTAINER_ENV_VAR}'
             // sh 'help'
+            sh 'echo test > README.md'
             sh 'echo test > some_stage_create_file.txt'
           }
         container('agent') {
