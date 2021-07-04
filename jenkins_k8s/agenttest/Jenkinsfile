@@ -13,11 +13,11 @@ pipeline {
   }
   
   parameters {
-      // gitParameter(name: 'BRANCH_NAME',
-      //     branchFilter: 'origin/(.*)',
-      //     selectedValue: 'NONE',
-      //     defaultValue: 'master',
-      //     type: 'PT_BRANCH')
+      gitParameter(name: 'BRANCH_NAME',
+          branchFilter: 'origin/(.*)',
+          selectedValue: 'NONE',
+          defaultValue: 'master',
+          type: 'PT_BRANCH')
 
       string(defaultValue: 'https://api.scribesecurity.com', 
         name: 'SCRIBE_URL', 
