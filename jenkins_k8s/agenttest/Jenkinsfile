@@ -45,11 +45,11 @@ pipeline {
     stage('Kaniko-push') {
       steps {
         container(name: 'kaniko', shell: '/busybox/sh') {
-           sh '''#!/busybox/sh
+           sh """#!/busybox/sh
             set -x
             echo "FROM jenkins/inbound-agent:latest" > Dockerfile
-            /kaniko/executor -f `pwd`/Dockerfile --verbosity debug -c `pwd` --insecure --skip-tls-verify --cache=false --destination=scribesecuriy.jfrog.io/scribe-testing-local/test_image:${env.BUILD_ID}
-          '''
+            /kaniko/executor -f `pwd`/Dockerfile --verbosity debug -c `pwd` --insecure --skip-tls-verify --cache=false --destination=scribesecuriy.jfrog.io/scribe-testing-local/test_image: ${env.BUILD_ID}
+            """
         }
       }
     }
