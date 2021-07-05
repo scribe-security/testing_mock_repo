@@ -8,7 +8,7 @@ def Agent_snapshot(String name) {
       --artifactory.password=${ART_PASSWORD} \
       --snapshot.artifactory.item.repo=testing*
       """,returnStdout: true)
-      println ################## name env.ART_USERNAME
+      println name env.ART_USERNAME
       println out_data
     }
 }
