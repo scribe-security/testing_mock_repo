@@ -2,7 +2,7 @@ def Agent_snapshot(String name) {
     withCredentials([usernamePassword(credentialsId: 'scribe-backend-basic-id', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD'),
                      usernamePassword(credentialsId: 'client-artifactory-cred-id', usernameVariable: 'ART_USERNAME', passwordVariable: 'ART_PASSWORD')]) {
       def out_data = sh(script: """agent snapshot -r=true  -vv -u ${params.SCRIBE_URL} -n ${name} -U ${USERNAME} -P ${PASSWORD} \
-       --artifactory.enable=true
+       --artifactory.enable=true \
       --artifactory.username=${ART_USERNAME} \
       --artifactory.password=${ART_PASSWORD} \
       --snapshot.artifactory.enable=true \
