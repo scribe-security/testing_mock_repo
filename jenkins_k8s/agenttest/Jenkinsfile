@@ -12,8 +12,8 @@ def Agent_snapshot(String name) {
 }
 
 
-go run main.go snapshot -vv --artifactory.username=mikey@scribesecurity.com --artifactory.password=Iamhipster3# --artifactory.url=https://scribesecuriy.jfrog.io/   --snapshot.file.enable=false --snapshot.git.enable=false --snapshot.artifactory.enable=true --artifactory.enable=true --snapshot.artifactory.item.lastminutes=100000 --snapshot.artifactory.item.lastseconds=0  -vv --snapshot.artifactory.item.name=* --snapshot.artifactory.item.repo=scribe-docker-local
-[4] 0:bash*                                                                                                            
+// go run main.go snapshot -vv --artifactory.username=mikey@scribesecurity.com --artifactory.password=Iamhipster3# --artifactory.url=https://scribesecuriy.jfrog.io/   --snapshot.file.enable=false --snapshot.git.enable=false --snapshot.artifactory.enable=true --artifactory.enable=true --snapshot.artifactory.item.lastminutes=100000 --snapshot.artifactory.item.lastseconds=0  -vv --snapshot.artifactory.item.name=* --snapshot.artifactory.item.repo=scribe-docker-local
+// [4] 0:bash*                                                                                                            
 
 pipeline {
   agent {
