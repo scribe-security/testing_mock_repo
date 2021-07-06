@@ -55,7 +55,7 @@ pipeline {
             set -x
             echo "FROM jenkins/inbound-agent:latest" > Dockerfile
             /kaniko/executor -h
-            /kaniko/executor -f `pwd`/Dockerfile --verbosity debug -c `pwd` --cache=false --destination=scribesecuriy.jfrog.io/scribe-testing-local/test_image:${env.BUILD_ID}
+            /kaniko/executor  -v `pwd`/config.json:/kaniko/.docker/config.json:ro -f `pwd`/Dockerfile --verbosity debug -c `pwd` --cache=false --destination=scribesecuriy.jfrog.io/scribe-testing-local/test_image:${env.BUILD_ID}
             """
         }
       }
