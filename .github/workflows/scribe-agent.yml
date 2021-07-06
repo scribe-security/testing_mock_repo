@@ -2,6 +2,7 @@ name: scribe agent
 
 env:
   SCRIBE_DEFAULT_URL: https://api.dev.scribesecurity.com
+  SNAPSHOT_TYPE: file
 
 on:
   push:
