@@ -31,7 +31,7 @@ jobs:
     - run: agent --version
     - run: printenv
     - name: Agent sample files metadata
-        if: ${{ env.TYPE }} == 'file'
+        if: ${{ env.TYPE  == 'file' }}
         run: |
           run: agent snapshot -vv -n github-push -u ${{ github.event.inputs.scribe_url || env.SCRIBE_DEFAULT_URL }} -t ${{ secrets.scribe_backend_token_id }} -H github
 
