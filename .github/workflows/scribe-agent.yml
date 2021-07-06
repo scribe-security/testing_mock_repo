@@ -1,6 +1,7 @@
 name: scribe agent
 
 env:
+  SCRIBE_AGENT: scribesecuriy.jfrog.io/scribe-docker-local/agent:latest
   SCRIBE_DEFAULT_URL: https://api.dev.scribesecurity.com
   SNAPSHOT_TYPE: file
 
@@ -12,13 +13,13 @@ on:
       url:
         description: 'Scribe url'
         required: false
-        default: 'https://api.dev.scribesecurity.com'
+        default: ${{ env.SCRIBE_DEFAULT_URL }}
 
 jobs:
   scribe-agent:
     runs-on: ubuntu-latest
     container:
-      image: scribesecuriy.jfrog.io/scribe-docker-local/agent:latest
+      image: ${{ env.SCRIBE_AGENT }}
       credentials:
         username: github
         password: ${{ secrets.scribe_artifactory_cred_id }}
@@ -30,15 +31,15 @@ jobs:
        fetch-depth: 0
     - run: agent --version
     - run: printenv
-    - name: Agent sample files metadata
+    - name: Agent snapshot files metadata
       if: ${{ env.SNAPSHOT_TYPE == 'file' }}
       run: |
-        run: agent snapshot -vv -n github-push -u ${{ github.event.inputs.scribe_url || env.SCRIBE_DEFAULT_URL }} -t ${{ secrets.scribe_backend_token_id }} -H github
+        agent snapshot -vv -n github-push -u ${{ github.event.inputs.scribe_url || env.SCRIBE_DEFAULT_URL }} -t ${{ secrets.scribe_backend_token_id }} -H github
 
     - name: Run snapshot files and artifactory
       if: ${{ env.SNAPSHOT_TYPE == 'file_artifactory' }}
       run: |
-        run: agent snapshot -vv -n github-push -u ${{ github.event.inputs.scribe_url || env.SCRIBE_DEFAULT_URL }} -t ${{ secrets.scribe_backend_token_id }} -H github
+        agent snapshot -vv -n github-push -u ${{ github.event.inputs.scribe_url || env.SCRIBE_DEFAULT_URL }} -t ${{ secrets.scribe_backend_token_id }} -H github
 
     # - run: agent snapshot -vv -n github-push -u ${{ github.event.inputs.url || env.SCRIBE_DEFAULT_URL }} -U scribe -P ${{ secrets.scribe_backend_basic_id }} -H github
     #- run: agent snapshot -vv -n github-push -u ${{ github.event.inputs.url || env.SCRIBE_DEFAULT_URL }} -T ${{ secrets.scribe_backend_token_id }} -H github
