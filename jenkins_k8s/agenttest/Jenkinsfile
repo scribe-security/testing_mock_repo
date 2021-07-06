@@ -44,6 +44,11 @@ pipeline {
   stages {
     stage('Kaniko-push') {
       steps {
+          withCredentials([usernamePassword(credentialsId: 'client-artifactory-cred-id', usernameVariable: 'ART_USERNAME', passwordVariable: 'ART_PASSWORD')]) {
+                    sh 'jenkins_k8s/scripts/kaniko_config.sh $ART_USERNAME $ART_PASSWORD'
+                    sh 'ls -lh'
+                    }
+
         container(name: 'kaniko', shell: '/busybox/sh') {
            sh """
             #!/busybox/sh
