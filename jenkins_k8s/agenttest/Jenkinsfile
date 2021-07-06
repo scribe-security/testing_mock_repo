@@ -43,24 +43,6 @@ pipeline {
     }
 
   stages {
-    stage('Kaniko-push') {
-      steps {
-          withCredentials([usernamePassword(credentialsId: 'client-artifactory-cred-id', usernameVariable: 'ART_USERNAME', passwordVariable: 'ART_PASSWORD')]) {
-                    sh 'jenkins_k8s/scripts/kaniko_config.sh $ART_USERNAME $ART_PASSWORD'
-                    sh 'ls -lh'
-                    }
-
-        container(name: 'kaniko', shell: '/busybox/sh') {
-           sh """
-            #!/busybox/sh
-            set -x
-            cat config.json
-            echo "FROM jenkins/inbound-agent:latest" > Dockerfile                                                                                                            
-            /kaniko/executor  -v `pwd`/config.json:/kaniko/.docker/config.json:ro -f `pwd`/Dockerfile --verbosity debug -c `pwd` --destination=scribesecuriy.jfrog.io/scribe-testing-local/testing:${BUILD_NUMBER}
-            """
-        }
-      }
-    }
     stage('Busybox') {
        steps {
         container('busybox') {
@@ -130,6 +112,25 @@ pipeline {
         container('agent') {
           Agent_snapshot("Post-kaniko")
         }
+      }
+    }
+    stage('Kaniko-push') {
+      steps {
+          withCredentials([usernamePassword(credentialsId: 'client-artifactory-cred-id', usernameVariable: 'ART_USERNAME', passwordVariable: 'ART_PASSWORD')]) {
+                    sh 'jenkins_k8s/scripts/kaniko_config.sh $ART_USERNAME $ART_PASSWORD'
+                    }
+        container(name: 'kaniko', shell: '/busybox/sh') {
+           sh """
+            #!/busybox/sh
+            set -x
+            cat config.json
+            echo "FROM jenkins/inbound-agent:latest" > Dockerfile                                                                                                            
+            /kaniko/executor  -v `pwd`/config.json:/kaniko/.docker/config.json:ro -f `pwd`/Dockerfile --verbosity debug -c `pwd` --destination=scribesecuriy.jfrog.io/scribe-testing-local/testing:${BUILD_NUMBER}
+            """
+        }
+      }
+      container('agent') {
+        Agent_snapshot("Kaniko-push")
       }
     }
   }
