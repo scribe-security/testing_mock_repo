@@ -7,7 +7,7 @@ def Agent_snapshot(String name) {
       --artifactory.url=https://scribesecuriy.jfrog.io/ \
       --artifactory.username=${ART_USERNAME} \
       --artifactory.password=${ART_PASSWORD} \
-      --snapshot.artifactory.item.repo=manifest.json \
+      --snapshot.artifactory.item.name=manifest.json \
       --snapshot.artifactory.item.repo=scribe-testing-local
       """,returnStdout: true)
       println out_data
