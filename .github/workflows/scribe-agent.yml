@@ -31,14 +31,14 @@ jobs:
     - run: agent --version
     - run: printenv
     - name: Agent sample files metadata
-        if: ${{ env.SNAPSHOT_TYPE == 'Mon' }}
-        run: |
-          run: agent snapshot -vv -n github-push -u ${{ github.event.inputs.scribe_url || env.SCRIBE_DEFAULT_URL }} -t ${{ secrets.scribe_backend_token_id }} -H github
+      if: ${{ env.SNAPSHOT_TYPE == 'Mon' }}
+      run: |
+        run: agent snapshot -vv -n github-push -u ${{ github.event.inputs.scribe_url || env.SCRIBE_DEFAULT_URL }} -t ${{ secrets.scribe_backend_token_id }} -H github
 
     - name: Run snapshot files and artifactory
-        if: ${{ env.SNAPSHOT_TYPE == 'Mon1' }}
-        run: |
-          run: agent snapshot -vv -n github-push -u ${{ github.event.inputs.scribe_url || env.SCRIBE_DEFAULT_URL }} -t ${{ secrets.scribe_backend_token_id }} -H github
+      if: ${{ env.SNAPSHOT_TYPE == 'Mon1' }}
+      run: |
+        run: agent snapshot -vv -n github-push -u ${{ github.event.inputs.scribe_url || env.SCRIBE_DEFAULT_URL }} -t ${{ secrets.scribe_backend_token_id }} -H github
 
     # - run: agent snapshot -vv -n github-push -u ${{ github.event.inputs.url || env.SCRIBE_DEFAULT_URL }} -U scribe -P ${{ secrets.scribe_backend_basic_id }} -H github
     #- run: agent snapshot -vv -n github-push -u ${{ github.event.inputs.url || env.SCRIBE_DEFAULT_URL }} -T ${{ secrets.scribe_backend_token_id }} -H github
