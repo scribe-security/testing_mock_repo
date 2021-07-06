@@ -1,7 +1,6 @@
 name: scribe agent
 
 env:
-  SCRIBE_AGENT: scribesecuriy.jfrog.io/scribe-docker-local/agent:latest
   SCRIBE_DEFAULT_URL: https://api.dev.scribesecurity.com
   SNAPSHOT_TYPE: file
 
@@ -19,7 +18,7 @@ jobs:
   scribe-agent:
     runs-on: ubuntu-latest
     container:
-      image: ${{ env.SCRIBE_AGENT }}
+      image: scribesecuriy.jfrog.io/scribe-docker-local/agent:latest
       credentials:
         username: github
         password: ${{ secrets.scribe_artifactory_cred_id }}
