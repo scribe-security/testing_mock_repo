@@ -43,6 +43,6 @@ jobs:
         --snapshot.artifactory.enable=true \
         --artifactory.url=https://scribesecuriy.jfrog.io/ \
         --artifactory.username=github \
-        --artifactory.password= ${{ secrets.scribe_artifactory_cred_id }} \
+        --artifactory.password=${{ secrets.scribe_artifactory_cred_id }} \
         --snapshot.artifactory.item.name=manifest.json \
         --snapshot.artifactory.item.repo=scribe-testing-local
