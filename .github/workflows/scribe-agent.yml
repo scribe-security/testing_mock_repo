@@ -12,7 +12,7 @@ on:
       url:
         description: 'Scribe url'
         required: false
-        default: ${{ env.SCRIBE_DEFAULT_URL }}
+        default: https://api.dev.scribesecurity.com
 
 jobs:
   scribe-agent:
