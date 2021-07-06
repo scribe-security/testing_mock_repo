@@ -128,9 +128,9 @@ pipeline {
             /kaniko/executor  -v `pwd`/config.json:/kaniko/.docker/config.json:ro -f `pwd`/Dockerfile --verbosity debug -c `pwd` --destination=scribesecuriy.jfrog.io/scribe-testing-local/testing:${BUILD_NUMBER}
             """
         }
-      }
-      container('agent') {
-        Agent_snapshot("Kaniko-push")
+        container('agent') {
+         Agent_snapshot("Kaniko-push")
+         }
       }
     }
   }
