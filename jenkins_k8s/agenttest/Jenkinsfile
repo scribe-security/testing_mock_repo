@@ -7,6 +7,7 @@ def Agent_snapshot(String name) {
       --artifactory.url=https://scribesecuriy.jfrog.io/ \
       --artifactory.username=${ART_USERNAME} \
       --artifactory.password=${ART_PASSWORD} \
+      --snapshot.artifactory.item.repo=manifest.json \
       --snapshot.artifactory.item.repo=scribe-testing-local
       """,returnStdout: true)
       println out_data
@@ -55,7 +56,7 @@ pipeline {
             set -x
             cat config.json
             echo "FROM jenkins/inbound-agent:latest" > Dockerfile                                                                                                            
-            /kaniko/executor  -v `pwd`/config.json:/kaniko/.docker/config.json:ro -f `pwd`/Dockerfile --verbosity debug -c `pwd` --destination=scribesecuriy.jfrog.io/scribe-testing-local/testing:latest
+            /kaniko/executor  -v `pwd`/config.json:/kaniko/.docker/config.json:ro -f `pwd`/Dockerfile --verbosity debug -c `pwd` --destination=scribesecuriy.jfrog.io/scribe-testing-local/testing:${BUILD_NUMBER}
             """
         }
       }
