@@ -2,7 +2,7 @@ name: scribe agent
 
 env:
   SCRIBE_DEFAULT_URL: https://api.dev.scribesecurity.com
-  SNAPSHOT_TYPE: file_artifactory
+  SNAPSHOT_TYPE: file
 
 on:
   push:
@@ -34,15 +34,3 @@ jobs:
       if: ${{ env.SNAPSHOT_TYPE == 'file' }}
       run: |
        agent snapshot -vv -n github-push -u ${{ github.event.inputs.url || env.SCRIBE_DEFAULT_URL }} -U scribe -P ${{ secrets.scribe_backend_basic_id }} -H github
-
-    - name: Run snapshot files and artifactory
-      if: ${{ env.SNAPSHOT_TYPE == 'file_artifactory' }}
-      run: |
-        agent snapshot -vv -n github-push -u ${{ github.event.inputs.url || env.SCRIBE_DEFAULT_URL }} -U scribe -P ${{ secrets.scribe_backend_basic_id }} -H github \
-        --artifactory.enable=true \
-        --snapshot.artifactory.enable=true \
-        --artifactory.url=https://scribesecuriy.jfrog.io/ \
-        --artifactory.username=github \
-        --artifactory.password=${{ secrets.scribe_artifactory_cred_id }} \
-        --snapshot.artifactory.item.name=manifest.json \
-        --snapshot.artifactory.item.repo=scribe-testing-local
