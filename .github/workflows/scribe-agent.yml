@@ -31,12 +31,12 @@ jobs:
     - run: agent --version
     - run: printenv
     - name: Agent sample files metadata
-      if: ${{ env.SNAPSHOT_TYPE == 'Mon' }}
+      if: ${{ env.SNAPSHOT_TYPE == 'file' }}
       run: |
         run: agent snapshot -vv -n github-push -u ${{ github.event.inputs.scribe_url || env.SCRIBE_DEFAULT_URL }} -t ${{ secrets.scribe_backend_token_id }} -H github
 
     - name: Run snapshot files and artifactory
-      if: ${{ env.SNAPSHOT_TYPE == 'Mon1' }}
+      if: ${{ env.SNAPSHOT_TYPE == 'file_artifactory' }}
       run: |
         run: agent snapshot -vv -n github-push -u ${{ github.event.inputs.scribe_url || env.SCRIBE_DEFAULT_URL }} -t ${{ secrets.scribe_backend_token_id }} -H github
 
