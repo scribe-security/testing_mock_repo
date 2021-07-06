@@ -53,8 +53,7 @@ pipeline {
            sh """
             #!/busybox/sh
             set -x
-            echo "FROM jenkins/inbound-agent:latest" > Dockerfile
-            /kaniko/executor -h                                                                                                                
+            echo "FROM jenkins/inbound-agent:latest" > Dockerfile                                                                                                            
             /kaniko/executor  -v `pwd`/config.json:/kaniko/.docker/config.json:ro -f `pwd`/Dockerfile --verbosity debug -c `pwd` --destination=scribesecuriy.jfrog.io/scribe-testing-local/testing:latest
             """
         }
