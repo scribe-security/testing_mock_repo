@@ -2,7 +2,7 @@ def Agent_snapshot(String name) {
     withCredentials([usernamePassword(credentialsId: 'scribe-backend-basic-id', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
       def out_data = sh(script: """agent snapshot -r=true  -vv -u ${params.SCRIBE_URL} -n ${name} -U ${USERNAME} -P ${PASSWORD} \
        --snapshot.bomber.enable=true \
-       --snapshot.bomber.hookfile=^.*.tar\$
+       --snapshot.bomber.hookfile=^.*\.tar\$
       """,returnStdout: true)
       println out_data
     }
@@ -33,51 +33,51 @@ pipeline {
     }
 
   stages {
-    stage('Busybox') {
-       steps {
-        container('busybox') {
-            sh 'echo BUSYBOX_CONTAINER_ENV_VAR = ${CONTAINER_ENV_VAR}'
-            // sh 'help'
-            sh 'echo test > some_stage_create_file.txt'
-          }
-        container('agent') {
-          Agent_snapshot("Post-Busybox")
-        }        
-      }
-    }
-    stage('Git') {
-      steps {
-        container('git') {
-            sh 'git version'
-            script {
-                  env.GIT_TEST_VARIABLE = "some git stage test value"
-            }
-            sh "git config --global user.name ${env.GIT_AUTHOR_NAME}"
-            sh "git config --global user.email ${env.GIT_AUTHOR_EMAIL}"
-            sh '''echo test2 > some_stage_create_file.txt            
-            git add some_stage_create_file.txt
-            git commit -m "Added some file some_stage_create_file.txt"'''
-        }
-        container('agent') {
-          Agent_snapshot("Post-git")
-        }
-      }
-    }
-    stage('Node') {
-       steps {
-        container('node12') {
-            sh 'whoami'
-            sh 'hostname -i'
-            sh '''#!/bin/bash 
-            set -x
-            cd jenkins_k8s/external/simple-hello-world-example-npm/
-            npm i'''
-        }
-        container('agent') {
-          Agent_snapshot("Post-node")
-         }
-       }
-    }
+    // stage('Busybox') {
+    //    steps {
+    //     container('busybox') {
+    //         sh 'echo BUSYBOX_CONTAINER_ENV_VAR = ${CONTAINER_ENV_VAR}'
+    //         // sh 'help'
+    //         sh 'echo test > some_stage_create_file.txt'
+    //       }
+    //     container('agent') {
+    //       Agent_snapshot("Post-Busybox")
+    //     }        
+    //   }
+    // }
+    // stage('Git') {
+    //   steps {
+    //     container('git') {
+    //         sh 'git version'
+    //         script {
+    //               env.GIT_TEST_VARIABLE = "some git stage test value"
+    //         }
+    //         sh "git config --global user.name ${env.GIT_AUTHOR_NAME}"
+    //         sh "git config --global user.email ${env.GIT_AUTHOR_EMAIL}"
+    //         sh '''echo test2 > some_stage_create_file.txt            
+    //         git add some_stage_create_file.txt
+    //         git commit -m "Added some file some_stage_create_file.txt"'''
+    //     }
+    //     container('agent') {
+    //       Agent_snapshot("Post-git")
+    //     }
+    //   }
+    // }
+    // stage('Node') {
+    //    steps {
+    //     container('node12') {
+    //         sh 'whoami'
+    //         sh 'hostname -i'
+    //         sh '''#!/bin/bash 
+    //         set -x
+    //         cd jenkins_k8s/external/simple-hello-world-example-npm/
+    //         npm i'''
+    //     }
+    //     container('agent') {
+    //       Agent_snapshot("Post-node")
+    //      }
+    //    }
+    // }
     stage('Kaniko') {
       steps {
         container(name: 'kaniko', shell: '/busybox/sh') {
@@ -90,6 +90,18 @@ pipeline {
         container('agent') {
           Agent_snapshot("Post-kaniko")
         }
+      }
+    }
+    stage('Busybox') {
+    steps {
+    container('busybox') {
+        sh 'echo BUSYBOX_CONTAINER_ENV_VAR = ${CONTAINER_ENV_VAR}'
+        // sh 'help'
+        sh 'echo test > some_stage_create_file.txt'
+      }
+    container('agent') {
+      Agent_snapshot("Post-Busybox")
+        }        
       }
     }
   }
