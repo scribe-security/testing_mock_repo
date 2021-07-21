@@ -54,22 +54,10 @@ pipeline {
             sh '''#!/bin/bash 
             set -x
             GOPATH=$(pwd)
-            go get github.com/go-cmd/cmd'''
+            go get github.com/spf13/pflag'''
         }
         container('agent') {
           Agent_snapshot("Post-golang")
-          }
-      }
-    }
-    stage('Alpine') {
-      steps {
-        container('alpine') {
-            sh '''
-            apk add curl
-            ln -s /usr/lib export_lib'''
-        }
-        container('agent') {
-          Agent_snapshot("Post-alpine")
           }
       }
     }
