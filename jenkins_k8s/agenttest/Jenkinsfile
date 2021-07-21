@@ -74,8 +74,6 @@ pipeline {
     stage('Node') {
        steps {
         container('node12') {
-            sh 'whoami'
-            sh 'hostname -i'
             sh '''#!/bin/bash 
             set -x
             cd jenkins_k8s/external/simple-hello-world-example-npm/
