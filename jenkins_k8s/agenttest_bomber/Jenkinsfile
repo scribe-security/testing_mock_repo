@@ -97,7 +97,7 @@ pipeline {
           sh '''#!/bin/bash 
           set -x
           pip install virtualenv
-          vritualenv venv
+          virutalenv venv
           source venv/bin/activate
           pip install argparse'''
       }
