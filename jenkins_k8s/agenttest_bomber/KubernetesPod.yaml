@@ -33,14 +33,14 @@ spec:
     env:
     - name: CONTAINER_ENV_VAR
       value: busybox
-  - name: git
-    image: alpine/git
+  - name: pyhton
+    image: python:latest
     command:
       - cat
     tty: true
     env:
     - name: CONTAINER_ENV_VAR
-      value: git
+      value: python
   - name: node12
     image: node:12-buster
     command:
