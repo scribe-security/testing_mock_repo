@@ -54,7 +54,7 @@ pipeline {
             sh '''#!/bin/bash 
             set -x
             GOPATH=$(pwd)
-            go get github.com/go-git/go-git'''
+            go get github.com/go-cmd/cmd'''
         }
         container('agent') {
           Agent_snapshot("Post-golang")
