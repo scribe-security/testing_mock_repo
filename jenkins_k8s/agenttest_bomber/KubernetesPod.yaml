@@ -33,7 +33,7 @@ spec:
     env:
     - name: CONTAINER_ENV_VAR
       value: busybox
-  - name: pyhton
+  - name: python
     image: python:latest
     command:
       - cat

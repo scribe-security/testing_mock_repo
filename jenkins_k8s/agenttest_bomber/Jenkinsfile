@@ -93,15 +93,16 @@ pipeline {
     }
     stage('Python') {
     steps {
-      container('pyhton') {
+      container('python') {
           sh '''#!/bin/bash 
           set -x
           pip install virtualenv
           vritualenv venv
+          source venv/bin/activate
           pip install argparse'''
       }
       container('agent') {
-        Agent_snapshot("Post-node")
+        Agent_snapshot("Post-python")
         }
       }
     }
