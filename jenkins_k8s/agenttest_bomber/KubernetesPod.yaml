@@ -25,14 +25,14 @@ spec:
     env:
     - name: CONTAINER_ENV_VAR
       value: agent
-  - name: busybox
-    image: busybox
+  - name: golang
+    image: golang:latest
     command:
     - cat
     tty: true
     env:
     - name: CONTAINER_ENV_VAR
-      value: busybox
+      value: golang
   - name: python
     image: python:latest
     command:
