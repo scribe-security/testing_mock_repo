@@ -33,6 +33,14 @@ spec:
     env:
     - name: CONTAINER_ENV_VAR
       value: golang
+  - name: alpine
+    image: alpine:latest
+    command:
+    - cat
+    tty: true
+    env:
+    - name: CONTAINER_ENV_VAR
+      value: alpine
   - name: python
     image: python:latest
     command:

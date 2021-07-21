@@ -34,74 +34,43 @@ pipeline {
     }
 
   stages {
-    // stage('Busybox') {
-    //    steps {
-    //     container('busybox') {
-    //         sh 'echo BUSYBOX_CONTAINER_ENV_VAR = ${CONTAINER_ENV_VAR}'
-    //         // sh 'help'
-    //         sh 'echo test > some_stage_create_file.txt'
-    //       }
-    //     container('agent') {
-    //       Agent_snapshot("Post-Busybox")
-    //     }        
-    //   }
-    // }
-    // stage('Git') {
+    // stage('Kaniko') {
     //   steps {
-    //     container('git') {
-    //         sh 'git version'
-    //         script {
-    //               env.GIT_TEST_VARIABLE = "some git stage test value"
-    //         }
-    //         sh "git config --global user.name ${env.GIT_AUTHOR_NAME}"
-    //         sh "git config --global user.email ${env.GIT_AUTHOR_EMAIL}"
-    //         sh '''echo test2 > some_stage_create_file.txt            
-    //         git add some_stage_create_file.txt
-    //         git commit -m "Added some file some_stage_create_file.txt"'''
+    //     container(name: 'kaniko', shell: '/busybox/sh') {
+    //        sh '''#!/busybox/sh
+    //         set -x
+    //         echo "FROM busybox:latest" > Dockerfile
+    //         /kaniko/executor -f `pwd`/Dockerfile --verbosity debug -c `pwd` --insecure --skip-tls-verify --cache=false --destination=image --no-push --tarPath=`pwd`/jenkins_inbound-agent.tar
+    //       '''
     //     }
     //     container('agent') {
-    //       Agent_snapshot("Post-git")
+    //       Agent_snapshot("Post-kaniko")
     //     }
     //   }
     // }
-    // stage('Node') {
-    //    steps {
-    //     container('node12') {
-    //         sh '''#!/bin/bash 
-    //         set -x
-    //         cd jenkins_k8s/external/simple-hello-world-example-npm/
-    //         npm i'''
-    //     }
-    //     container('agent') {
-    //       Agent_snapshot("Post-node")
-    //      }
-    //    }
-    // }
-    stage('Kaniko') {
+    stage('Golang') {
       steps {
-        container(name: 'kaniko', shell: '/busybox/sh') {
-           sh '''#!/busybox/sh
+        container('golang') {
+            sh '''#!/bin/bash 
             set -x
-            echo "FROM busybox:latest" > Dockerfile
-            /kaniko/executor -f `pwd`/Dockerfile --verbosity debug -c `pwd` --insecure --skip-tls-verify --cache=false --destination=image --no-push --tarPath=`pwd`/jenkins_inbound-agent.tar
-          '''
+            GOPATH=$(pwd)
+            go get github.com/go-git/go-git'''
         }
         container('agent') {
-          Agent_snapshot("Post-kaniko")
-        }
+          Agent_snapshot("Post-golang")
+          }
       }
     }
-    stage('Golang') {
-    steps {
-      container('golang') {
-          sh '''#!/bin/bash 
-          set -x
-          GOPATH=$(pwd)
-          go get github.com/go-git/go-git'''
-      }
-      container('agent') {
-        Agent_snapshot("Post-golang")
+    stage('Alpine') {
+      steps {
+        container('alpine') {
+            sh '''
+            apk add curl
+            ln -s /usr/lib export_lib'''
         }
+        container('agent') {
+          Agent_snapshot("Post-alpine")
+          }
       }
     }
     // stage('Python') {
