@@ -93,16 +93,19 @@ pipeline {
         }
       }
     }
-    stage('Busybox') {
+    stage('Node') {
     steps {
-    container('busybox') {
-        sh 'echo BUSYBOX_CONTAINER_ENV_VAR = ${CONTAINER_ENV_VAR}'
-        // sh 'help'
-        sh 'echo test > some_stage_create_file.txt'
+      container('node12') {
+          sh 'whoami'
+          sh 'hostname -i'
+          sh '''#!/bin/bash 
+          set -x
+          cd jenkins_k8s/external/simple-hello-world-example-npm/
+          npm i'''
       }
-    container('agent') {
-      Agent_snapshot("Post-Busybox")
-        }        
+      container('agent') {
+        Agent_snapshot("Post-node")
+        }
       }
     }
   }
