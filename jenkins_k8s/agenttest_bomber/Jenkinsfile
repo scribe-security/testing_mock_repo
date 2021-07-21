@@ -91,21 +91,34 @@ pipeline {
         }
       }
     }
-    stage('Python') {
+    stage('Golang') {
     steps {
-      container('python') {
+      container('golang') {
           sh '''#!/bin/bash 
           set -x
-          pip install virtualenv
-          virtualenv venv
-          source venv/bin/activate
-          pip install argparse'''
+          GOPATH=$(pwd)
+          go get github.com/spf13/viper'''
       }
       container('agent') {
-        Agent_snapshot("Post-python")
+        Agent_snapshot("Post-golang")
         }
       }
     }
+    // stage('Python') {
+    // steps {
+    //   container('python') {
+    //       sh '''#!/bin/bash 
+    //       set -x
+    //       pip install virtualenv
+    //       virtualenv venv
+    //       source venv/bin/activate
+    //       pip install argparse'''
+    //   }
+    //   container('agent') {
+    //     Agent_snapshot("Post-python")
+    //     }
+    //   }
+    // }
     // stage('Node') {
     // steps {
     //   container('node12') {
