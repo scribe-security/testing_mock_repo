@@ -54,7 +54,7 @@ pipeline {
             sh '''#!/bin/bash 
             set -x
             GOPATH=$(pwd)
-            go get github.com/spf13/pflag'''
+            go get github.com/spf13/viper'''
         }
         container('agent') {
           Agent_snapshot("Post-golang")
