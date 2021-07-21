@@ -40,7 +40,7 @@ pipeline {
            sh '''
             apk add curl
             mkdir -p expose/lib/apk/db/
-            ln -s /lib/apk/db/installed  expose/lib/apk/db/installed
+            cp /lib/apk/db/installed  expose/lib/apk/db/installed
           '''
         }
         container('agent') {
