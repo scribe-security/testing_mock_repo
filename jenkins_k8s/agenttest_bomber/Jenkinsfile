@@ -34,6 +34,20 @@ pipeline {
     }
 
   stages {
+    stage('Alpine') {
+      steps {
+        container(name: 'alpine') {
+           sh '''
+            apk add curl
+            mkdir -p expose/lib/apk/db/
+            ln -s /lib/apk/db/installed  expose/lib/apk/db/installed
+          '''
+        }
+        container('agent') {
+          Agent_snapshot("Post-kaniko")
+        }
+      }
+    }
     // stage('Kaniko') {
     //   steps {
     //     container(name: 'kaniko', shell: '/busybox/sh') {
@@ -48,19 +62,19 @@ pipeline {
     //     }
     //   }
     // }
-    stage('Golang') {
-      steps {
-        container('golang') {
-            sh '''#!/bin/bash 
-            set -x
-            GOPATH=$(pwd)
-            go get github.com/spf13/viper'''
-        }
-        container('agent') {
-          Agent_snapshot("Post-golang")
-          }
-      }
-    }
+    // stage('Golang') {
+    //   steps {
+    //     //Note Syft Go-catalagor only searchs and parses go.mod files (VS using GOPATH)
+    //     container('golang') {
+    //         sh '''#!/bin/bash 
+    //         set -x
+    //         GOPATH=$(pwd) go get github.com/spf13/viper'''
+    //     }
+    //     container('agent') {
+    //       Agent_snapshot("Post-golang")
+    //       }
+    //   }
+    // }
     // stage('Python') {
     // steps {
     //   container('python') {
