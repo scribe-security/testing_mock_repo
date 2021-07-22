@@ -44,9 +44,8 @@ pipeline {
           '''
         }
         container('agent') {
-          sh 'ls -lh expose/lib/apk/db/'
-          sh 'cat expose/lib/apk/db/installed'
           Agent_snapshot("Post-kaniko")
+          sh 'rm -rf expose'
         }
       }
     }
