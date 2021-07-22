@@ -55,7 +55,7 @@ pipeline {
            sh '''
             apk add curl
             mkdir -p expose/ruby
-            find . -type f -name "Gemfile.lock" -not -path "*/test/*" -exec sh -c 'DIR=expose/gem/$(basename $(dirname {})) ; mkdir -p $DIR && cp {} "$DIR"' \;
+            find . -type f -name "Gemfile.lock" -not -path "*/test/*" -exec sh -c 'DIR=expose/gem/$(basename $(dirname {})) ; mkdir -p $DIR && cp {} "$DIR"' ;
           '''
         }
         container('agent') {
@@ -91,6 +91,7 @@ pipeline {
         }
         container('agent') {
           Agent_snapshot("Post-golang")
+          sh 'rm -rf go-cmd'
           }
       }
     }
