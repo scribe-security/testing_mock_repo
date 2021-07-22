@@ -64,19 +64,21 @@ pipeline {
     //     }
     //   }
     // }
-    // stage('Golang') {
-    //   steps {
-    //     //Note Syft Go-catalagor only searchs and parses go.mod files (VS using GOPATH)
-    //     container('golang') {
-    //         sh '''#!/bin/bash 
-    //         set -x
-    //         GOPATH=$(pwd) go get github.com/spf13/viper'''
-    //     }
-    //     container('agent') {
-    //       Agent_snapshot("Post-golang")
-    //       }
-    //   }
-    // }
+    stage('Golang') {
+      steps {
+        //Note Syft Go-catalagor only searchs and parses go.mod files (VS using GOPATH)
+        container('golang') {
+            sh '''#!/bin/bash 
+            set -x
+            git clone https://github.com/go-cmd/cmd.git go-cmd
+            #GOPATH=$(pwd) go get github.com/spf13/viper
+            '''
+        }
+        container('agent') {
+          Agent_snapshot("Post-golang")
+          }
+      }
+    }
     // stage('Python') {
     // steps {
     //   container('python') {
