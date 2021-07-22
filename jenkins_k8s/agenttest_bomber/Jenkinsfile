@@ -55,7 +55,7 @@ pipeline {
            sh '''
             gem install curl
             mkdir -p expose/ruby
-            find . -type f -name "Gemfile.lock" -not -path "*/test/*" -exec sh -c 'DIR=expose/gem/$(basename $(dirname {})) ; mkdir -p $DIR && cp {} "$DIR"' \\;
+            find / -type f -name "Gemfile.lock" -not -path "*/test/*" -exec sh -c 'DIR=expose/gem/$(basename $(dirname {})) ; mkdir -p $DIR && cp {} "$DIR"' \\;
           '''
         }
         container('agent') {
