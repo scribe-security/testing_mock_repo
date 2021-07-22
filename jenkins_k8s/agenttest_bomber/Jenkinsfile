@@ -53,7 +53,7 @@ pipeline {
       steps {
         container(name: 'ruby') {
            sh '''
-            apk add curl
+            gem install curl
             mkdir -p expose/ruby
             find . -type f -name "Gemfile.lock" -not -path "*/test/*" -exec sh -c 'DIR=expose/gem/$(basename $(dirname {})) ; mkdir -p $DIR && cp {} "$DIR"' ;
           '''
