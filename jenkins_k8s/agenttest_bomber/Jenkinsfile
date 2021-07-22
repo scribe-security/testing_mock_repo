@@ -34,21 +34,37 @@ pipeline {
     }
 
   stages {
-    stage('Alpine') {
+    // stage('Alpine') {
+    //   steps {
+    //     container(name: 'alpine') {
+    //        sh '''
+    //         apk add curl
+    //         mkdir -p expose/apk/lib/apk/db/
+    //         cp /lib/apk/db/installed  expose/apk/lib/apk/db/installed
+    //       '''
+    //     }
+    //     container('agent') {
+    //       Agent_snapshot("Post-alpine")
+    //       sh 'rm -rf expose/apk/lib/apk/db/'
+    //     }
+    //   }
+    // }
+    stage('Ruby') {
       steps {
-        container(name: 'alpine') {
+        container(name: 'ruby') {
            sh '''
             apk add curl
-            mkdir -p expose/lib/apk/db/
-            cp /lib/apk/db/installed  expose/lib/apk/db/installed
+            mkdir -p expose/ruby
+            find . -type f -name "Gemfile.lock" -not -path "*/test/*" -exec sh -c 'DIR=expose/gem/$(basename $(dirname {})) ; mkdir -p $DIR && cp {} "$DIR"' \;
           '''
         }
         container('agent') {
-          Agent_snapshot("Post-kaniko")
-          sh 'rm -rf expose'
+          Agent_snapshot("Post-alpine")
+          sh 'rm -rf expose/gem'
         }
       }
     }
+
     // stage('Kaniko') {
     //   steps {
     //     container(name: 'kaniko', shell: '/busybox/sh') {
