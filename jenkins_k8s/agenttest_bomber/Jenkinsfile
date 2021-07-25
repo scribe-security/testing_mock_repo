@@ -37,20 +37,39 @@ pipeline {
 
     //Note: Apk catalogor reads package details from java archive files eg: jav, war, ear, jpi, hpi
     // Files are commonly seen after build or installation
-    stage('Maven') {
+    // stage('Maven') {
+    //   steps {
+    //     container('maven') {
+
+    //        sh '''
+    //         mvn -B -DskipTests -f jenkins_k8s/external/simple-java-maven-app/pom.xml clean package
+    //         find / -type f -name "*.jar" -not -path "*/expose/*" -exec sh -c 'DIR=expose/java/jar ; mkdir -p $DIR && cp {} "$DIR"' \\;
+    //       '''
+
+    //     }
+    //     container('agent') {
+    //       Agent_snapshot("Post-maven")
+    //       sh 'rm -rf expose/java'
+    //       sh 'rm -rf jenkins_k8s/external/*.jar'
+    //     }
+    //   }
+    // }
+
+    //Note: RPM catalogor reads package details from the /var/lib/rpm/Packages/ whom lists the installed packages and versions
+    // Apk does now install log file relativly to the working dir
+    stage('Centos') {
       steps {
-        container('maven') {
+        container('centos') {
 
            sh '''
-            mvn -B -DskipTests -f jenkins_k8s/external/simple-java-maven-app/pom.xml clean package
-            find / -type f -name "*.jar" -not -path "*/expose/*" -exec sh -c 'DIR=expose/java/jar ; mkdir -p $DIR && cp {} "$DIR"' \\;
+            mkdir -p expose/rpm/var/lib/rpm/Packages
+            cp -r /var/lib/rpm/Packages/*  expose/rpm/var/lib/rpm/Packages/
           '''
 
         }
         container('agent') {
-          Agent_snapshot("Post-maven")
-          sh 'rm -rf expose/java'
-          sh 'rm -rf jenkins_k8s/external/*.jar'
+          Agent_snapshot("Post-centos")
+          sh 'rm -rf expose/rpm'
         }
       }
     }
