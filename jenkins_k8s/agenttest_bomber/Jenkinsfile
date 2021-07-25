@@ -57,25 +57,23 @@ pipeline {
 
     //Note: RPM catalogor reads package details from the /var/lib/rpm/Packages/ whom lists the installed packages and versions
     // Apk does now install log file relativly to the working dir
-    stage('Centos') {
-      steps {
-        container('centos') {
-
-           sh '''
-            yum install curl -y
-            ls -lh /var/lib/rpm/Packages
-            mkdir -p expose/rpm/var/lib/rpm
-            cp /var/lib/rpm/Packages  expose/rpm/var/lib/rpm/Packages
-            ls -lh expose/rpm/var/lib/rpm/Packages
-          '''
-
-        }
-        container('agent') {
-          Agent_snapshot("Post-centos")
-          sh 'rm -rf expose/rpm'
-        }
-      }
-    }
+    // stage('Centos') {
+    //   steps {
+    //     container('centos') {
+    //        sh '''
+    //         yum install curl -y
+    //         ls -lh /var/lib/rpm/Packages
+    //         mkdir -p expose/rpm/var/lib/rpm
+    //         cp /var/lib/rpm/Packages  expose/rpm/var/lib/rpm/Packages
+    //         ls -lh expose/rpm/var/lib/rpm/Packages
+    //       '''
+    //     }
+    //     container('agent') {
+    //       Agent_snapshot("Post-centos")
+    //       sh 'rm -rf expose/rpm'
+    //     }
+    //   }
+    // }
 
     //Note: Apk catalogor reads package details from the /lib/apk/db/installed whom lists the installed packages and versions
     // Apk does now install log file relativly to the working dir
@@ -108,11 +106,30 @@ pipeline {
     //       '''
     //     }
     //     container('agent') {
-    //       Agent_snapshot("Post-alpine")
+    //       Agent_snapshot("Post-ruby")
     //       sh 'rm -rf expose/gem'
     //     }
     //   }
     // }
+
+    //Note: Rust catalogor reads package details from the Cargo.lock whom lists a specific package dependencies.
+    // It does not include the actual package using the Cargo.lock.
+    // File is commonly in source code and preset after installation.
+    stage('Rust') {
+      steps {
+        container(name: 'rust') {
+           sh '''
+            cargo install ripgrep
+            mkdir -p expose/rust
+            find / -type f -name "Cargo.lock" -not -path "*/expose/*" -exec sh -c 'DIR=expose/rust/$(basename $(dirname {})) ; mkdir -p $DIR && cp {} "$DIR"' \\;
+          '''
+        }
+        container('agent') {
+          Agent_snapshot("Post-rust")
+          sh 'rm -rf expose/rust'
+        }
+      }
+    }
 
     // stage('Kaniko') {
     //   steps {
