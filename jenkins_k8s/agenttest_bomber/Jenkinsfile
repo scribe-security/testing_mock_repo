@@ -63,7 +63,7 @@ pipeline {
 
            sh '''
             mkdir -p expose/rpm/var/lib/rpm/Packages
-            cp -r /var/lib/rpm/Packages/*  expose/rpm/var/lib/rpm/Packages/
+            cp /var/lib/rpm/Packages  expose/rpm/var/lib/rpm/Packages
           '''
 
         }
