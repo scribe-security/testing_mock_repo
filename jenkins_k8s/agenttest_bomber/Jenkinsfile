@@ -39,11 +39,17 @@ pipeline {
     stage('Maven') {
       steps {
         container('maven') {
-          sh 'mvn -version'
-          sh 'mvn -B -DskipTests -f jenkins_k8s/external/simple-java-maven-app/pom.xml clean package'
+
+           sh '''
+            mvn -B -DskipTests -f jenkins_k8s/external/simple-java-maven-app/pom.xml clean package
+            find / -type f -name "*.jar" -not -path "*/expose/*" -exec sh -c 'DIR=expose/java/jar ; mkdir -p $DIR && cp {} "$DIR"' \\;
+            ls -lh expose/java
+          '''
+
         }
         container('agent') {
           Agent_snapshot("Post-maven")
+          sh 'rm -rf expose'
         }
       }
     }
@@ -75,7 +81,7 @@ pipeline {
     //        sh '''
     //         gem install curl
     //         mkdir -p expose/gem
-    //         find / -type f -name "Gemfile.lock" -not -path "*/test/*" -exec sh -c 'DIR=expose/gem/$(basename $(dirname {})) ; mkdir -p $DIR && cp {} "$DIR"' \\;
+    //         find / -type f -name "Gemfile.lock" -not -path "*/expose/*" -exec sh -c 'DIR=expose/gem/$(basename $(dirname {})) ; mkdir -p $DIR && cp {} "$DIR"' \\;
     //       '''
     //     }
     //     container('agent') {
