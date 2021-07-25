@@ -63,8 +63,10 @@ pipeline {
 
            sh '''
             yum install curl -y
-            mkdir -p expose/rpm/var/lib/rpm/Packages
+            ls -lh /var/lib/rpm/Packages
+            mkdir -p expose/rpm/var/lib/rpm
             cp /var/lib/rpm/Packages  expose/rpm/var/lib/rpm/Packages
+            ls -lh expose/rpm/var/lib/rpm/Packages
           '''
 
         }
