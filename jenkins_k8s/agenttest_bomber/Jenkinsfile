@@ -35,6 +35,7 @@ pipeline {
 
   stages {
 
+    //Note: Apk catalogor reads package details from java archive files eg: jav, war, ear, jpi, hpi
     stage('Maven') {
       steps {
         container('maven') {
