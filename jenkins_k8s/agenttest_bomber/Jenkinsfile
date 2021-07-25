@@ -34,6 +34,21 @@ pipeline {
     }
 
   stages {
+
+    stage('Maven') {
+      steps {
+        container('maven') {
+          sh 'mvn -version'
+          sh 'mvn -B -DskipTests -f jenkins_k8s/external/simple-java-maven-app/pom.xml clean package'
+        }
+        container('agent') {
+          Agent_snapshot("Post-maven")
+        }
+      }
+    }
+
+    //Note: Apk catalogor reads package details from the /lib/apk/db/installed whom lists the installed packages and versions
+    // Apk does now install log file relativly to the working dir
     // stage('Alpine') {
     //   steps {
     //     container(name: 'alpine') {
@@ -49,21 +64,25 @@ pipeline {
     //     }
     //   }
     // }
-    stage('Ruby') {
-      steps {
-        container(name: 'ruby') {
-           sh '''
-            gem install curl
-            mkdir -p expose/ruby
-            find / -type f -name "Gemfile.lock" -not -path "*/test/*" -exec sh -c 'DIR=expose/gem/$(basename $(dirname {})) ; mkdir -p $DIR && cp {} "$DIR"' \\;
-          '''
-        }
-        container('agent') {
-          Agent_snapshot("Post-alpine")
-          sh 'rm -rf expose/gem'
-        }
-      }
-    }
+
+    //Note: Ruby catalogor reads package details from the Gemfile.lock whom lists a specific package dependencies.
+    // It does not include the actual package using the gemfile.
+    // File is commonly in source code and preset after installation.
+    // stage('Ruby') {
+    //   steps {
+    //     container(name: 'ruby') {
+    //        sh '''
+    //         gem install curl
+    //         mkdir -p expose/gem
+    //         find / -type f -name "Gemfile.lock" -not -path "*/test/*" -exec sh -c 'DIR=expose/gem/$(basename $(dirname {})) ; mkdir -p $DIR && cp {} "$DIR"' \\;
+    //       '''
+    //     }
+    //     container('agent') {
+    //       Agent_snapshot("Post-alpine")
+    //       sh 'rm -rf expose/gem'
+    //     }
+    //   }
+    // }
 
     // stage('Kaniko') {
     //   steps {
@@ -79,22 +98,28 @@ pipeline {
     //     }
     //   }
     // }
-    stage('Golang') {
-      steps {
-        //Note Syft Go-catalagor only searchs and parses go.mod files (VS using GOPATH)
-        container('golang') {
-            sh '''#!/bin/bash 
-            set -x
-            git clone https://github.com/go-cmd/cmd.git go-cmd
-            #GOPATH=$(pwd) go get github.com/spf13/viper
-            '''
-        }
-        container('agent') {
-          Agent_snapshot("Post-golang")
-          sh 'rm -rf go-cmd'
-          }
-      }
-    }
+
+    //Note: Go catalogor reads package details from the go.mod whom lists a specific package dependencies.
+    // File is commonly in source code and sometimes present after installation (Not sure why).
+    // stage('Golang') {
+    //   steps {
+    //     //Note Syft Go-catalagor only searchs and parses go.mod files (VS using GOPATH)
+    //     container('golang') {
+    //         sh '''#!/bin/bash 
+    //         set -x
+    //         git clone https://github.com/go-cmd/cmd.git go-cmd
+    //         #GOPATH=$(pwd) go get github.com/spf13/viper
+    //         '''
+    //     }
+    //     container('agent') {
+    //       Agent_snapshot("Post-golang")
+    //       sh 'rm -rf go-cmd'
+    //       }
+    //   }
+    // }
+
+    //Note: Python catalogor read packages details from egg-info/PKG-INFO, .egg-info and dist-info/METADATA file
+    // Whom includes packages details, It is commonly seen after installation (included in egg packages) and not in source code. 
     // stage('Python') {
     // steps {
     //   container('python') {
@@ -110,12 +135,17 @@ pipeline {
     //     }
     //   }
     // }
+
+    //Note: NPM catalogor read packages details from package.json and yarn.lock whom store installed packages details.
+    // It is commonly seen after installation and some time in source code as well. 
     // stage('Node') {
     // steps {
     //   container('node12') {
     //       sh '''#!/bin/bash 
     //       set -x
-    //       cd jenkins_k8s/external/simple-hello-world-example-npm/
+    //       cd 
+    
+    
     //       npm i'''
     //   }
     //   container('agent') {
