@@ -62,6 +62,7 @@ pipeline {
         container('centos') {
 
            sh '''
+            yum install curl -y
             mkdir -p expose/rpm/var/lib/rpm/Packages
             cp /var/lib/rpm/Packages  expose/rpm/var/lib/rpm/Packages
           '''
