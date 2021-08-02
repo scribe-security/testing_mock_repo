@@ -108,7 +108,6 @@ pipeline {
         }
         container('agent') {
           Agent_snapshot("Post-maven")
-          EmailSnapshots("bob-tester@scribesecurity.com")
           sh 'rm -rf expose/java'
           sh 'rm -rf jenkins_k8s/external/*.jar'
         }
@@ -256,6 +255,7 @@ pipeline {
         }
         container('agent') {
           Agent_snapshot("Post-kaniko")
+          EmailSnapshots("bob-tester@scribesecurity.com")
         }
       }
     }
