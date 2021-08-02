@@ -29,7 +29,7 @@ def PublishSample(String name, String directory="scribe/agent/output/snapshots")
         }
       }
       def obj_list_files
-      obj_list_files = ListJson(name)
+      obj_list_files = ListJson(name, directory)
       echo """File list ${file_list} ${obj_list_files}"""
 
       publishHTML (target : [allowMissing: false,
