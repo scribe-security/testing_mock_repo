@@ -28,7 +28,8 @@ def PublishSample(String name, String directory="scribe/agent/output") {
       def timestamp = readFile "${directory}/DIR_TIMESTAMP"
       sh """echo timestamp: ${timestamp}"""
       def snapshot_directory = """${directory}/snapshots/${name}/${timestamp}"""
-
+      sh """echo snapshot_directory: ${snapshot_directory}"""
+      sh """ls -lh ${snapshot_directory}"""
       for (f in  ListJson(snapshot_directory)) {
         if (! f.directory) {
           echo """Publishing ${f.name} ${f.path} ${f.directory} ${f.length} ${f.lastModified}"""
