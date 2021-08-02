@@ -22,7 +22,7 @@ def PublishSnapshots(String name, String directory="scribe/agent/output") {
     def file_list = []
     try {    
       def timestamp = readFile directory + '/DIR_TIMESTAMP'
-      def snapshot_directory = directory}+ '/snapshots/' + name + '/' + timestamp
+      def snapshot_directory = directory + '/snapshots/' + name + '/' + timestamp
       sh """dir: ${snapshot_directory}"""
       for (f in  ListJson(snapshot_directory)) {
         if (! f.directory) {
