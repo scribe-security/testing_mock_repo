@@ -17,7 +17,7 @@ def ListJson(String snapshot_directory) {
     dir ("""${snapshot_directory}""") {
       json_files = findFiles(glob: """*.json""")
     }
-    echo """List file ${directory}/${name} ${json_files}"""
+    echo """List file ${snapshot_directory} ${json_files}"""
     return json_files
 }
 
