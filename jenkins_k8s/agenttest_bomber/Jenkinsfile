@@ -120,7 +120,7 @@ pipeline {
         }
         container('agent') {
           Agent_snapshot("Post-alpine")
-          PublishSample( ${env.STAGE_NAME})
+          PublishSample(env.STAGE_NAME)
           sh 'rm -rf expose/apk/lib/apk/db/'
         }
       }
