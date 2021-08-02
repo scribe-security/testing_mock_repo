@@ -9,7 +9,7 @@ def Agent_snapshot(String name) {
     }
 }
 
-def ListJson(snapshot_directory String) {
+def ListJson(String snapshot_directory) {
     def json_files
     sh 'ls -lhR scribe'
 
