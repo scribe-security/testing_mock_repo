@@ -12,8 +12,8 @@ def Agent_snapshot(String name) {
 def ListJson(String name, String directory) {
     def json_files
     sh 'ls -lhR scribe'
-    sh """cat ${directory}/BUILD_TIMESTAMP"""
-    def timestamp = readFile "${directory}/BUILD_TIMESTAMP"
+    sh """cat ${directory}/DIR_TIMESTAMP"""
+    def timestamp = readFile "${directory}/DIR_TIMESTAMP"
     sh """echo timestamp: ${timestamp}"""
 
     dir ("""${directory}/snapshots/${name}""") {
