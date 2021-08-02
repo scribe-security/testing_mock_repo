@@ -41,7 +41,7 @@ def PublishSnapshots(String name, String directory="scribe/agent/output") {
           reportDir: snapshot_directory,
           reportFiles: obj_list_files.join(','),
           reportName: name])
-    }
+    // }
     // catch (Exception e) {
     //   echo 'Exception occurred: ' + e.toString()
     // }
