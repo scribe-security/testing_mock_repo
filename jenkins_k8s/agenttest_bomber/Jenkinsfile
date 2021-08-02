@@ -12,14 +12,18 @@ def Agent_snapshot(String name) {
 def ListJson(String name, String directory) {
     def json_files
     sh 'ls -lhR scribe'
-    dir ("""${directory}/${name}""") {
-      json_files = findFiles(glob: """*.json""")
+    sh """cat ${directory}/BUILD_TIMESTAMP"""
+    def timestamp = readFile "${directory}/BUILD_TIMESTAMP"
+    sh """echo timestamp: ${timestamp}"""
+
+    dir ("""${directory}/snapshots/${name}""") {
+      json_files = findFiles(glob: """**/*.json""")
     }
     echo """List file ${directory}/${name} ${json_files}"""
     return json_files
 }
 
-def PublishSample(String name, String directory="scribe/agent/output/snapshots") {
+def PublishSample(String name, String directory="scribe/agent/output") {
     def file_list = []
     try {    
       for (f in  ListJson(name, directory)) {
