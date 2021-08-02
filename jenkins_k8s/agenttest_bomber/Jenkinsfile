@@ -118,13 +118,13 @@ pipeline {
     // Apk does now install log file relativly to the working dir
     stage('Alpine') {
       steps {
-        container(name: 'alpine') {
-           sh '''
-            apk add curl
-            mkdir -p expose/apk/lib/apk/db/
-            cp /lib/apk/db/installed  expose/apk/lib/apk/db/installed
-          '''
-        }
+        // container(name: 'alpine') {
+        //    sh '''
+        //     apk add curl
+        //     mkdir -p expose/apk/lib/apk/db/
+        //     cp /lib/apk/db/installed  expose/apk/lib/apk/db/installed
+        //   '''
+        // }
         container('agent') {
           Agent_snapshot("Post-alpine")
           sh 'rm -rf expose/apk/lib/apk/db/'
