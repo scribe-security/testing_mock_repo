@@ -14,6 +14,7 @@ def ListJson(String name, String directory="scribe/agent/output/snapshots") {
     dir ("""${directory}/${name}""") {
       json_files = findFiles(glob: """*.json""")
     }
+    echo """List file"""
     return json_files
 }
 
