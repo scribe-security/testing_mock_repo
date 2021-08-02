@@ -29,14 +29,14 @@ def PublishSample(String name, String directory="scribe/agent/output") {
       sh """echo timestamp: ${timestamp}"""
       def snapshot_directory = """${directory}/snapshots/${name}/${timestamp}"""
 
-      for (f in  ListJson(name, directory)) {
+      for (f in  ListJson(snapshot_directory)) {
         if (! f.directory) {
           echo """Publishing ${f.name} ${f.path} ${f.directory} ${f.length} ${f.lastModified}"""
           file_list.add(f.path)
         }
       }
       def obj_list_files
-      obj_list_files = ListJson(name, snapshot_directory)
+      obj_list_files = ListJson(snapshot_directory)
       echo """File list ${snapshot_directory} ${file_list} ${obj_list_files}"""
 
       publishHTML (target : [allowMissing: false,
