@@ -9,7 +9,7 @@ def Agent_snapshot(String name) {
     }
 }
 
-def ListJson(String name, String directory="scribe/agent/output/snapshots") {
+def ListJson(String name, String directory) {
     def json_files
     sh 'ls -lhR scribe'
     dir ("""${directory}/${name}""") {
@@ -19,24 +19,29 @@ def ListJson(String name, String directory="scribe/agent/output/snapshots") {
     return json_files
 }
 
-def PublishSample(String name) {
+def PublishSample(String name, String directory="scribe/agent/output/snapshots") {
     def file_list = []
-    for (f in  ListJson(name)) {
-      if (! f.directory) {
-        echo """Publishing ${f.name} ${f.path} ${f.directory} ${f.length} ${f.lastModified}"""
-        file_list.add(f.path)
+    try {    
+      for (f in  ListJson(name, directory)) {
+        if (! f.directory) {
+          echo """Publishing ${f.name} ${f.path} ${f.directory} ${f.length} ${f.lastModified}"""
+          file_list.add(f.path)
+        }
       }
-    }
-    def obj_list_files
-    obj_list_files = ListJson(name)
-    echo """File list ${file_list} ${obj_list_files}"""
+      def obj_list_files
+      obj_list_files = ListJson(name)
+      echo """File list ${file_list} ${obj_list_files}"""
 
-    publishHTML (target : [allowMissing: false,
-        alwaysLinkToLastBuild: true,
-        keepAll: true,
-        reportDir: """samples/${name}""",
-        reportFiles: obj_list_files.join(','),
-        reportName: name])
+      publishHTML (target : [allowMissing: false,
+          alwaysLinkToLastBuild: true,
+          keepAll: true,
+          reportDir: """${directory}/${name}""",
+          reportFiles: obj_list_files.join(','),
+          reportName: name])
+    }
+    catch (Exception e) {
+      echo 'Exception occurred: ' + e.toString()
+    }
 }
 
 
