@@ -20,10 +20,10 @@ def ListJson(String snapshot_directory) {
 
 def PublishSnapshots(String name, String directory="scribe/agent/output") {
     def file_list = []
-    try {    
+    // try {    
       def timestamp = readFile directory + '/DIR_TIMESTAMP'
       def snapshot_directory = directory + '/snapshots/' + name + '/' + timestamp
-      sh """dir: ${snapshot_directory}"""
+      sh 'echo dir: ' + snapshot_directory
       sh 'ls -lhR scribe'
       for (f in  ListJson(snapshot_directory)) {
         if (! f.directory) {
@@ -42,9 +42,9 @@ def PublishSnapshots(String name, String directory="scribe/agent/output") {
           reportFiles: obj_list_files.join(','),
           reportName: name])
     }
-    catch (Exception e) {
-      echo 'Exception occurred: ' + e.toString()
-    }
+    // catch (Exception e) {
+    //   echo 'Exception occurred: ' + e.toString()
+    // }
 }
 
 
