@@ -52,17 +52,17 @@ def tar_samples(String dir, String tar="samples.tar"){
     return tar
 }
 
-def sendSnapshots(String recipients, String attachment="samples.tar") {
+def sendSnapshots(String recipients, String attachment="snapshots.tar") {
     def jobName = currentBuild.fullDisplayName
     emailext body: '''${SCRIPT, template="groovy-html.template"}''',
         attachLog: true,
         attachmentsPattern: attachment,
         mimeType: 'text/html',
-        subject: "[Scribe] sample ${jobName}",
+        subject: "[Scribe] snapshots ${jobName}",
         to: "${recipients}"
 }
 
-def EmailSnapshots(String recipients="scribe-samples@scribesecurity.com", String dir="scribe/agent/output", String tar="snapshots.tar") {
+def EmailSnapshots(String recipients="scribe-snapshots@scribesecurity.com", String dir="scribe/agent/output", String tar="snapshots.tar") {
     echo "Sending sample to $recipients"
     def attachment = tar_samples(dir,tar)
     sendSnapshots(recipients, attachment)
@@ -108,7 +108,7 @@ pipeline {
         }
         container('agent') {
           Agent_snapshot("Post-maven")
-          EmailSnapshots()
+          EmailSnapshots("mikey@scribe-security.com")
           sh 'rm -rf expose/java'
           sh 'rm -rf jenkins_k8s/external/*.jar'
         }
