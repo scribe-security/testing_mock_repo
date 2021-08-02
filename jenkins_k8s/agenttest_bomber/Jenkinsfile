@@ -11,6 +11,7 @@ def Agent_snapshot(String name) {
 
 def ListJson(String name, String directory="scribe/agent/output/snapshots") {
     def json_files
+    sh 'ls -lhR scribe'
     dir ("""${directory}/${name}""") {
       json_files = findFiles(glob: """*.json""")
     }
