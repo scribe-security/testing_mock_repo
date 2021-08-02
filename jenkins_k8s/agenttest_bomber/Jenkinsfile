@@ -12,7 +12,7 @@ def Agent_snapshot(String name) {
 
 def ListJson(String snapshot_directory) {
     def json_files
-    dir ("""${snapshot_directory}""") {
+    dir (snapshot_directory) {
       json_files = findFiles(glob: """*.json""")
     }
     return json_files
