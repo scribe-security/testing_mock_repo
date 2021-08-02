@@ -15,7 +15,7 @@ def ListJson(String name, String directory) {
     dir ("""${directory}/${name}""") {
       json_files = findFiles(glob: """*.json""")
     }
-    echo """List file"""
+    echo """List file ${directory}/${name} ${json_files}"""
     return json_files
 }
 
