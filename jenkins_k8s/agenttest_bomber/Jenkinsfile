@@ -75,57 +75,57 @@ pipeline {
 
   stages {
 
-    // //Note: Apk catalogor reads package details from java archive files eg: jav, war, ear, jpi, hpi
-    // // Files are commonly seen after build or installation
-    // stage('Maven') {
-    //   steps {
-    //     container('maven') {
+    //Note: Apk catalogor reads package details from java archive files eg: jav, war, ear, jpi, hpi
+    // Files are commonly seen after build or installation
+    stage('Maven') {
+      steps {
+        container('maven') {
 
-    //        sh '''
-    //         mvn -B -DskipTests -f jenkins_k8s/external/simple-java-maven-app/pom.xml clean package
-    //         find / -type f -name "*.jar" -not -path "*/expose/*" -exec sh -c 'DIR=expose/java/jar ; mkdir -p $DIR && cp {} "$DIR"' \\;
-    //       '''
+           sh '''
+            mvn -B -DskipTests -f jenkins_k8s/external/simple-java-maven-app/pom.xml clean package
+            find / -type f -name "*.jar" -not -path "*/expose/*" -exec sh -c 'DIR=expose/java/jar ; mkdir -p $DIR && cp {} "$DIR"' \\;
+          '''
 
-    //     }
-    //     container('agent') {
-    //       Agent_snapshot("Post-maven")
-    //       sh 'rm -rf expose/java'
-    //       sh 'rm -rf jenkins_k8s/external/*.jar'
-    //     }
-    //   }
-    // }
+        }
+        container('agent') {
+          Agent_snapshot("Post-maven")
+          sh 'rm -rf expose/java'
+          sh 'rm -rf jenkins_k8s/external/*.jar'
+        }
+      }
+    }
 
-    // //Note: RPM catalogor reads package details from the /var/lib/rpm/Packages whom lists the installed packages and versions
-    // // Apk does now install log file relativly to the working dir
-    // stage('Centos') {
-    //   steps {
-    //     container('centos') {
-    //        sh '''
-    //         yum install curl -y
-    //         ls -lh /var/lib/rpm/Packages
-    //         mkdir -p expose/rpm/var/lib/rpm
-    //         cp /var/lib/rpm/Packages  expose/rpm/var/lib/rpm/Packages
-    //         ls -lh expose/rpm/var/lib/rpm/Packages
-    //       '''
-    //     }
-    //     container('agent') {
-    //       Agent_snapshot("Post-centos")
-    //       sh 'rm -rf expose/rpm'
-    //     }
-    //   }
-    // }
+    //Note: RPM catalogor reads package details from the /var/lib/rpm/Packages whom lists the installed packages and versions
+    // Apk does now install log file relativly to the working dir
+    stage('Centos') {
+      steps {
+        container('centos') {
+           sh '''
+            yum install curl -y
+            ls -lh /var/lib/rpm/Packages
+            mkdir -p expose/rpm/var/lib/rpm
+            cp /var/lib/rpm/Packages  expose/rpm/var/lib/rpm/Packages
+            ls -lh expose/rpm/var/lib/rpm/Packages
+          '''
+        }
+        container('agent') {
+          Agent_snapshot("Post-centos")
+          sh 'rm -rf expose/rpm'
+        }
+      }
+    }
 
     //Note: Apk catalogor reads package details from the /lib/apk/db/installed whom lists the installed packages and versions
     // Apk does now install log file relativly to the working dir
     stage('Alpine') {
       steps {
-        // container(name: 'alpine') {
-        //    sh '''
-        //     apk add curl
-        //     mkdir -p expose/apk/lib/apk/db/
-        //     cp /lib/apk/db/installed  expose/apk/lib/apk/db/installed
-        //   '''
-        // }
+        container(name: 'alpine') {
+           sh '''
+            apk add curl
+            mkdir -p expose/apk/lib/apk/db/
+            cp /lib/apk/db/installed  expose/apk/lib/apk/db/installed
+          '''
+        }
         container('agent') {
           Agent_snapshot("Post-alpine")
           sh 'rm -rf expose/apk/lib/apk/db/'
@@ -133,111 +133,111 @@ pipeline {
       }
     }
 
-    // //Note: Ruby catalogor reads package details from the Gemfile.lock whom lists a specific package dependencies.
-    // // It does not include the actual package using the gemfile.
-    // // File is commonly in source code and preset after installation.
-    // stage('Ruby') {
-    //   steps {
-    //     container(name: 'ruby') {
-    //        sh '''
-    //         gem install curl
-    //         mkdir -p expose/gem
-    //         find / -type f -name "Gemfile.lock" -not -path "*/expose/*" -exec sh -c 'DIR=expose/gem/$(basename $(dirname {})) ; mkdir -p $DIR && cp {} "$DIR"' \\;
-    //       '''
-    //     }
-    //     container('agent') {
-    //       Agent_snapshot("Post-ruby")
-    //       sh 'rm -rf expose/gem'
-    //     }
-    //   }
-    // }
+    //Note: Ruby catalogor reads package details from the Gemfile.lock whom lists a specific package dependencies.
+    // It does not include the actual package using the gemfile.
+    // File is commonly in source code and preset after installation.
+    stage('Ruby') {
+      steps {
+        container(name: 'ruby') {
+           sh '''
+            gem install curl
+            mkdir -p expose/gem
+            find / -type f -name "Gemfile.lock" -not -path "*/expose/*" -exec sh -c 'DIR=expose/gem/$(basename $(dirname {})) ; mkdir -p $DIR && cp {} "$DIR"' \\;
+          '''
+        }
+        container('agent') {
+          Agent_snapshot("Post-ruby")
+          sh 'rm -rf expose/gem'
+        }
+      }
+    }
 
-    // //Note: Rust catalogor reads package details from the Cargo.lock whom lists a specific package dependencies.
-    // // It does not include the actual package using the Cargo.lock.
-    // // File is commonly in source code and preset after installation.
-    // stage('Rust') {
-    //   steps {
-    //     container(name: 'rust') {
-    //        sh '''
-    //         cargo install ripgrep
-    //         mkdir -p expose/rust
-    //         find / -type f -name "Cargo.lock" -not -path "*/expose/*" -exec sh -c 'DIR=expose/rust/$(basename $(dirname {})) ; mkdir -p $DIR && cp {} "$DIR"' \\;
-    //       '''
-    //     }
-    //     container('agent') {
-    //       Agent_snapshot("Post-rust")
-    //       sh 'rm -rf expose/rust'
-    //     }
-    //   }
-    // }
+    //Note: Rust catalogor reads package details from the Cargo.lock whom lists a specific package dependencies.
+    // It does not include the actual package using the Cargo.lock.
+    // File is commonly in source code and preset after installation.
+    stage('Rust') {
+      steps {
+        container(name: 'rust') {
+           sh '''
+            cargo install ripgrep
+            mkdir -p expose/rust
+            find / -type f -name "Cargo.lock" -not -path "*/expose/*" -exec sh -c 'DIR=expose/rust/$(basename $(dirname {})) ; mkdir -p $DIR && cp {} "$DIR"' \\;
+          '''
+        }
+        container('agent') {
+          Agent_snapshot("Post-rust")
+          sh 'rm -rf expose/rust'
+        }
+      }
+    }
 
-    // //Note: Go catalogor reads package details from the go.mod whom lists a specific package dependencies.
-    // // File is commonly in source code and sometimes present after installation (Not sure why).
-    // stage('Golang') {
-    //   steps {
-    //     //Note Syft Go-catalagor only searchs and parses go.mod files (VS using GOPATH)
-    //     container('golang') {
-    //         sh '''#!/bin/bash 
-    //         set -x
-    //         git clone https://github.com/go-cmd/cmd.git go-cmd
-    //         #GOPATH=$(pwd) go get github.com/spf13/viper
-    //         '''
-    //     }
-    //     container('agent') {
-    //         Agent_snapshot("Post-golang")
-    //         sh 'rm -rf go-cmd'
-    //       }
-    //   }
-    // }
+    //Note: Go catalogor reads package details from the go.mod whom lists a specific package dependencies.
+    // File is commonly in source code and sometimes present after installation (Not sure why).
+    stage('Golang') {
+      steps {
+        //Note Syft Go-catalagor only searchs and parses go.mod files (VS using GOPATH)
+        container('golang') {
+            sh '''#!/bin/bash 
+            set -x
+            git clone https://github.com/go-cmd/cmd.git go-cmd
+            #GOPATH=$(pwd) go get github.com/spf13/viper
+            '''
+        }
+        container('agent') {
+            Agent_snapshot("Post-golang")
+            sh 'rm -rf go-cmd'
+          }
+      }
+    }
 
-    // //Note: Python catalogor read packages details from egg-info/PKG-INFO, .egg-info and dist-info/METADATA file
-    // // Whom includes packages details, It is commonly seen after installation (included in egg packages) and not in source code. 
-    // stage('Python') {
-    // steps {
-    //   container('python') {
-    //       sh '''#!/bin/bash 
-    //       set -x
-    //       pip install virtualenv
-    //       virtualenv venv
-    //       source venv/bin/activate
-    //       pip install pycurl'''
-    //   }
-    //   container('agent') {
-    //       Agent_snapshot("Post-python")
-    //       sh 'rm -rf venv'
-    //     }
-    //   }
-    // }
+    //Note: Python catalogor read packages details from egg-info/PKG-INFO, .egg-info and dist-info/METADATA file
+    // Whom includes packages details, It is commonly seen after installation (included in egg packages) and not in source code. 
+    stage('Python') {
+    steps {
+      container('python') {
+          sh '''#!/bin/bash 
+          set -x
+          pip install virtualenv
+          virtualenv venv
+          source venv/bin/activate
+          pip install pycurl'''
+      }
+      container('agent') {
+          Agent_snapshot("Post-python")
+          sh 'rm -rf venv'
+        }
+      }
+    }
 
-    // //Note: NPM catalogor read packages details from package.json and yarn.lock whom store installed packages details.
-    // // It is commonly seen after installation and some time in source code as well. 
-    // stage('Node') {
-    // steps {
-    //   container('node12') {
-    //       sh '''#!/bin/bash 
-    //       cd jenkins_k8s/external/simple-hello-world-example-npm/
-    //       npm i'''
-    //   }
-    //   container('agent') {
-    //       Agent_snapshot("Post-node")
-    //       sh 'rm -rf jenkins_k8s/external/simple-hello-world-example-npm/node_modules'
-    //     }
-    //   }
-    // }
+    //Note: NPM catalogor read packages details from package.json and yarn.lock whom store installed packages details.
+    // It is commonly seen after installation and some time in source code as well. 
+    stage('Node') {
+    steps {
+      container('node12') {
+          sh '''#!/bin/bash 
+          cd jenkins_k8s/external/simple-hello-world-example-npm/
+          npm i'''
+      }
+      container('agent') {
+          Agent_snapshot("Post-node")
+          sh 'rm -rf jenkins_k8s/external/simple-hello-world-example-npm/node_modules'
+        }
+      }
+    }
 
-    // stage('Kaniko') {
-    //   steps {
-    //     container(name: 'kaniko', shell: '/busybox/sh') {
-    //        sh '''#!/busybox/sh
-    //         set -x
-    //         echo "FROM jenkins/slave" > Dockerfile
-    //         /kaniko/executor -f `pwd`/Dockerfile --verbosity debug -c `pwd` --insecure --skip-tls-verify --cache=false --destination=image --no-push --tarPath=`pwd`/jenkins_inbound-agent.tar
-    //       '''
-    //     }
-    //     container('agent') {
-    //       Agent_snapshot("Post-kaniko")
-    //     }
-    //   }
-    // }
+    stage('Kaniko') {
+      steps {
+        container(name: 'kaniko', shell: '/busybox/sh') {
+           sh '''#!/busybox/sh
+            set -x
+            echo "FROM jenkins/slave" > Dockerfile
+            /kaniko/executor -f `pwd`/Dockerfile --verbosity debug -c `pwd` --insecure --skip-tls-verify --cache=false --destination=image --no-push --tarPath=`pwd`/jenkins_inbound-agent.tar
+          '''
+        }
+        container('agent') {
+          Agent_snapshot("Post-kaniko")
+        }
+      }
+    }
   }
 }
