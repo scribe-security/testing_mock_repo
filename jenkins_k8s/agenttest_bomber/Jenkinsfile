@@ -20,7 +20,7 @@ def ListJson(String snapshot_directory) {
 
 def PublishSnapshots(String name, String directory="scribe/agent/output") {
     def file_list = []
-    // try {    
+    try {    
       def timestamp = readFile directory + '/DIR_TIMESTAMP'
       def snapshot_directory = directory + '/snapshots/' + name + '/' + timestamp
       sh 'echo dir: $snapshot_directory'
@@ -41,13 +41,32 @@ def PublishSnapshots(String name, String directory="scribe/agent/output") {
           reportDir: snapshot_directory,
           reportFiles: obj_list_files.join(','),
           reportName: name])
-    // }
-    // catch (Exception e) {
-    //   echo 'Exception occurred: ' + e.toString()
-    // }
+    }
+    catch (Exception e) {
+      echo 'Exception occurred: ' + e.toString()
+    }
 }
 
+def tar_samples(String dir, String tar="samples.tar"){
+    sh "tar cvf ${tar} ${dir}"
+    return tar
+}
 
+def sendSnapshots(String recipients, String attachment="samples.tar") {
+    def jobName = currentBuild.fullDisplayName
+    emailext body: '''${SCRIPT, template="groovy-html.template"}''',
+        attachLog: true,
+        attachmentsPattern: attachment,
+        mimeType: 'text/html',
+        subject: "[Scribe] sample ${jobName}",
+        to: "${recipients}"
+}
+
+def EmailSnapshots(String recipients="scribe-samples@scribesecurity.com", String dir="scribe/agent/output", String tar="snapshots.tar") {
+    echo "Sending sample to $recipients"
+    def attachment = tar_samples(dir,tar)
+    sendSnapshots(recipients, attachment)
+}
 
 pipeline {
   agent {
@@ -89,6 +108,7 @@ pipeline {
         }
         container('agent') {
           Agent_snapshot("Post-maven")
+          EmailSnapshots()
           sh 'rm -rf expose/java'
           sh 'rm -rf jenkins_k8s/external/*.jar'
         }
