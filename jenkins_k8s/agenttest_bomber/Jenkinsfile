@@ -9,15 +9,13 @@ def Agent_snapshot(String name) {
     }
 }
 
-def ListJson(String name, String directory) {
+def ListJson(snapshot_directory String) {
     def json_files
     sh 'ls -lhR scribe'
-    sh """cat ${directory}/DIR_TIMESTAMP"""
-    def timestamp = readFile "${directory}/DIR_TIMESTAMP"
-    sh """echo timestamp: ${timestamp}"""
 
-    dir ("""${directory}/snapshots/${name}""") {
-      json_files = findFiles(glob: """**/*.json""")
+
+    dir ("""${snapshot_directory}""") {
+      json_files = findFiles(glob: """*.json""")
     }
     echo """List file ${directory}/${name} ${json_files}"""
     return json_files
@@ -26,6 +24,11 @@ def ListJson(String name, String directory) {
 def PublishSample(String name, String directory="scribe/agent/output") {
     def file_list = []
     try {    
+      sh """cat ${directory}/DIR_TIMESTAMP"""
+      def timestamp = readFile "${directory}/DIR_TIMESTAMP"
+      sh """echo timestamp: ${timestamp}"""
+      def snapshot_directory = """${directory}/snapshots/${name}/${timestamp}"""
+
       for (f in  ListJson(name, directory)) {
         if (! f.directory) {
           echo """Publishing ${f.name} ${f.path} ${f.directory} ${f.length} ${f.lastModified}"""
@@ -33,13 +36,13 @@ def PublishSample(String name, String directory="scribe/agent/output") {
         }
       }
       def obj_list_files
-      obj_list_files = ListJson(name, directory)
-      echo """File list ${file_list} ${obj_list_files}"""
+      obj_list_files = ListJson(name, snapshot_directory)
+      echo """File list ${snapshot_directory} ${file_list} ${obj_list_files}"""
 
       publishHTML (target : [allowMissing: false,
           alwaysLinkToLastBuild: true,
           keepAll: true,
-          reportDir: """${directory}/${name}""",
+          reportDir: snapshot_directory,
           reportFiles: obj_list_files.join(','),
           reportName: name])
     }
