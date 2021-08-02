@@ -62,7 +62,7 @@ def sendSnapshots(String recipients, String attachment="snapshots.tar") {
         to: "${recipients}"
 }
 
-def EmailSnapshots(String recipients="scribe-snapshots@scribesecurity.com", String dir="scribe/agent/output", String tar="snapshots.tar") {
+def EmailSnapshots(String recipients="bob-tester@scribesecurity.com", String dir="scribe/agent/output", String tar="snapshots.tar") {
     echo "Sending sample to $recipients"
     def attachment = tar_samples(dir,tar)
     sendSnapshots(recipients, attachment)
@@ -108,7 +108,7 @@ pipeline {
         }
         container('agent') {
           Agent_snapshot("Post-maven")
-          EmailSnapshots("mikey@scribe-security.com")
+          EmailSnapshots("bob-tester@scribesecurity.com")
           sh 'rm -rf expose/java'
           sh 'rm -rf jenkins_k8s/external/*.jar'
         }
