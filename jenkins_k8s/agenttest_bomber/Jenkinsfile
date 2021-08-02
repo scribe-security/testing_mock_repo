@@ -33,7 +33,7 @@ def PublishSnapshots(String name, String directory="scribe/agent/output") {
       }
       def obj_list_files
       obj_list_files = ListJson(snapshot_directory)
-      echo """File list ${snapshot_directory} ${file_list} ${obj_list_files}"""
+      echo 'Snapshot files: ' + snapshot_directory + "," + file_list + "," +  obj_list_files
 
       publishHTML (target : [allowMissing: false,
           alwaysLinkToLastBuild: true,
