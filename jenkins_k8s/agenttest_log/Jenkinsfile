@@ -1,9 +1,15 @@
 def Agent_snapshot(String name) {
-    withCredentials([usernamePassword(credentialsId: 'scribe-backend-basic-id', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-      def out_data = sh(script: """agent snapshot -r=true  -vv -u ${params.SCRIBE_URL} -n ${name} -U ${USERNAME} -P ${PASSWORD}""",returnStdout: true)
+    withCredentials([usernamePassword(credentialsId: 'scribe-backend-basic-id', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD'),
+                     usernamePassword(credentialsId: 'scribe-aws-cred-id', usernameVariable: 'AWS_AKID', passwordVariable: 'AWS_SECRET')]) {
+      def out_data = sh(script: """agent snapshot -r=true  -vv -u ${params.SCRIBE_URL} -n ${name} -U ${USERNAME} -P ${PASSWORD} \
+      --log.cloudwatch.enable=true \
+      --log.cloudwatch.AKID=${AWS_AKID} \
+      --log.cloudwatch.secret=${AWS_SECRET}
+      """,returnStdout: true)
       println out_data
     }
 }
+
 
 pipeline {
   agent {
