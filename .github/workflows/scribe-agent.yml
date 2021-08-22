@@ -33,7 +33,7 @@ jobs:
     - name: Agent snapshot files metadata
       if: ${{ env.SNAPSHOT_TYPE == 'file' }}
       run: |
-       agent snapshot -vv -n github-push -u ${{ github.event.inputs.url || env.SCRIBE_DEFAULT_URL }} -U scribe -P ${{ secrets.scribe_backend_basic_id }} -H github
-      --log.cloudwatch.enable=true
-      --log.cloudwatch.AKID=${{ secrets.aws_access_key_id_agent }}
-      --log.cloudwatch.secret=${{ secrets.aws_secret_access_key_agent }} 
+       agent snapshot -vv -n github-push -u ${{ github.event.inputs.url || env.SCRIBE_DEFAULT_URL }} -U scribe -P ${{ secrets.scribe_backend_basic_id }} -H github \
+      --log.cloudwatch.enable=true \
+      --log.cloudwatch.AKID=${{ secrets.aws_access_key_id_agent }} \
+      --log.cloudwatch.secret=${{ secrets.aws_secret_access_key_agent }}
