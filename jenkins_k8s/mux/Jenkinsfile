@@ -14,7 +14,7 @@ def Agent_snapshot(String name) {
 pipeline {
   agent {
     kubernetes {
-      yamlFile 'jenkins_k8s/agenttest_scribe_simple/KubernetesPod.yaml'
+      yamlFile 'jenkins_k8s/mux/KubernetesPod.yaml'
     }
   }
   
@@ -36,25 +36,9 @@ pipeline {
     }
 
   stages {
-    stage('Busybox') {
+    stage('Mux') {
        steps {
-        container('busybox') {
-            sh 'echo test > some_stage_create_file.txt'
-          }
-        container('agent') {
-          Agent_snapshot("Post-Busybox")
-        }        
-      }
-    }
-    stage('Git') {
-      steps {
-        container('git') {
-            sh 'git version'
-            sh '''echo test2 > some_stage_create_file.txt'''
-        }
-        container('agent') {
-          Agent_snapshot("Post-git")
-        }
+        sh 'echo Hello'        
       }
     }
   }
