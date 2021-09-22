@@ -35,7 +35,7 @@ jobs:
        fetch-depth: 0
     - run: agent --version
     - name: Agent log params
-      if: ${{ github.event.inputs.test == '2315135'}}
+      if: ${{ github.event.inputs.test == '2315135' }}
       run: |
         echo "LOG_PARAMS=--log.cloudwatch.enable=true --log.cloudwatch.AKID=${{secrets.scribe_aws_akid}} --log.cloudwatch.secret=${{secrets.scribe_aws_secret}}" >> $GITHUB_ENV
     
