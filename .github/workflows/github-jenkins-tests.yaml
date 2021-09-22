@@ -1,4 +1,4 @@
-name: scribe agent
+name: github jenkins test
 
 env:
   SCRIBE_DEFAULT_URL: https://api.dev.scribesecurity.com
