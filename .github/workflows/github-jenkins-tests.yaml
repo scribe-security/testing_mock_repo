@@ -17,7 +17,7 @@ on:
       test:
         description: 'Test name to trigger (agenttest_scribe_simple, agenttest_log, agenttest_artifactory, agenttest_bomber, agenttest)'
         required: false
-        default: agenttest_scribe_simple
+        default: ssss
 
 jobs:
   scribe-agent:
