@@ -1,0 +1,42 @@
+name: scribe agent
+
+env:
+  SCRIBE_DEFAULT_URL: https://api.dev.scribesecurity.com
+  SNAPSHOT_TYPE: file
+  LOG_PARAMS: 
+
+on:
+  # push:
+  # pull_request:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: 'Scribe url'
+        required: false
+        default: https://api.dev.scribesecurity.com
+      test:
+        description: 'Test name to trigger (agenttest_scribe_simple, agenttest_log, agenttest_artifactory, agenttest_bomber, agenttest)'
+        required: false
+        default: agenttest_scribe_simple
+
+jobs:
+  scribe-agent:
+    runs-on: ubuntu-latest
+    container:
+      image: scribesecuriy.jfrog.io/scribe-docker-local/agent:latest
+      credentials:
+        username: github
+        password: ${{ secrets.scribe_artifactory_cred_id }}
+    steps:
+    - run: echo "Url - ${{ github.event.inputs.url }}!"
+    - name: Checkout source
+      uses: actions/checkout@v2
+      with:
+       fetch-depth: 0
+    - run: agent --version
+    - name: Agent log params
+      if: ${{ github.event.inputs.url == 'agenttest_log' }} || ${{ github.event.inputs.url == 'agenttest_bomber' }} || ${{ github.event.inputs.url == 'agenttest_scribe_simple' }}
+      run: echo ::set-env name=LOG_PARAMS::"--log.cloudwatch.AKID=${{secrets.scribe_aws_akid}} --log.cloudwatch.secret=${{secrets.scribe_aws_secret}}"
+    - name: ReadEnv
+      run: echoi ${{ env.LOG_PARAMS }}
+
