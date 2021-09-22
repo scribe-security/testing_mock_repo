@@ -27,32 +27,32 @@ jobs:
   webhook-jenkins:
     runs-on: ubuntu-latest
     steps:
-    - name: Record challenge ASWA
+    - name: Trigger jenkins
       uses: joelwmale/webhook-action@master
       with:
         url: ${{ github.event.inputs.jenkins }}/generic-webhook-trigger/invoke?token=${{ github.event.inputs.test }}
         body: '{"gitHubId": "${{ github.event.issue.user.login }}", "timestamp": "${{ steps.checkpoint.outputs.timestamp }}", "prId": ${{ github.event.issue.number }} }'
 
-  # scribe-agent:
-  #   runs-on: ubuntu-latest
-  #   container:
-  #     image: scribesecuriy.jfrog.io/scribe-docker-local/agent:latest
-  #     credentials:
-  #       username: github
-  #       password: ${{ secrets.scribe_artifactory_cred_id }}
-  #   steps:
-  #   - run: echo "Url - ${{ github.event.inputs.url }}!"
-  #   - name: Checkout source
-  #     uses: actions/checkout@v2
-  #     with:
-  #      fetch-depth: 0
-  #   - run: agent --version
-  #   - name: Agent log params
-  #     if: ${{ github.event.inputs.test == 'agenttest_log' || github.event.inputs.test == 'agenttest_bomber' || github.event.inputs.test == 'agenttest_scribe_simple' }}
-  #     run: |
-  #       echo "LOG_PARAMS=--log.cloudwatch.enable=true --log.cloudwatch.AKID=${{secrets.scribe_aws_akid}} --log.cloudwatch.secret=${{secrets.scribe_aws_secret}}" >> $GITHUB_ENV
+  scribe-agent:
+    runs-on: ubuntu-latest
+    container:
+      image: scribesecuriy.jfrog.io/scribe-docker-local/agent:latest
+      credentials:
+        username: github
+        password: ${{ secrets.scribe_artifactory_cred_id }}
+    steps:
+    - run: echo "Url - ${{ github.event.inputs.url }}!"
+    - name: Checkout source
+      uses: actions/checkout@v2
+      with:
+       fetch-depth: 0
+    - run: agent --version
+    - name: Agent log params
+      if: ${{ github.event.inputs.test == 'agenttest_log' || github.event.inputs.test == 'agenttest_bomber' || github.event.inputs.test == 'agenttest_scribe_simple' }}
+      run: |
+        echo "LOG_PARAMS=--log.cloudwatch.enable=true --log.cloudwatch.AKID=${{secrets.scribe_aws_akid}} --log.cloudwatch.secret=${{secrets.scribe_aws_secret}}" >> $GITHUB_ENV
     
-  #   - name: Run agent
-  #     run: >-
-  #       agent snapshot -vv -n github-push -u ${{ github.event.inputs.url || env.SCRIBE_DEFAULT_URL }} -U scribe -P ${{ secrets.scribe_backend_basic_id }} -H github
-  #       ${{ env.LOG_PARAMS }}
+    - name: Run agent
+      run: >-
+        agent snapshot -vv -n github-push -u ${{ github.event.inputs.url || env.SCRIBE_DEFAULT_URL }} -U scribe -P ${{ secrets.scribe_backend_basic_id }} -H github
+        ${{ env.LOG_PARAMS }}
