@@ -102,7 +102,8 @@ def main():
          # xml_tree = read_xml(test_template)
          # xml_modify(xml_tree, jenkins_path, repo_url, dir.stem)
          # xml_str =  xml_toStr(xml_tree)
-         xml_str = xml_modifyStr(test_template, jenkins_path, repo_url, dir.stem)
+         token_val = os.path.join(repo_name, dir.stem)
+         xml_str = xml_modifyStr(test_template, jenkins_path, repo_url, token_val)
          J_SERVER.create_folder(folder_name, ignore_failures=True)
          J_SERVER.create_folder(sub_folder_name, ignore_failures=True)
 
