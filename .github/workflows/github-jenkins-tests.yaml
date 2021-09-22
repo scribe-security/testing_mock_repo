@@ -30,7 +30,7 @@ jobs:
     - name: Trigger jenkins
       uses: joelwmale/webhook-action@master
       with:
-        url: ${{ github.event.inputs.jenkins }}/generic-webhook-trigger/invoke?token=${{ env.REPOSITORY_NAME }}/${{ github.event.inputs.test }}
+        url: ${{ github.event.inputs.jenkins }}/generic-webhook-trigger/invoke?token=${{ github.event.repository.name }}/${{ github.event.inputs.test }}
         body: '{"gitHubId": "${{ github.event.issue.user.login }}", "timestamp": "${{ steps.checkpoint.outputs.timestamp }}", "prId": ${{ github.event.issue.number }} }'
 
   # scribe-agent:
