@@ -3,7 +3,7 @@ name: github jenkins test
 env:
   SCRIBE_DEFAULT_URL: https://api.dev.scribesecurity.com
   SNAPSHOT_TYPE: file
-  LOG_PARAMS: 
+  LOG_PARAMS: "not"
 
 on:
   # push:
@@ -35,7 +35,10 @@ jobs:
        fetch-depth: 0
     - run: agent --version
     - name: Agent log params
-      if: ${{ github.event.inputs.url == 'agenttest_log' }} || ${{ github.event.inputs.url == 'agenttest_bomber' }} || ${{ github.event.inputs.url == 'agenttest_scribe_simple' }}
+      if: |
+        ${{ github.event.inputs.url == 'agenttest_log' }} || 
+        ${{ github.event.inputs.url == 'agenttest_bomber' }} || 
+        ${{ github.event.inputs.url == 'agenttest_scribe_simple' }}
       run: echo "LOG_PARAMS=--log.cloudwatch.enable=true --log.cloudwatch.AKID=${{secrets.scribe_aws_akid}} --log.cloudwatch.secret=${{secrets.scribe_aws_secret}}" >> $GITHUB_ENV
     
     - name: Run agent
