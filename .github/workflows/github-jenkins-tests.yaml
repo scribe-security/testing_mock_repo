@@ -14,6 +14,10 @@ on:
         description: 'Scribe url'
         required: false
         default: https://api.dev.scribesecurity.com
+      jenkins:
+        description: 'Scribe jenkins url'
+        required: false
+        default: http://pipeline.scribesecurity.com:8080
       test:
         description: 'Test name to trigger (agenttest_scribe_simple, agenttest_log, agenttest_artifactory, agenttest_bomber, agenttest)'
         required: false
@@ -26,7 +30,7 @@ jobs:
     - name: Record challenge ASWA
       uses: joelwmale/webhook-action@master
       with:
-        url: http://pipeline.scribesecurity.com:8080/generic-webhook-trigger/invoke?token=agenttest_scribe_simple
+        url: ${{ github.event.inputs.jenkins }}/generic-webhook-trigger/invoke?token= ${{ github.event.inputs.test }}
         body: '{"gitHubId": "${{ github.event.issue.user.login }}", "timestamp": "${{ steps.checkpoint.outputs.timestamp }}", "prId": ${{ github.event.issue.number }} }'
 
   # scribe-agent:
