@@ -24,10 +24,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Record challenge ASWA
-    uses: joelwmale/webhook-action@master
-    with:
-      url: http://pipeline.scribesecurity.com:8080/github-webhook
-      body: '{"gitHubId": "${{ github.event.issue.user.login }}", "timestamp": "${{ steps.checkpoint.outputs.timestamp }}", "prId": ${{ github.event.issue.number }} }'
+      uses: joelwmale/webhook-action@master
+      with:
+        url: http://pipeline.scribesecurity.com:8080/github-webhook
+        body: '{"gitHubId": "${{ github.event.issue.user.login }}", "timestamp": "${{ steps.checkpoint.outputs.timestamp }}", "prId": ${{ github.event.issue.number }} }'
 
   # scribe-agent:
   #   runs-on: ubuntu-latest
