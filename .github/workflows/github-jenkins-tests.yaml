@@ -26,7 +26,7 @@ jobs:
     - name: Record challenge ASWA
       uses: joelwmale/webhook-action@master
       with:
-        url: http://pipeline.scribesecurity.com:8080/github-webhook
+        url: http://pipeline.scribesecurity.com:8080/generic-webhook-trigger/invoke?token=agenttest_scribe_simple
         body: '{"gitHubId": "${{ github.event.issue.user.login }}", "timestamp": "${{ steps.checkpoint.outputs.timestamp }}", "prId": ${{ github.event.issue.number }} }'
 
   # scribe-agent:
