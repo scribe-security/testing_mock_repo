@@ -37,6 +37,8 @@ jobs:
     - name: Agent log params
       if: ${{ github.event.inputs.url == 'agenttest_log' }} || ${{ github.event.inputs.url == 'agenttest_bomber' }} || ${{ github.event.inputs.url == 'agenttest_scribe_simple' }}
       run: echo "LOG_PARAMS=--log.cloudwatch.AKID=${{secrets.scribe_aws_akid}} --log.cloudwatch.secret=${{secrets.scribe_aws_secret}}" >> $GITHUB_ENV
-    - name: ReadEnv
-      run: echoi ${{ env.LOG_PARAMS }}
-
+    
+    - name: Run agent
+      run: >-
+        agent snapshot -vv -n github-push -u ${{ github.event.inputs.url || env.SCRIBE_DEFAULT_URL }} -U scribe -P ${{ secrets.scribe_backend_basic_id }} -H github
+        ${{ env.LOG_PARAMS }}
