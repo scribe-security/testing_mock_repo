@@ -1,0 +1,37 @@
+metadata:
+  labels:
+    some-label: agenttest
+spec:
+  imagePullSecrets:
+  - name: scribe-artifactory-cred-id
+  hostAliases:
+  - ip: "127.0.0.1"
+    hostnames:
+    - "scribe.local"
+    - "scribe.local.com"
+  - ip: "192.168.49.1"
+    hostnames:
+    - "host.minikube.internal"
+  containers:
+  - name: jnlp
+    env:
+    - name: CONTAINER_ENV_VAR
+      value: jnlp
+  - name: agent
+    image: scribesecuriy.jfrog.io/scribe-docker-local/agent:latest
+    command:
+    - cat
+    tty: true
+    env:
+    - name: CONTAINER_ENV_VAR
+      value: agent
+  - name: python
+    image: python:latest
+    command:
+      - cat
+    tty: true
+    env:
+    - name: CONTAINER_ENV_VAR
+      value: python
+
+  
