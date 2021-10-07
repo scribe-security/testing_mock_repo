@@ -48,7 +48,7 @@ pipeline {
             virtualenv venv
             source venv/bin/activate
             pip install pycurl'''
-            pip install pyopenssl
+            pip install pyopenssl'''
         }
         container('agent') {
             Agent_snapshot("Post-python")
