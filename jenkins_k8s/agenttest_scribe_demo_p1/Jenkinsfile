@@ -47,7 +47,7 @@ pipeline {
             pip install virtualenv
             virtualenv venv
             source venv/bin/activate
-            pip install pyopenssl==0.12.0
+            pip install argparse==1.3.0
             pip install pycurl'''
         }
         container('agent') {
