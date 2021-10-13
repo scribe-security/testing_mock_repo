@@ -52,7 +52,7 @@ pipeline {
             pip install pycurl'''
         }
         container('agent') {
-            Agent_snapshot("Post-python")
+            Agent_snapshot("sample")
             sh 'rm -rf venv'
           }
       }
