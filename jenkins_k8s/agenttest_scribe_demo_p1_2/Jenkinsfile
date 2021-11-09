@@ -16,7 +16,7 @@ def Agent_snapshot(String name) {
 pipeline {
   agent {
     kubernetes {
-      yamlFile 'jenkins_k8s/agenttest_scribe_demo_p1.2/KubernetesPod.yaml'
+      yamlFile 'jenkins_k8s/agenttest_scribe_demo_p1_2/KubernetesPod.yaml'
     }
   }
 
