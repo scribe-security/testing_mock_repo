@@ -6,7 +6,7 @@ def Agent_snapshot(String name) {
       --log.cloudwatch.AKID=${AWS_AKID} \
       --log.cloudwatch.secret=${AWS_SECRET}\
        --snapshot.bomber.enable=true \
-       --snapshot.bomber.hookfile=^.*.tar\$ 
+       --snapshot.bomber.hookfile=^.*.tar\$
       """,returnStdout: true)
       println out_data
     }
@@ -16,10 +16,10 @@ def Agent_snapshot(String name) {
 pipeline {
   agent {
     kubernetes {
-      yamlFile 'jenkins_k8s/agenttest_scribe_simple/KubernetesPod.yaml'
+      yamlFile 'jenkins_k8s/agenttest_scribe_demo_p1.2/KubernetesPod.yaml'
     }
   }
-  
+
   parameters {
       gitParameter(name: 'BRANCH_NAME',
           branchFilter: 'origin/(.*)',
@@ -27,8 +27,8 @@ pipeline {
           defaultValue: 'master',
           type: 'PT_BRANCH')
 
-      string(defaultValue: 'https://api.dev.scribesecurity.com', 
-        name: 'SCRIBE_URL', 
+      string(defaultValue: 'https://api.dev.scribesecurity.com',
+        name: 'SCRIBE_URL',
         trim: true)
   }
 
@@ -46,7 +46,7 @@ pipeline {
           }
         container('agent') {
           Agent_snapshot("sample-test1")
-        }        
+        }
       }
     }
     stage('XGit') {
@@ -64,7 +64,7 @@ pipeline {
       stage('Python') {
       steps {
         container('python') {
-            sh '''#!/bin/bash 
+            sh '''#!/bin/bash
             set -x
             pip install virtualenv
             virtualenv venv
