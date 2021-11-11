@@ -5,19 +5,27 @@ def Agent_snapshot(String name) {
       --log.cloudwatch.enable=true \
       --log.cloudwatch.AKID=${AWS_AKID} \
       --log.cloudwatch.secret=${AWS_SECRET} \
-      --snapshot.file.enable=true \
-      --snapshot.bomber.enable=true \
-      --snapshot.bomber.hookfile=^.*.tar\$ 
+       --snapshot.file.enable=false \
+       --snapshot.bomber.enable=true \
+       --snapshot.bomber.hookfile=^.*.tar\$ 
       """,returnStdout: true)
       println out_data
       PublishSnapshots(env.STAGE_NAME)
     }
 }
 
+def ListJson(String snapshot_directory) {
+    def json_files
+    dir (snapshot_directory) {
+      json_files = findFiles(glob: """*.json""")
+    }
+    return json_files
+}
+
 def PublishSnapshots(String name, String directory="scribe/agent/output") {
     def file_list = []
     try {    
-      def timestamp = readFile directory + '/events/' + name + '/DIR_TIMESTAMP'
+      def timestamp = readFile directory + '/DIR_TIMESTAMP'
       def snapshot_directory = directory + '/events/' + name + '/' + timestamp
       sh 'echo dir: $snapshot_directory'
       sh 'ls -lhR scribe'
