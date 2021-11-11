@@ -15,7 +15,7 @@ def Agent_snapshot(String name) {
       sh 'ls -lh scribe/agent'
       sh 'ls -lh scribe/agent/output'
       sh 'ls -lh scribe/agent/output/Post-centos'
-      PublishSnapshots(name)
+      PublishSnapshots(env.STAGE_NAME)
     }
 }
 
