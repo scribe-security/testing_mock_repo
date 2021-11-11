@@ -1,14 +1,45 @@
 def Agent_snapshot(String name) {
     withCredentials([usernamePassword(credentialsId: 'scribe-backend-auth0-id', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD'),
                      usernamePassword(credentialsId: 'scribe-aws-cred-id', usernameVariable: 'AWS_AKID', passwordVariable: 'AWS_SECRET')]) {
-      def out_data = sh(script: """agent snapshot -r=true --failonerror -vv -u ${params.SCRIBE_URL} -n ${name} -U ${USERNAME} -P ${PASSWORD} \
+      def out_data = sh(script: """agent snapshot -r=true  -vv -u ${params.SCRIBE_URL} -n ${name} -U ${USERNAME} -P ${PASSWORD} \
       --log.cloudwatch.enable=true \
       --log.cloudwatch.AKID=${AWS_AKID} \
-      --log.cloudwatch.secret=${AWS_SECRET}\
-       --snapshot.bomber.enable=true \
-       --snapshot.bomber.hookfile=^.*.tar\$
+      --log.cloudwatch.secret=${AWS_SECRET} \
+      --snapshot.file.enable=true \
+      --snapshot.bomber.enable=true \
+      --snapshot.bomber.hookfile=^.*.tar\$ 
       """,returnStdout: true)
       println out_data
+      PublishSnapshots(env.STAGE_NAME)
+    }
+}
+
+def PublishSnapshots(String name, String directory="scribe/agent/output") {
+    def file_list = []
+    try {    
+      def timestamp = readFile directory + '/events/' + name + '/DIR_TIMESTAMP'
+      def snapshot_directory = directory + '/events/' + name + '/' + timestamp
+      sh 'echo dir: $snapshot_directory'
+      sh 'ls -lhR scribe'
+      for (f in  ListJson(snapshot_directory)) {
+        if (! f.directory) {
+          echo """Publishing ${f.name} ${f.path} ${f.directory} ${f.length} ${f.lastModified}"""
+          file_list.add(f.path)
+        }
+      }
+      def obj_list_files
+      obj_list_files = ListJson(snapshot_directory)
+      echo 'Snapshot files: ' + snapshot_directory + "," + file_list + "," +  obj_list_files
+
+      publishHTML (target : [allowMissing: false,
+          alwaysLinkToLastBuild: true,
+          keepAll: true,
+          reportDir: snapshot_directory,
+          reportFiles: obj_list_files.join(','),
+          reportName: name])
+    }
+    catch (Exception e) {
+      echo 'Exception occurred: ' + e.toString()
     }
 }
 
@@ -46,6 +77,8 @@ pipeline {
           }
         container('agent') {
           Agent_snapshot("sample-test1")
+          
+            
         }
       }
     }
