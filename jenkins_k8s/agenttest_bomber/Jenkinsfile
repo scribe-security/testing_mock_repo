@@ -10,7 +10,7 @@ def Agent_snapshot(String name) {
        --snapshot.bomber.hookfile=^.*.tar\$ 
       """,returnStdout: true)
       println out_data
-      PublishSnapshots(env.STAGE_NAME)
+      PublishSnapshots(name)
     }
 }
 
