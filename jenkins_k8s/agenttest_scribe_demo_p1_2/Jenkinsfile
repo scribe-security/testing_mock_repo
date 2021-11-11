@@ -5,7 +5,7 @@ def Agent_snapshot(String name) {
       --log.cloudwatch.enable=true \
       --log.cloudwatch.AKID=${AWS_AKID} \
       --log.cloudwatch.secret=${AWS_SECRET} \
-       --snapshot.file.enable=false \
+       --snapshot.file.enable=true \
        --snapshot.bomber.enable=true \
        --snapshot.bomber.hookfile=^.*.tar\$ 
       """,returnStdout: true)
