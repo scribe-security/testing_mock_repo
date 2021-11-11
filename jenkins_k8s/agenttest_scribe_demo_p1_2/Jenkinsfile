@@ -1,14 +1,16 @@
 def Agent_snapshot(String name) {
     withCredentials([usernamePassword(credentialsId: 'scribe-backend-auth0-id', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD'),
                      usernamePassword(credentialsId: 'scribe-aws-cred-id', usernameVariable: 'AWS_AKID', passwordVariable: 'AWS_SECRET')]) {
-      def out_data = sh(script: """agent snapshot -r=true --failonerror -vv -u ${params.SCRIBE_URL} -n ${name} -U ${USERNAME} -P ${PASSWORD} \
+      def out_data = sh(script: """agent snapshot -r=true  -vv -u ${params.SCRIBE_URL} -n ${name} -U ${USERNAME} -P ${PASSWORD} \
       --log.cloudwatch.enable=true \
       --log.cloudwatch.AKID=${AWS_AKID} \
-      --log.cloudwatch.secret=${AWS_SECRET}\
-       --snapshot.bomber.enable=true \
-       --snapshot.bomber.hookfile=^.*.tar\$
+      --log.cloudwatch.secret=${AWS_SECRET} \
+      --snapshot.file.enable=false \
+      --snapshot.bomber.enable=true \
+      --snapshot.bomber.hookfile=^.*.tar\$ 
       """,returnStdout: true)
       println out_data
+      PublishSnapshots(env.STAGE_NAME)
     }
 }
 
@@ -107,7 +109,6 @@ pipeline {
         }
         container('agent') {
             Agent_snapshot("sample")
-            PublishSnapshots("python")
             sh 'rm -rf venv'
        }
       }
