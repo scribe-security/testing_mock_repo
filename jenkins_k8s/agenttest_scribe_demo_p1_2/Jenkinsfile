@@ -12,6 +12,35 @@ def Agent_snapshot(String name) {
     }
 }
 
+def PublishSnapshots(String name, String directory="scribe/agent/output") {
+    def file_list = []
+    try {    
+      def timestamp = readFile directory + '/events/' + name + '/DIR_TIMESTAMP'
+      def snapshot_directory = directory + '/events/' + name + '/' + timestamp
+      sh 'echo dir: $snapshot_directory'
+      sh 'ls -lhR scribe'
+      for (f in  ListJson(snapshot_directory)) {
+        if (! f.directory) {
+          echo """Publishing ${f.name} ${f.path} ${f.directory} ${f.length} ${f.lastModified}"""
+          file_list.add(f.path)
+        }
+      }
+      def obj_list_files
+      obj_list_files = ListJson(snapshot_directory)
+      echo 'Snapshot files: ' + snapshot_directory + "," + file_list + "," +  obj_list_files
+
+      publishHTML (target : [allowMissing: false,
+          alwaysLinkToLastBuild: true,
+          keepAll: true,
+          reportDir: snapshot_directory,
+          reportFiles: obj_list_files.join(','),
+          reportName: name])
+    }
+    catch (Exception e) {
+      echo 'Exception occurred: ' + e.toString()
+    }
+}
+
 
 pipeline {
   agent {
@@ -46,6 +75,8 @@ pipeline {
           }
         container('agent') {
           Agent_snapshot("sample-test1")
+          
+            
         }
       }
     }
@@ -76,6 +107,7 @@ pipeline {
         }
         container('agent') {
             Agent_snapshot("sample")
+            PublishSnapshots("Python")
             sh 'rm -rf venv'
        }
       }
