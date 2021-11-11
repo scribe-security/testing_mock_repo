@@ -107,7 +107,7 @@ pipeline {
         }
         container('agent') {
             Agent_snapshot("sample")
-            PublishSnapshots("Python")
+            PublishSnapshots("python")
             sh 'rm -rf venv'
        }
       }
