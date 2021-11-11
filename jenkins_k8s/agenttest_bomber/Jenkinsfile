@@ -13,8 +13,8 @@ def Agent_snapshot(String name) {
       sh 'ls -lh .'
       sh 'ls -lh scribe'
       sh 'ls -lh scribe/agent'
-      sh 'ls -lh scribe/agent/output'
-      sh 'ls -lh scribe/agent/output/Maven'
+      sh 'ls -lh scribe/agent/output/events'
+      // sh 'ls -lh scribe/agent/output/Maven'
       PublishSnapshots(env.STAGE_NAME)
     }
 }
@@ -31,7 +31,7 @@ def PublishSnapshots(String name, String directory="scribe/agent/output") {
     def file_list = []
     try {    
       def timestamp = readFile directory + '/DIR_TIMESTAMP'
-      def snapshot_directory = directory + '/snapshots/' + name + '/' + timestamp
+      def snapshot_directory = directory + '/events/' + name + '/' + timestamp
       sh 'echo dir: $snapshot_directory'
       sh 'ls -lhR scribe'
       for (f in  ListJson(snapshot_directory)) {
