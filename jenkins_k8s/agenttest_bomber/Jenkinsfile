@@ -10,11 +10,6 @@ def Agent_snapshot(String name) {
        --snapshot.bomber.hookfile=^.*.tar\$ 
       """,returnStdout: true)
       println out_data
-      sh 'ls -lh .'
-      sh 'ls -lh scribe'
-      sh 'ls -lh scribe/agent'
-      sh 'ls -lh scribe/agent/output/events'
-      // sh 'ls -lh scribe/agent/output/Maven'
       PublishSnapshots(env.STAGE_NAME)
     }
 }
