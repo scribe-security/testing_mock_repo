@@ -95,7 +95,7 @@ pipeline {
         container('git') {
             sh 'git version'
             sh '''echo test2 > some_stage_create_file.txt'''
-            sh 'echo and one orange >> fruit.txt'
+            sh 'echo and two oranges >> fruit.txt'
         }
         container('agent') {
           Agent_snapshot("sample-test2")
