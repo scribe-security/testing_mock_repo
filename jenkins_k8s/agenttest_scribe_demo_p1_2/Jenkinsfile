@@ -82,6 +82,7 @@ pipeline {
         container('busybox') {
             sh 'echo test > some_stage_create_file.txt'
             sh 'echo Danny has three apples > fruit.txt'
+            sh 'echo Sunday > days.txt'
           }
         container('agent') {
           Agent_snapshot("sample-test1")
@@ -96,6 +97,7 @@ pipeline {
             sh 'git version'
             sh '''echo test2 > some_stage_create_file.txt'''
             sh 'echo and two oranges >> fruit.txt'
+            sh 'echo Monday > days.txt'
         }
         container('agent') {
           Agent_snapshot("sample-test2")
