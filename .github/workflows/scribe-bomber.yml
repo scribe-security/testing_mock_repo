@@ -14,7 +14,7 @@ on:
         default: busybox:latest
 
 jobs:
-  scribe-agent:
+  scribe-bomber:
     runs-on: ubuntu-latest
     container:
       image: scribesecuriy.jfrog.io/scribe-docker-local/bomber:latest
