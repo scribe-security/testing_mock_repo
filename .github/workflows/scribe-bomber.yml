@@ -1,0 +1,34 @@
+name: scribe agent
+
+env:
+  DEFAULT_OBJECT: busybox:latest
+
+on:
+  # push:
+  # pull_request:
+  workflow_dispatch:
+    inputs:
+      object:
+        description: 'Object to bom'
+        required: false
+        default: busybox:latest
+
+jobs:
+  scribe-agent:
+    runs-on: ubuntu-latest
+    container:
+      image: scribesecuriy.jfrog.io/scribe-docker-local/bomber:latest
+      credentials:
+        username: github
+        password: ${{ secrets.scribe_artifactory_cred_id }}
+    steps:
+    - run: echo "Url - ${{ github.event.inputs.url }}!"
+    - name: Checkout source
+      uses: actions/checkout@v2
+      with:
+       fetch-depth: 0
+    - run: bomber --version
+    - run: printenv
+    - name: Bomber output SBOM on object
+      run: >-
+        bomber bomb-syft -vv ${{ github.event.inputs.object || env.DEFAULT_OBJECT }}
