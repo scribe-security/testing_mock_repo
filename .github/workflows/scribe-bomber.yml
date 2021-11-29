@@ -1,4 +1,4 @@
-name: scribe agent
+name: scribe bomber
 
 env:
   DEFAULT_OBJECT: busybox:latest
