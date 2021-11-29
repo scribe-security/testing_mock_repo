@@ -79,5 +79,5 @@ jobs:
       - name: Sign the images with GitHub OIDC **not production ready**
         run: cosign sign --oidc-issuer https://token.actions.githubusercontent.com ${TAGS}
         env:
-          TAGS: scribesecuriy.jfrog.io/scribe-docker-local/bomber:latest
+          TAGS: scribesecuriy.jfrog.io/scribe-docker-public-local/pre-commit-slsa:latest
           COSIGN_EXPERIMENTAL: 1
