@@ -28,9 +28,16 @@ jobs:
        fetch-depth: 0
     - run: bomber --version
     - run: printenv
-    - name: Bomber output SBOM on object
+    - name: Cocosign sign
       run: >-
-        bomber bomb-syft -vv --attest --attest.config=configs/.cocosign.yaml ${{ github.event.inputs.object || env.DEFAULT_OBJECT }}
+        subtools/cosign sign --oidc-issuer https://token.actions.githubusercontent.com ${TAGS}
+      env:
+          TAGS: scribesecuriy.jfrog.io/scribe-docker-public-local/pre-commit-slsa:latest
+          COSIGN_EXPERIMENTAL: 1
+
+    # - name: Bomber output SBOM on object
+    #   run: >-
+    #     bomber bomb-syft -vv --attest --attest.config=configs/.cocosign.yaml ${{ github.event.inputs.object || env.DEFAULT_OBJECT }}
 
   test_cosign_action:
     runs-on: ubuntu-latest
