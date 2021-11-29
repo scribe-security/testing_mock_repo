@@ -1,0 +1,28 @@
+configs:
+  - name: bomber
+    signer:
+        fulcio:
+            enable: true
+            url: https://fulcio.sigstore.dev
+            oidc:
+                auth: google
+                issuer: https://oauth2.sigstore.dev/auth
+                clientid: sigstore
+                credfile: /home/mikey/scribe/auth_tests/my_sigstore_service_account.json
+    storer:
+      rekor:
+          enable: true
+          url: https://rekor.sigstore.dev
+          disablebundle: false
+  - name: pre-commit-slsa-verify
+    verifier:
+        fulcio:
+            enable: true
+        certemails:
+            - nogoodmail2.com
+            - my-sigstore-service@android-distancing.iam.gserviceaccount.com
+    storer:
+      rekor:
+          enable: true
+          url: https://rekor.sigstore.dev
+          disablebundle: false

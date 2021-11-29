@@ -30,4 +30,4 @@ jobs:
     - run: printenv
     - name: Bomber output SBOM on object
       run: >-
-        bomber bomb-syft -vv ${{ github.event.inputs.object || env.DEFAULT_OBJECT }}
+        bomber bomb-syft -vv --attest --attest.config=configs/.cocosign.yaml ${{ github.event.inputs.object || env.DEFAULT_OBJECT }}
