@@ -15,7 +15,7 @@ on:
         default: https://api.dev.scribesecurity.com
 
 jobs:
-  scribe-agent:
+  scribe-bomber:
     runs-on: ubuntu-latest
     container:
       image: scribesecuriy.jfrog.io/scribe-docker-local/agent:latest
@@ -28,7 +28,7 @@ jobs:
       uses: actions/checkout@v2
       with:
        fetch-depth: 0
-       
+
 # name: scribe bomber
 
 # env:
