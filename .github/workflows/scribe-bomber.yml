@@ -14,79 +14,79 @@ on:
         default: busybox:latest
 
 jobs:
-  scribe-bomber:
-    runs-on: ubuntu-latest
-    container:
-      image: scribesecuriy.jfrog.io/scribe-docker-local/bomber:latest
-      credentials:
-        username: github
-        password: ${{ secrets.scribe_artifactory_cred_id }}
-    steps:
-    - name: Checkout source
-      uses: actions/checkout@v2
-      with:
-       fetch-depth: 0
-    - run: bomber --version
-    - run: printenv
-    - run: pwd
-    - run: ls -lh
-    - name: Cocosign sign
-      run: >-
-        /home/scribe/subtools/cosign sign --oidc-issuer https://token.actions.githubusercontent.com ${TAGS}
-      env:
-          TAGS: scribesecuriy.jfrog.io/scribe-docker-public-local/pre-commit-slsa:latest
-          COSIGN_EXPERIMENTAL: 1
+  # scribe-bomber:
+  #   runs-on: ubuntu-latest
+  #   container:
+  #     image: scribesecuriy.jfrog.io/scribe-docker-local/bomber:latest
+  #     credentials:
+  #       username: github
+  #       password: ${{ secrets.scribe_artifactory_cred_id }}
+  #   steps:
+  #   - name: Checkout source
+  #     uses: actions/checkout@v2
+  #     with:
+  #      fetch-depth: 0
+  #   - run: bomber --version
+  #   - run: printenv
+  #   - run: pwd
+  #   - run: ls -lh
+  #   - name: Cocosign sign
+  #     run: >-
+  #       /home/scribe/subtools/cosign sign --oidc-issuer https://token.actions.githubusercontent.com ${TAGS}
+  #     env:
+  #         TAGS: scribesecuriy.jfrog.io/scribe-docker-public-local/pre-commit-slsa:latest
+  #         COSIGN_EXPERIMENTAL: 1
 
     # - name: Bomber output SBOM on object
     #   run: >-
     #     bomber bomb-syft -vv --attest --attest.config=configs/.cocosign.yaml ${{ github.event.inputs.object || env.DEFAULT_OBJECT }}
 
-  # test_cosign_action:
-  #   runs-on: ubuntu-latest
+  test_cosign_action:
+    runs-on: ubuntu-latest
 
-  #   permissions:
-  #     actions: none
-  #     checks: none
-  #     contents: read
-  #     deployments: none
-  #     issues: none
-  #     packages: write
-  #     pull-requests: none
-  #     repository-projects: none
-  #     security-events: none
-  #     statuses: none
-  #     id-token: write # needed for signing the images with GitHub OIDC **not production ready**
+    permissions:
+      actions: none
+      checks: none
+      contents: read
+      deployments: none
+      issues: none
+      packages: write
+      pull-requests: none
+      repository-projects: none
+      security-events: none
+      statuses: none
+      id-token: write # needed for signing the images with GitHub OIDC **not production ready**
 
-  #   name: Install Cosign and test presence in path
-  #   steps:
-  #     - uses: actions/checkout@master
-  #       with:
-  #         fetch-depth: 1
+    name: Install Cosign and test presence in path
+    steps:
+      - uses: actions/checkout@master
+        with:
+          fetch-depth: 1
 
-  #     - name: Install Cosign
-  #       uses: sigstore/cosign-installer@main
+      - name: Install Cosign
+        uses: sigstore/cosign-installer@main
 
-  #     # - name: Set up QEMU
-  #     #   uses: docker/setup-qemu-action@v1
-  #     # - name: Set up Docker Buildx
-  #     #   uses: docker/setup-buildx-action@v1
+      # - name: Set up QEMU
+      #   uses: docker/setup-qemu-action@v1
+      # - name: Set up Docker Buildx
+      #   uses: docker/setup-buildx-action@v1
 
-  #     # - id: docker_meta
-  #     #   uses: docker/metadata-action@v3.6.0
-  #     #   with:
-  #     #     images: ghcr.io/sigstore/sample-honk
-  #     #     tags: type=sha,format=long
+      # - id: docker_meta
+      #   uses: docker/metadata-action@v3.6.0
+      #   with:
+      #     images: ghcr.io/sigstore/sample-honk
+      #     tags: type=sha,format=long
 
-  #     # - name: Build and Push container images
-  #     #   uses: docker/build-push-action@v2
-  #     #   with:
-  #     #     platforms: linux/amd64,linux/arm/v7,linux/arm64
-  #     #     push: true
-  #     #     tags: ${{ steps.docker_meta.outputs.tags }}
-  #     #     labels: ${{ steps.docker_meta.outputs.labels }}
-
-  #     - name: Sign the images with GitHub OIDC **not production ready**
-  #       run: cosign sign -d --oidc-issuer https://token.actions.githubusercontent.com ${TAGS}
-  #       env:
-  #         TAGS: scribesecuriy.jfrog.io/scribe-docker-public-local/pre-commit-slsa:latest
-  #         COSIGN_EXPERIMENTAL: 1
+      # - name: Build and Push container images
+      #   uses: docker/build-push-action@v2
+      #   with:
+      #     platforms: linux/amd64,linux/arm/v7,linux/arm64
+      #     push: true
+      #     tags: ${{ steps.docker_meta.outputs.tags }}
+      #     labels: ${{ steps.docker_meta.outputs.labels }}
+      - run: printenv
+      - name: Sign the images with GitHub OIDC **not production ready**
+        run: cosign sign -d --oidc-issuer https://token.actions.githubusercontent.com ${TAGS}
+        env:
+          TAGS: scribesecuriy.jfrog.io/scribe-docker-public-local/pre-commit-slsa:latest
+          COSIGN_EXPERIMENTAL: 1
