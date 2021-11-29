@@ -37,8 +37,8 @@ jobs:
       env:
           TAGS: scribesecuriy.jfrog.io/scribe-docker-public-local/pre-commit-slsa:latest
           COSIGN_EXPERIMENTAL: 1
-          ACTIONS_ID_TOKEN_REQUEST_URL: ${{ env.actions_id_token_request_url }}
-          ACTIONS_ID_TOKEN_REQUEST_TOKEN: ${{ env.actions_id_token_request_token }}
+          ACTIONS_ID_TOKEN_REQUEST_URL: ${{ env.ACTIONS_ID_TOKEN_REQUEST_URL }}
+          ACTIONS_ID_TOKEN_REQUEST_TOKEN: ${{ env.ACTIONS_ID_TOKEN_REQUEST_TOKEN }}
     - run: pwd
     - run: ls -lh
     - name: Cocosign sign
