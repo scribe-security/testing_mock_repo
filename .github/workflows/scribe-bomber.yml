@@ -48,13 +48,13 @@ jobs:
     - run: printenv
     - run: pwd
     - run: ls -lh
-    - name: Cocosign sign
-      run: >-
-        /home/scribe/subtools/cosign sign --oidc-issuer https://token.actions.githubusercontent.com ${TAGS}
-
-    # - name: Bomber output SBOM on object
+    # - name: Cocosign sign
     #   run: >-
-    #     bomber bomb-syft -vv --attest --attest.config=configs/.cocosign.yaml ${{ github.event.inputs.object || env.DEFAULT_OBJECT }}
+    #     /home/scribe/subtools/cosign sign --oidc-issuer https://token.actions.githubusercontent.com ${TAGS}
+
+    - name: Bomber output SBOM on object
+      run: >-
+        bomber bomb-syft -vv --attest --attest.config=configs/.cocosign.yaml ${{ github.event.inputs.object || env.DEFAULT_OBJECT }}
 
   # test_cosign_action:
   #   runs-on: ubuntu-latest
