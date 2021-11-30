@@ -54,12 +54,12 @@ jobs:
 
     - name: Bomber output SBOM on object
       run: >-
-        bomber bomb-syft busybox:latest -vv
+        bomber bomb-syft oci-registry:busybox:latest -vv
     - uses: actions/upload-artifact@v2
       with:
         name: bomber-artifacts
         path: /tmp/bomber/ # or path/to/artifact
-    - run: docker pull busybox:latest
+
   # test_cosign_action:
   #   runs-on: ubuntu-latest
 
