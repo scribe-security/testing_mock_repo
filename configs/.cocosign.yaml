@@ -5,9 +5,9 @@ configs:
             enable: true
             url: https://fulcio.sigstore.dev
             oidc:
-                auth: provider
-	        			issuer: https://token.actions.githubusercontent.com
-                clientid: sigstore
+              auth: provider
+              issuer: https://token.actions.githubusercontent.com
+              clientid: sigstore
     storer:
       rekor:
           enable: true
