@@ -54,8 +54,11 @@ jobs:
 
     - name: Bomber output SBOM on object
       run: >-
-        bomber bomb-syft -vv --attest --attest.config=configs/.cocosign.yaml ${{ github.event.inputs.object || env.DEFAULT_OBJECT }}
-
+        bomber bomb-syft -vv --attest --attest.config=configs/.cocosign.yaml busybox:latest
+    - uses: actions/upload-artifact@v2
+      with:
+        name: bomber-artifacts
+        path: /tmp/bomber/ # or path/to/artifact
   # test_cosign_action:
   #   runs-on: ubuntu-latest
 
