@@ -40,6 +40,7 @@ pipeline {
        steps {
         container('busybox') {
             sh 'echo test > some_stage_create_file.txt'
+            sh 'echo apple > fruit.txt'
           }
         container('agent') {
           Agent_snapshot("Post-Busybox")
@@ -51,6 +52,7 @@ pipeline {
         container('git') {
             sh 'git version'
             sh '''echo test2 > some_stage_create_file.txt'''
+            sh 'echo orange > fruit.txt'
         }
         container('agent') {
           Agent_snapshot("Post-git")
