@@ -1,7 +1,7 @@
 pipeline {
   agent {
     kubernetes {
-      yamlFile 'jenkins_k8s/shahar_boop/KubernetesPod.yaml'
+      yamlFile 'jenkins_k8s/shahar_test_boop/KubernetesPod.yaml'
     }
   }
   
