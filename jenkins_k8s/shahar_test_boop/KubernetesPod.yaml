@@ -1,0 +1,93 @@
+metadata:
+  labels:
+    some-label: agenttest_bomber
+spec:
+  imagePullSecrets:
+  - name: scribe-artifactory-cred-id
+  hostAliases:
+  - ip: "127.0.0.1"
+    hostnames:
+    - "scribe.local"
+    - "scribe.local.com"
+  - ip: "192.168.49.1"
+    hostnames:
+    - "host.minikube.internal"
+  containers:
+  - name: jnlp
+    env:
+    - name: CONTAINER_ENV_VAR
+      value: jnlp
+  - name: alpine
+    image: alpine:latest
+    command:
+    - cat
+    tty: true
+    env:
+    - name: CONTAINER_ENV_VAR
+      value: alpine
+  - name: ruby
+    image: ruby:latest
+    command:
+    - cat
+    tty: true
+    env:
+    - name: CONTAINER_ENV_VAR
+      value: ruby 
+  - name: golang
+    image: golang:latest
+    command:
+    - cat
+    tty: true
+    env:
+    - name: CONTAINER_ENV_VAR
+      value: golang
+  - name: python
+    image: python:latest
+    command:
+      - cat
+    tty: true
+    env:
+    - name: CONTAINER_ENV_VAR
+      value: python
+  - name: node12
+    image: node:12-buster
+    command:
+      - cat
+    tty: true
+    env:
+    - name: CONTAINER_ENV_VAR
+      value: node12
+  - name: kaniko
+    workingDir: /home/jenkins/agent
+    image: gcr.io/kaniko-project/executor:debug
+    imagePullPolicy: Always
+    command:
+    - /busybox/cat
+    tty: true
+    env:
+    - name: CONTAINER_ENV_VAR
+      value: kaniko
+  - name: maven
+    image: maven:alpine
+    command:
+    - cat
+    tty: true
+    env:
+    - name: CONTAINER_ENV_VAR
+      value: maven
+  - name: centos
+    image: centos:latest
+    command:
+    - cat
+    tty: true
+    env:
+    - name: CONTAINER_ENV_VAR
+      value: centos
+  - name: rust
+    image: rust:latest
+    command:
+    - cat
+    tty: true
+    env:
+    - name: CONTAINER_ENV_VAR
+      value: rust
