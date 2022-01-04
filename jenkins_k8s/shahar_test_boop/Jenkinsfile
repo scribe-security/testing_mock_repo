@@ -134,6 +134,7 @@ pipeline {
           sh '''#!/bin/bash 
           cd jenkins_k8s/external/simple-hello-world-example-npm/
           npm i'''
+        }
       }
     }
 
