@@ -28,7 +28,7 @@ pipeline {
         container('maven') {
            sh 'env'
            sh '''
-            mvn -B -DskipTests -f jenkins_k8s/external/simple-java-maven-app/pom.xml clean package
+            mvn -B -DskipTests -X -f jenkins_k8s/external/simple-java-maven-app/pom.xml clean package
             find / -type f -name "*.jar" -not -path "*/expose/*" -exec sh -c 'DIR=expose/java/jar ; mkdir -p $DIR && cp {} "$DIR"' \\;
           '''
 
