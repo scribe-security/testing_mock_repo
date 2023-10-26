@@ -1,0 +1,44 @@
+attest:
+  config: ""
+  default: ""
+  push: false
+  cocosign:
+    signer:
+      x509:
+        enable: true
+        private: testdata/keys/test.key.pem
+        cert: testdata/keys/test.cert.pem
+        ca: testdata/keys/ca-chain.cert.pem
+    verifier:
+      x509:
+        enable: true
+        cert: testdata/keys/test.cert.pem
+        ca: testdata/keys/ca-chain.cert.pem
+    policies:
+    - enable: true
+      name: build-time-policy-fail.alpine:3.18.3
+      modules:
+      - enable: true
+        type: verify-artifact
+        name: build-time
+        input:
+          format: statement-slsa
+          match:
+            target_type: image
+          rego:
+            args:
+              end_hour: 8
+              start_hour: 8
+              workdays:
+              - Sunday
+            path: policies/build-time.rego
+  x509: {}
+list:
+  columns: []
+  filters: {}
+  current: false
+download:
+  folder-path: ""
+  format: ""
+  ref: ""
+  store: ""

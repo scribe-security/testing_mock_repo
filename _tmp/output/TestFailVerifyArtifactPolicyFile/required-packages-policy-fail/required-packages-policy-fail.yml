@@ -1,0 +1,42 @@
+attest:
+  config: ""
+  default: ""
+  push: false
+  cocosign:
+    signer:
+      x509:
+        enable: true
+        private: testdata/keys/test.key.pem
+        cert: testdata/keys/test.cert.pem
+        ca: testdata/keys/ca-chain.cert.pem
+    verifier:
+      x509:
+        enable: true
+        cert: testdata/keys/test.cert.pem
+        ca: testdata/keys/ca-chain.cert.pem
+    policies:
+    - enable: true
+      name: required-packages-policy-fail.busybox:1.36.1
+      modules:
+      - enable: true
+        type: verify-artifact
+        name: required-packages
+        input:
+          format: statement-cyclonedx-json
+          rego:
+            args:
+              required_pkgs:
+              - pkg:deb/ubuntu/bash@15.1-6ubuntu1?arch=amd64&distro=ubuntu-22.10
+              violations_limit: 0
+            path: policies/required-packages.rego
+          signed: false
+  x509: {}
+list:
+  columns: []
+  filters: {}
+  current: false
+download:
+  folder-path: ""
+  format: ""
+  ref: ""
+  store: ""

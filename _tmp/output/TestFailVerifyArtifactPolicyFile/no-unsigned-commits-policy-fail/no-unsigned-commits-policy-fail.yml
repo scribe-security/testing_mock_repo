@@ -1,0 +1,39 @@
+attest:
+  config: ""
+  default: ""
+  push: false
+  cocosign:
+    signer:
+      x509:
+        enable: true
+        private: testdata/keys/test.key.pem
+        cert: testdata/keys/test.cert.pem
+        ca: testdata/keys/ca-chain.cert.pem
+    verifier:
+      x509:
+        enable: true
+        cert: testdata/keys/test.cert.pem
+        ca: testdata/keys/ca-chain.cert.pem
+    policies:
+    - enable: true
+      name: no-unsigned-commits-policy-fail.git:testdata/testing_mock_repo
+      modules:
+      - enable: true
+        type: verify-artifact
+        name: no-unsigned-commits
+        input:
+          format: statement-cyclonedx-json
+          match:
+            target_type: git
+          rego:
+            path: policies/no-unsigned-commits.rego
+  x509: {}
+list:
+  columns: []
+  filters: {}
+  current: false
+download:
+  folder-path: ""
+  format: ""
+  ref: ""
+  store: ""

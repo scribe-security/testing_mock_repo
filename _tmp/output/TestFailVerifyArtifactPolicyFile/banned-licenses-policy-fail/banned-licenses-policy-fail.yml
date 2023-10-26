@@ -1,0 +1,41 @@
+attest:
+  config: ""
+  default: ""
+  push: false
+  cocosign:
+    signer:
+      x509:
+        enable: true
+        private: testdata/keys/test.key.pem
+        cert: testdata/keys/test.cert.pem
+        ca: testdata/keys/ca-chain.cert.pem
+    verifier:
+      x509:
+        enable: true
+        cert: testdata/keys/test.cert.pem
+        ca: testdata/keys/ca-chain.cert.pem
+    policies:
+    - enable: true
+      name: banned-licenses-policy-fail.busybox:1.36.1
+      modules:
+      - enable: true
+        type: verify-artifact
+        name: blocklist-licenses
+        input:
+          format: statement-cyclonedx-json
+          rego:
+            args:
+              blocklist: '{"GPL", "MPL"}'
+              blocklisted_limit: 0
+            path: policies/banned-licenses.rego
+          signed: false
+  x509: {}
+list:
+  columns: []
+  filters: {}
+  current: false
+download:
+  folder-path: ""
+  format: ""
+  ref: ""
+  store: ""
