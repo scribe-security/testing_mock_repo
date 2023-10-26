@@ -1,211 +1,174 @@
 {
-  "_type": "https://in-toto.io/Statement/v0.1",
-  "predicateType": "http:/docs.oasis-open.org/sarif/sarif/2.1.0",
-  "subject": [
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0-rtm.5.json",
+  "runs": [
     {
-      "name": "",
-      "digest": {
-        "sha256": "fcedcbdc4f618d89804438d8e9a4f8cf0ec0ebbf357ba8b4e9097c77c419a194"
-      }
-    }
-  ],
-  "predicate": {
-    "environment": {
-      "hostname": "mikey-thinkpad",
-      "user": "mikey",
-      "name": "valint..TestFailVerifyArtifactPolicyFile.cache.banned-licenses-policy-fail",
-      "timestamp": "2023-10-26T11:37:03+03:00",
-      "input_scheme": "docker",
-      "input_name": "busybox",
-      "input_tag": "1.36.1",
-      "content_type": "statement-sarif",
-      "context_type": "local",
-      "predicate_type": "http:/docs.oasis-open.org/sarif/sarif/2.1.0",
-      "git_url": "https://github.com/scribe-security/valint.git",
-      "git_branch": "feature/evidence_policy_result4",
-      "git_commit": "bd47d1b4389751aa3dbb67573d93ccfdd4f9251c",
-      "git_ref": "refs/heads/feature/evidence_policy_result4",
-      "imageID": "sha256:a416a98b71e224a31ee99cff8e16063554498227d2b696152a9c3e0aa65e5824",
-      "repoDigest": [
-        "busybox@sha256:3fbc632167424a6d997e74f52b878d7cc478225cffac6bc977eedfe51c7f4e79"
-      ],
-      "tag": [
-        "1.36.1",
-        "latest",
-        "1.36.1"
-      ],
-      "target_type": "image",
-      "sbomgroup": "generic",
-      "sbomname": "index.docker.io/library/busybox:1.36.1",
-      "sbomversion": "sha256:fcedcbdc4f618d89804438d8e9a4f8cf0ec0ebbf357ba8b4e9097c77c419a194",
-      "sbomhashs": [
-        "sha256-fcedcbdc4f618d89804438d8e9a4f8cf0ec0ebbf357ba8b4e9097c77c419a194"
-      ],
-      "sbompurl": "pkg:docker/index.docker.io/library/busybox:1.36.1@sha256:a416a98b71e224a31ee99cff8e16063554498227d2b696152a9c3e0aa65e5824?arch=amd64",
-      "policies": [
-        "banned-licenses-policy-fail.busybox:1.36.1"
-      ],
-      "modules": [
-        "blocklist-licenses"
-      ],
-      "module_types": [
-        "verify-artifact"
-      ]
-    },
-    "mimeType": "application/json",
-    "content": {
-      "version": "2.1.0",
-      "$schema": "https://json.schemastore.org/sarif-2.1.0-rtm.5.json",
-      "runs": [
-        {
-          "tool": {
-            "driver": {
-              "name": "",
-              "version": "",
-              "informationUri": "",
-              "rules": [
-                {
-                  "id": "banned-licenses-policy-fail.busybox:1.36.1.verify-artifact.blocklist-licenses.origin",
-                  "name": "banned-licenses-policy-fail.busybox:1.36.1",
-                  "shortDescription": {
-                    "text": "The Verify Artifact module enforces a set of requirements on who produced artifacts across your supply chain but also what information should be collected on each artifact. \nIn other words, it ensures produced artifacts (targets) integrity by checking the expected evidence, signatures and origin in your supply chain."
-                  }
-                },
-                {
-                  "id": "banned-licenses-policy-fail.busybox:1.36.1.verify-artifact.blocklist-licenses.custom-script",
-                  "name": "banned-licenses-policy-fail.busybox:1.36.1",
-                  "shortDescription": {
-                    "text": "The Verify Artifact module enforces a custom policy script"
-                  }
-                }
-              ]
-            }
-          },
-          "invocations": [
+      "tool": {
+        "driver": {
+          "name": "",
+          "version": "",
+          "informationUri": "",
+          "rules": [
             {
-              "executionSuccessful": false
-            }
-          ],
-          "results": [
-            {
-              "ruleId": "banned-licenses-policy-fail.busybox:1.36.1.verify-artifact.blocklist-licenses.origin",
-              "kind": "pass",
-              "message": {
-                "properties": {
-                  "summary": [
-                    {
-                      "type": "verify-artifact",
-                      "details": "1/1 evidence origin and signature verified"
-                    }
-                  ]
-                },
-                "text": "rule verdict result"
-              },
-              "occurrenceCount": 0,
-              "properties": {
-                "evidence": [
-                  {
-                    "content_type": "statement-cyclonedx-json",
-                    "context_type": "local",
-                    "git_branch": "feature/evidence_policy_result4",
-                    "git_commit": "bd47d1b4389751aa3dbb67573d93ccfdd4f9251c",
-                    "git_ref": "refs/heads/feature/evidence_policy_result4",
-                    "git_url": "https://github.com/scribe-security/valint.git",
-                    "hostname": "mikey-thinkpad",
-                    "imageID": "sha256:a416a98b71e224a31ee99cff8e16063554498227d2b696152a9c3e0aa65e5824",
-                    "input_name": "busybox",
-                    "input_scheme": "docker",
-                    "input_tag": "1.36.1",
-                    "name": "valint..TestFailVerifyArtifactPolicyFile.cache.banned-licenses-policy-fail",
-                    "predicate_type": "https://cyclonedx.org/bom",
-                    "ref": "/home/mikey/scribe/valint/test/integration/_tmp/output/TestFailVerifyArtifactPolicyFile/banned-licenses-policy-fail/sha256-a416a98b71e224a31ee99cff8e16063554498227d2b696152a9c3e0aa65e5824.bom.statement.json",
-                    "repoDigest": [
-                      "busybox@sha256:3fbc632167424a6d997e74f52b878d7cc478225cffac6bc977eedfe51c7f4e79"
-                    ],
-                    "sbomgroup": "image",
-                    "sbomhashs": [
-                      "sha256-3fbc632167424a6d997e74f52b878d7cc478225cffac6bc977eedfe51c7f4e79",
-                      "sha256-a416a98b71e224a31ee99cff8e16063554498227d2b696152a9c3e0aa65e5824"
-                    ],
-                    "sbomname": "index.docker.io/library/busybox:1.36.1",
-                    "sbompurl": "pkg:docker/index.docker.io/library/busybox:1.36.1@sha256:a416a98b71e224a31ee99cff8e16063554498227d2b696152a9c3e0aa65e5824?arch=amd64",
-                    "sbomversion": "sha256:a416a98b71e224a31ee99cff8e16063554498227d2b696152a9c3e0aa65e5824",
-                    "store": "cache",
-                    "tag": [
-                      "1.36.1",
-                      "latest",
-                      "1.36.1"
-                    ],
-                    "target_type": "image",
-                    "timestamp": "2023-10-26T11:37:03+03:00",
-                    "user": "mikey"
-                  }
-                ]
+              "id": "blocklist-packages-policy-fail.ubuntu:jammy-20230804.verify-artifact.blocklist-packages.origin",
+              "name": "blocklist-packages-policy-fail.ubuntu:jammy-20230804",
+              "shortDescription": {
+                "text": "The Verify Artifact module enforces a set of requirements on who produced artifacts across your supply chain but also what information should be collected on each artifact. \nIn other words, it ensures produced artifacts (targets) integrity by checking the expected evidence, signatures and origin in your supply chain."
               }
             },
             {
-              "ruleId": "banned-licenses-policy-fail.busybox:1.36.1.verify-artifact.blocklist-licenses.custom-script",
-              "kind": "fail",
-              "message": {
-                "properties": {
-                  "summary": [
-                    {
-                      "reason": "Some packages use blocklisted licenses"
-                    }
-                  ]
-                },
-                "text": "rule verdict result"
-              },
-              "occurrenceCount": 0
+              "id": "blocklist-packages-policy-fail.ubuntu:jammy-20230804.verify-artifact.blocklist-packages.custom-script",
+              "name": "blocklist-packages-policy-fail.ubuntu:jammy-20230804",
+              "shortDescription": {
+                "text": "The Verify Artifact module enforces a custom policy script"
+              }
             }
-          ],
-          "properties": {
-            "verifier-context": {
-              "hostname": "mikey-thinkpad",
-              "user": "mikey",
-              "name": "valint..TestFailVerifyArtifactPolicyFile.cache.banned-licenses-policy-fail",
-              "timestamp": "2023-10-26T11:37:03+03:00",
-              "input_scheme": "docker",
-              "input_name": "busybox",
-              "input_tag": "1.36.1",
-              "content_type": "statement-sarif",
-              "context_type": "local",
-              "predicate_type": "https://cyclonedx.org/bom",
-              "git_url": "https://github.com/scribe-security/valint.git",
-              "git_branch": "feature/evidence_policy_result4",
-              "git_commit": "bd47d1b4389751aa3dbb67573d93ccfdd4f9251c",
-              "git_ref": "refs/heads/feature/evidence_policy_result4",
-              "imageID": "sha256:a416a98b71e224a31ee99cff8e16063554498227d2b696152a9c3e0aa65e5824",
-              "repoDigest": [
-                "busybox@sha256:3fbc632167424a6d997e74f52b878d7cc478225cffac6bc977eedfe51c7f4e79"
-              ],
-              "tag": [
-                "1.36.1",
-                "latest",
-                "1.36.1"
-              ],
-              "target_type": "image",
-              "sbomgroup": "image",
-              "sbomname": "index.docker.io/library/busybox:1.36.1",
-              "sbomversion": "sha256:a416a98b71e224a31ee99cff8e16063554498227d2b696152a9c3e0aa65e5824",
-              "sbomhashs": [
-                "sha256-3fbc632167424a6d997e74f52b878d7cc478225cffac6bc977eedfe51c7f4e79",
-                "sha256-a416a98b71e224a31ee99cff8e16063554498227d2b696152a9c3e0aa65e5824"
-              ],
-              "sbompurl": "pkg:docker/index.docker.io/library/busybox:1.36.1@sha256:a416a98b71e224a31ee99cff8e16063554498227d2b696152a9c3e0aa65e5824?arch=amd64",
-              "policies": [
-                "banned-licenses-policy-fail.busybox:1.36.1"
-              ],
-              "modules": [
-                "blocklist-licenses"
-              ],
-              "module_types": [
-                "verify-artifact"
+          ]
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": false
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "blocklist-packages-policy-fail.ubuntu:jammy-20230804.verify-artifact.blocklist-packages.origin",
+          "kind": "pass",
+          "message": {
+            "properties": {
+              "summary": [
+                {
+                  "type": "verify-artifact",
+                  "details": "1/1 evidence origin and signature verified"
+                }
               ]
-            }
+            },
+            "text": "rule verdict result"
+          },
+          "occurrenceCount": 0,
+          "properties": {
+            "evidence": [
+              {
+                "content_type": "statement-cyclonedx-json",
+                "context_type": "local",
+                "git_branch": "feature/evidence_policy_result4",
+                "git_commit": "bd47d1b4389751aa3dbb67573d93ccfdd4f9251c",
+                "git_ref": "refs/heads/feature/evidence_policy_result4",
+                "git_url": "https://github.com/scribe-security/valint.git",
+                "hostname": "mikey-thinkpad",
+                "imageID": "sha256:01f29b872827fa6f9aed0ea0b2ede53aea4ad9d66c7920e81a8db6d1fd9ab7f9",
+                "input_name": "ubuntu",
+                "input_scheme": "docker",
+                "input_tag": "jammy-20230804",
+                "name": "valint..TestFailVerifyArtifactPolicyFile.cache.blocklist-packages-policy-fail",
+                "predicate_type": "https://cyclonedx.org/bom",
+                "ref": "/home/mikey/scribe/valint/test/integration/_tmp/output/TestFailVerifyArtifactPolicyFile/blocklist-packages-policy-fail/sha256-01f29b872827fa6f9aed0ea0b2ede53aea4ad9d66c7920e81a8db6d1fd9ab7f9.bom.statement.json",
+                "repoDigest": [
+                  "ubuntu@sha256:ec050c32e4a6085b423d36ecd025c0d3ff00c38ab93a3d71a460ff1c44fa6d77"
+                ],
+                "sbomgroup": "image",
+                "sbomhashs": [
+                  "sha256-ec050c32e4a6085b423d36ecd025c0d3ff00c38ab93a3d71a460ff1c44fa6d77",
+                  "sha256-01f29b872827fa6f9aed0ea0b2ede53aea4ad9d66c7920e81a8db6d1fd9ab7f9"
+                ],
+                "sbomname": "index.docker.io/library/ubuntu:jammy-20230804",
+                "sbompurl": "pkg:docker/index.docker.io/library/ubuntu:jammy-20230804@sha256:01f29b872827fa6f9aed0ea0b2ede53aea4ad9d66c7920e81a8db6d1fd9ab7f9?arch=amd64",
+                "sbomversion": "sha256:01f29b872827fa6f9aed0ea0b2ede53aea4ad9d66c7920e81a8db6d1fd9ab7f9",
+                "store": "cache",
+                "tag": [
+                  "jammy-20230804",
+                  "jammy-20230804"
+                ],
+                "target_type": "image",
+                "timestamp": "2023-10-26T11:37:04+03:00",
+                "user": "mikey"
+              }
+            ]
+          }
+        },
+        {
+          "ruleId": "blocklist-packages-policy-fail.ubuntu:jammy-20230804.verify-artifact.blocklist-packages.custom-script",
+          "kind": "fail",
+          "message": {
+            "properties": {
+              "summary": [
+                {
+                  "details": "[{\"details\":[{\"package\":\"apt\"}],\"type\":\"banned package\"},{\"details\":[{\"package\":\"pkg:deb/ubuntu/dpkg@1.21.1ubuntu2.2?arch=amd64\"}],\"type\":\"banned package\"}]",
+                  "violations": 2,
+                  "reason": "Some blocklisted packages were found in the project"
+                }
+              ]
+            },
+            "text": "rule verdict result"
+          },
+          "occurrenceCount": 2,
+          "properties": {
+            "violation": [
+              {
+                "type": "banned package",
+                "details": [
+                  {
+                    "package": "apt"
+                  }
+                ]
+              },
+              {
+                "type": "banned package",
+                "details": [
+                  {
+                    "package": "pkg:deb/ubuntu/dpkg@1.21.1ubuntu2.2?arch=amd64"
+                  }
+                ]
+              }
+            ]
           }
         }
-      ]
+      ],
+      "properties": {
+        "verifier-context": {
+          "hostname": "mikey-thinkpad",
+          "user": "mikey",
+          "name": "valint..TestFailVerifyArtifactPolicyFile.cache.blocklist-packages-policy-fail",
+          "timestamp": "2023-10-26T11:37:05+03:00",
+          "input_scheme": "docker",
+          "input_name": "ubuntu",
+          "input_tag": "jammy-20230804",
+          "content_type": "statement-sarif",
+          "context_type": "local",
+          "predicate_type": "https://cyclonedx.org/bom",
+          "git_url": "https://github.com/scribe-security/valint.git",
+          "git_branch": "feature/evidence_policy_result4",
+          "git_commit": "bd47d1b4389751aa3dbb67573d93ccfdd4f9251c",
+          "git_ref": "refs/heads/feature/evidence_policy_result4",
+          "imageID": "sha256:01f29b872827fa6f9aed0ea0b2ede53aea4ad9d66c7920e81a8db6d1fd9ab7f9",
+          "repoDigest": [
+            "ubuntu@sha256:ec050c32e4a6085b423d36ecd025c0d3ff00c38ab93a3d71a460ff1c44fa6d77"
+          ],
+          "tag": [
+            "jammy-20230804",
+            "jammy-20230804"
+          ],
+          "target_type": "image",
+          "sbomgroup": "image",
+          "sbomname": "index.docker.io/library/ubuntu:jammy-20230804",
+          "sbomversion": "sha256:01f29b872827fa6f9aed0ea0b2ede53aea4ad9d66c7920e81a8db6d1fd9ab7f9",
+          "sbomhashs": [
+            "sha256-ec050c32e4a6085b423d36ecd025c0d3ff00c38ab93a3d71a460ff1c44fa6d77",
+            "sha256-01f29b872827fa6f9aed0ea0b2ede53aea4ad9d66c7920e81a8db6d1fd9ab7f9"
+          ],
+          "sbompurl": "pkg:docker/index.docker.io/library/ubuntu:jammy-20230804@sha256:01f29b872827fa6f9aed0ea0b2ede53aea4ad9d66c7920e81a8db6d1fd9ab7f9?arch=amd64",
+          "policies": [
+            "blocklist-packages-policy-fail.ubuntu:jammy-20230804"
+          ],
+          "modules": [
+            "blocklist-packages"
+          ],
+          "module_types": [
+            "verify-artifact"
+          ]
+        }
+      }
     }
-  }
+  ]
 }
