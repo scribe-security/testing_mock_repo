@@ -7,7 +7,7 @@
         "driver": {
           "name": "",
           "version": "",
-          "informationUri": "",
+          "informationUri": "https://www.example.com",
           "rules": [
             {
               "id": "blocklist-packages-policy-fail.ubuntu:jammy-20230804.verify-artifact.blocklist-packages.origin",
