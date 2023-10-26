@@ -1,0 +1,211 @@
+{
+  "_type": "https://in-toto.io/Statement/v0.1",
+  "predicateType": "http:/docs.oasis-open.org/sarif/sarif/2.1.0",
+  "subject": [
+    {
+      "name": "",
+      "digest": {
+        "sha256": "402d5f554c9cd8216cb46c7084d89bec8d1f0d03331641547272207b32422c89"
+      }
+    }
+  ],
+  "predicate": {
+    "environment": {
+      "hostname": "mikey-thinkpad",
+      "user": "mikey",
+      "name": "valint..TestFailVerifyArtifactPolicyFile.cache.build-time-policy-fail",
+      "timestamp": "2023-10-26T11:37:19+03:00",
+      "input_scheme": "docker",
+      "input_name": "alpine",
+      "input_tag": "3.18.3",
+      "content_type": "statement-sarif",
+      "context_type": "local",
+      "predicate_type": "http:/docs.oasis-open.org/sarif/sarif/2.1.0",
+      "git_url": "https://github.com/scribe-security/valint.git",
+      "git_branch": "feature/evidence_policy_result4",
+      "git_commit": "bd47d1b4389751aa3dbb67573d93ccfdd4f9251c",
+      "git_ref": "refs/heads/feature/evidence_policy_result4",
+      "imageID": "sha256:7e01a0d0a1dcd9e539f8e9bbd80106d59efbdf97293b3d38f5d7a34501526cdb",
+      "repoDigest": [
+        "alpine@sha256:7144f7bab3d4c2648d7e59409f15ec52a18006a128c733fcff20d3a4a54ba44a"
+      ],
+      "tag": [
+        "3.18.3",
+        "latest",
+        "3.18.3"
+      ],
+      "target_type": "image",
+      "sbomgroup": "generic",
+      "sbomname": "index.docker.io/library/alpine:3.18.3",
+      "sbomversion": "sha256:402d5f554c9cd8216cb46c7084d89bec8d1f0d03331641547272207b32422c89",
+      "sbomhashs": [
+        "sha256-402d5f554c9cd8216cb46c7084d89bec8d1f0d03331641547272207b32422c89"
+      ],
+      "sbompurl": "pkg:docker/index.docker.io/library/alpine:3.18.3@sha256:7e01a0d0a1dcd9e539f8e9bbd80106d59efbdf97293b3d38f5d7a34501526cdb?arch=amd64",
+      "policies": [
+        "build-time-policy-fail.alpine:3.18.3"
+      ],
+      "modules": [
+        "build-time"
+      ],
+      "module_types": [
+        "verify-artifact"
+      ]
+    },
+    "mimeType": "application/json",
+    "content": {
+      "version": "2.1.0",
+      "$schema": "https://json.schemastore.org/sarif-2.1.0-rtm.5.json",
+      "runs": [
+        {
+          "tool": {
+            "driver": {
+              "name": "",
+              "version": "",
+              "informationUri": "",
+              "rules": [
+                {
+                  "id": "build-time-policy-fail.alpine:3.18.3.verify-artifact.build-time.origin",
+                  "name": "build-time-policy-fail.alpine:3.18.3",
+                  "shortDescription": {
+                    "text": "The Verify Artifact module enforces a set of requirements on who produced artifacts across your supply chain but also what information should be collected on each artifact. \nIn other words, it ensures produced artifacts (targets) integrity by checking the expected evidence, signatures and origin in your supply chain."
+                  }
+                },
+                {
+                  "id": "build-time-policy-fail.alpine:3.18.3.verify-artifact.build-time.custom-script",
+                  "name": "build-time-policy-fail.alpine:3.18.3",
+                  "shortDescription": {
+                    "text": "The Verify Artifact module enforces a custom policy script"
+                  }
+                }
+              ]
+            }
+          },
+          "invocations": [
+            {
+              "executionSuccessful": false
+            }
+          ],
+          "results": [
+            {
+              "ruleId": "build-time-policy-fail.alpine:3.18.3.verify-artifact.build-time.origin",
+              "kind": "pass",
+              "message": {
+                "properties": {
+                  "summary": [
+                    {
+                      "type": "verify-artifact",
+                      "details": "1/1 evidence origin and signature verified"
+                    }
+                  ]
+                },
+                "text": "rule verdict result"
+              },
+              "occurrenceCount": 0,
+              "properties": {
+                "evidence": [
+                  {
+                    "content_type": "statement-slsa",
+                    "context_type": "local",
+                    "git_branch": "feature/evidence_policy_result4",
+                    "git_commit": "bd47d1b4389751aa3dbb67573d93ccfdd4f9251c",
+                    "git_ref": "refs/heads/feature/evidence_policy_result4",
+                    "git_url": "https://github.com/scribe-security/valint.git",
+                    "hostname": "mikey-thinkpad",
+                    "imageID": "sha256:7e01a0d0a1dcd9e539f8e9bbd80106d59efbdf97293b3d38f5d7a34501526cdb",
+                    "input_name": "alpine",
+                    "input_scheme": "docker",
+                    "input_tag": "3.18.3",
+                    "name": "valint..TestFailVerifyArtifactPolicyFile.cache.build-time-policy-fail",
+                    "predicate_type": "https://slsa.dev/provenance/v1",
+                    "ref": "/home/mikey/scribe/valint/test/integration/_tmp/output/TestFailVerifyArtifactPolicyFile/build-time-policy-fail/sha256-7e01a0d0a1dcd9e539f8e9bbd80106d59efbdf97293b3d38f5d7a34501526cdb.provenance.statement.json",
+                    "repoDigest": [
+                      "alpine@sha256:7144f7bab3d4c2648d7e59409f15ec52a18006a128c733fcff20d3a4a54ba44a"
+                    ],
+                    "sbomgroup": "image",
+                    "sbomhashs": [
+                      "sha256-7144f7bab3d4c2648d7e59409f15ec52a18006a128c733fcff20d3a4a54ba44a",
+                      "sha256-7e01a0d0a1dcd9e539f8e9bbd80106d59efbdf97293b3d38f5d7a34501526cdb"
+                    ],
+                    "sbomname": "index.docker.io/library/alpine:3.18.3",
+                    "sbompurl": "pkg:docker/index.docker.io/library/alpine:3.18.3@sha256:7e01a0d0a1dcd9e539f8e9bbd80106d59efbdf97293b3d38f5d7a34501526cdb?arch=amd64",
+                    "sbomversion": "sha256:7e01a0d0a1dcd9e539f8e9bbd80106d59efbdf97293b3d38f5d7a34501526cdb",
+                    "store": "cache",
+                    "tag": [
+                      "3.18.3",
+                      "latest",
+                      "3.18.3"
+                    ],
+                    "target_type": "image",
+                    "timestamp": "2023-10-26T11:37:19+03:00",
+                    "user": "mikey"
+                  }
+                ]
+              }
+            },
+            {
+              "ruleId": "build-time-policy-fail.alpine:3.18.3.verify-artifact.build-time.custom-script",
+              "kind": "fail",
+              "message": {
+                "properties": {
+                  "summary": [
+                    {
+                      "reason": "Image created outside of working hours: on day Monday, on hour 19"
+                    }
+                  ]
+                },
+                "text": "rule verdict result"
+              },
+              "occurrenceCount": 0
+            }
+          ],
+          "properties": {
+            "verifier-context": {
+              "hostname": "mikey-thinkpad",
+              "user": "mikey",
+              "name": "valint..TestFailVerifyArtifactPolicyFile.cache.build-time-policy-fail",
+              "timestamp": "2023-10-26T11:37:19+03:00",
+              "input_scheme": "docker",
+              "input_name": "alpine",
+              "input_tag": "3.18.3",
+              "content_type": "statement-sarif",
+              "context_type": "local",
+              "predicate_type": "https://cyclonedx.org/bom",
+              "git_url": "https://github.com/scribe-security/valint.git",
+              "git_branch": "feature/evidence_policy_result4",
+              "git_commit": "bd47d1b4389751aa3dbb67573d93ccfdd4f9251c",
+              "git_ref": "refs/heads/feature/evidence_policy_result4",
+              "imageID": "sha256:7e01a0d0a1dcd9e539f8e9bbd80106d59efbdf97293b3d38f5d7a34501526cdb",
+              "repoDigest": [
+                "alpine@sha256:7144f7bab3d4c2648d7e59409f15ec52a18006a128c733fcff20d3a4a54ba44a"
+              ],
+              "tag": [
+                "3.18.3",
+                "latest",
+                "3.18.3"
+              ],
+              "target_type": "image",
+              "sbomgroup": "image",
+              "sbomname": "index.docker.io/library/alpine:3.18.3",
+              "sbomversion": "sha256:7e01a0d0a1dcd9e539f8e9bbd80106d59efbdf97293b3d38f5d7a34501526cdb",
+              "sbomhashs": [
+                "sha256-7144f7bab3d4c2648d7e59409f15ec52a18006a128c733fcff20d3a4a54ba44a",
+                "sha256-7e01a0d0a1dcd9e539f8e9bbd80106d59efbdf97293b3d38f5d7a34501526cdb"
+              ],
+              "sbompurl": "pkg:docker/index.docker.io/library/alpine:3.18.3@sha256:7e01a0d0a1dcd9e539f8e9bbd80106d59efbdf97293b3d38f5d7a34501526cdb?arch=amd64",
+              "policies": [
+                "build-time-policy-fail.alpine:3.18.3"
+              ],
+              "modules": [
+                "build-time"
+              ],
+              "module_types": [
+                "verify-artifact"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,321 @@
+{
+  "_type": "https://in-toto.io/Statement/v0.1",
+  "predicateType": "https://cyclonedx.org/bom",
+  "subject": [
+    {
+      "name": "index.docker.io/library/busybox:1.36.1",
+      "digest": {
+        "sha256": "3fbc632167424a6d997e74f52b878d7cc478225cffac6bc977eedfe51c7f4e79"
+      }
+    },
+    {
+      "name": "index.docker.io/library/busybox:1.36.1",
+      "digest": {
+        "sha256": "a416a98b71e224a31ee99cff8e16063554498227d2b696152a9c3e0aa65e5824"
+      }
+    }
+  ],
+  "predicate": {
+    "environment": {
+      "hostname": "mikey-thinkpad",
+      "user": "mikey",
+      "name": "valint..TestFailVerifyArtifactPolicyFile.cache.required-packages-policy-fail",
+      "timestamp": "2023-10-26T11:37:07+03:00",
+      "input_scheme": "docker",
+      "input_name": "busybox",
+      "input_tag": "1.36.1",
+      "content_type": "statement-cyclonedx-json",
+      "context_type": "local",
+      "git_url": "https://github.com/scribe-security/valint.git",
+      "git_branch": "feature/evidence_policy_result4",
+      "git_commit": "bd47d1b4389751aa3dbb67573d93ccfdd4f9251c",
+      "git_ref": "refs/heads/feature/evidence_policy_result4",
+      "imageID": "sha256:a416a98b71e224a31ee99cff8e16063554498227d2b696152a9c3e0aa65e5824",
+      "repoDigest": [
+        "busybox@sha256:3fbc632167424a6d997e74f52b878d7cc478225cffac6bc977eedfe51c7f4e79"
+      ],
+      "tag": [
+        "1.36.1",
+        "latest",
+        "1.36.1"
+      ],
+      "target_type": "image",
+      "sbomgroup": "image",
+      "sbomname": "index.docker.io/library/busybox:1.36.1",
+      "sbomversion": "sha256:a416a98b71e224a31ee99cff8e16063554498227d2b696152a9c3e0aa65e5824",
+      "sbomhashs": [
+        "sha256-3fbc632167424a6d997e74f52b878d7cc478225cffac6bc977eedfe51c7f4e79",
+        "sha256-a416a98b71e224a31ee99cff8e16063554498227d2b696152a9c3e0aa65e5824"
+      ],
+      "sbompurl": "pkg:docker/index.docker.io/library/busybox:1.36.1@sha256:a416a98b71e224a31ee99cff8e16063554498227d2b696152a9c3e0aa65e5824?arch=amd64"
+    },
+    "bom": {
+      "$schema": "http://cyclonedx.org/schema/bom-1.4.schema.json",
+      "bomFormat": "CycloneDX",
+      "components": [
+        {
+          "bom-ref": "pkg:layer/index.docker.io/library/busybox:1.36.1@sha256:3d24ee258efc3bfe4066a1a9fb83febf6dc0b1548dfe896161533668281c9f4f?index=0\u0026ID=5412e8561b55cf85",
+          "group": "layer",
+          "hashes": [
+            {
+              "alg": "SHA-256",
+              "content": "3d24ee258efc3bfe4066a1a9fb83febf6dc0b1548dfe896161533668281c9f4f"
+            }
+          ],
+          "mime-type": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+          "name": "sha256:3d24ee258efc3bfe4066a1a9fb83febf6dc0b1548dfe896161533668281c9f4f",
+          "properties": [
+            {
+              "name": "size",
+              "value": "4261550"
+            },
+            {
+              "name": "CreatedBy",
+              "value": "#(nop) ADD file:7e9002edaafd4e4579b65c8f0aaabde1aeb7fd3f8d95579f7fd3443cef785fd1 in / "
+            },
+            {
+              "name": "index",
+              "value": "0"
+            }
+          ],
+          "purl": "pkg:layer/index.docker.io/library/busybox:1.36.1@sha256:3d24ee258efc3bfe4066a1a9fb83febf6dc0b1548dfe896161533668281c9f4f?index=0",
+          "type": "container",
+          "version": "sha256:3d24ee258efc3bfe4066a1a9fb83febf6dc0b1548dfe896161533668281c9f4f"
+        },
+        {
+          "bom-ref": "pkg:binary//bin/busybox@1.36.1?ID=33d80c1419fb210f",
+          "cpe": "cpe:2.3:a:busybox:busybox:1.36.1:*:*:*:*:*:*:*",
+          "group": "binary",
+          "name": "busybox",
+          "properties": [
+            {
+              "name": "cpe",
+              "value": "cpe:2.3:a:busybox:busybox:1.36.1:*:*:*:*:*:*:*"
+            },
+            {
+              "name": "importer-path",
+              "value": "/bin/["
+            },
+            {
+              "name": "layer_ref",
+              "value": "pkg:layer/index.docker.io/library/busybox:1.36.1@sha256:3d24ee258efc3bfe4066a1a9fb83febf6dc0b1548dfe896161533668281c9f4f?index=0\u0026ID=5412e8561b55cf85"
+            }
+          ],
+          "purl": "pkg:binary//bin/busybox@1.36.1",
+          "type": "library",
+          "version": "1.36.1"
+        },
+        {
+          "bom-ref": "pkg:file/./syft?ID=3fc30692bd4a0139",
+          "group": "syft",
+          "hashes": [
+            {
+              "alg": "SHA-256",
+              "content": "ce290f8dbbdbf5a6e2591024af03f93b46f68aabccf89c6dfe532291b1514a75"
+            }
+          ],
+          "mime-type": "application/json",
+          "name": "syft",
+          "properties": [
+            {
+              "name": "content",
+              "value": "ewogICJhcnRpZmFjdHMiOiBbCiAgICB7CiAgICAgICJpZCI6ICJiNDEyZjQyZjVmMzkyNThjIiwKICAgICAgIm5hbWUiOiAiYnVzeWJveCIsCiAgICAgICJ2ZXJzaW9uIjogIjEuMzYuMSIsCiAgICAgICJ0eXBlIjogImJpbmFyeSIsCiAgICAgICJmb3VuZEJ5IjogImJpbmFyeS1jYXRhbG9nZXIiLAogICAgICAibG9jYXRpb25zIjogWwogICAgICAgIHsKICAgICAgICAgICJwYXRoIjogIi9iaW4vWyIsCiAgICAgICAgICAibGF5ZXJJRCI6ICJzaGEyNTY6M2QyNGVlMjU4ZWZjM2JmZTQwNjZhMWE5ZmI4M2ZlYmY2ZGMwYjE1NDhkZmU4OTYxNjE1MzM2NjgyODFjOWY0ZiIsCiAgICAgICAgICAiYW5ub3RhdGlvbnMiOiB7CiAgICAgICAgICAgICJldmlkZW5jZSI6ICJwcmltYXJ5IgogICAgICAgICAgfQogICAgICAgIH0KICAgICAgXSwKICAgICAgImxpY2Vuc2VzIjogW10sCiAgICAgICJsYW5ndWFnZSI6ICIiLAogICAgICAiY3BlcyI6IFsKICAgICAgICAiY3BlOjIuMzphOmJ1c3lib3g6YnVzeWJveDoxLjM2LjE6KjoqOio6KjoqOio6KiIsCiAgICAgICAgImNwZToyLjM6YTpidXN5Ym94OmJ1c3lib3g6MS4zNi4xOio6KjoqOio6KjoqOioiCiAgICAgIF0sCiAgICAgICJwdXJsIjogIiIsCiAgICAgICJtZXRhZGF0YVR5cGUiOiAiQmluYXJ5TWV0YWRhdGEiLAogICAgICAibWV0YWRhdGEiOiB7CiAgICAgICAgIm1hdGNoZXMiOiBbCiAgICAgICAgICB7CiAgICAgICAgICAgICJjbGFzc2lmaWVyIjogImJ1c3lib3gtYmluYXJ5IiwKICAgICAgICAgICAgImxvY2F0aW9uIjogewogICAgICAgICAgICAgICJwYXRoIjogIi9iaW4vWyIsCiAgICAgICAgICAgICAgImxheWVySUQiOiAic2hhMjU2OjNkMjRlZTI1OGVmYzNiZmU0MDY2YTFhOWZiODNmZWJmNmRjMGIxNTQ4ZGZlODk2MTYxNTMzNjY4MjgxYzlmNGYiLAogICAgICAgICAgICAgICJhbm5vdGF0aW9ucyI6IHsKICAgICAgICAgICAgICAgICJldmlkZW5jZSI6ICJwcmltYXJ5IgogICAgICAgICAgICAgIH0KICAgICAgICAgICAgfQogICAgICAgICAgfQogICAgICAgIF0KICAgICAgfQogICAgfQogIF0sCiAgImFydGlmYWN0UmVsYXRpb25zaGlwcyI6IFsKICAgIHsKICAgICAgInBhcmVudCI6ICIyZGVhNmRlOGIzZjAxMjdjN2YzYmU3YzhjYzhhYjJiMGU3NzQzOGM2MzdkMzE0NzczYjZlOTM5OGIzNmNjYTM4IiwKICAgICAgImNoaWxkIjogImI0MTJmNDJmNWYzOTI1OGMiLAogICAgICAidHlwZSI6ICJjb250YWlucyIKICAgIH0sCiAgICB7CiAgICAgICJwYXJlbnQiOiAiYjQxMmY0MmY1ZjM5MjU4YyIsCiAgICAgICJjaGlsZCI6ICI4NDQwMmRlZThlNWM5ODMwIiwKICAgICAgInR5cGUiOiAiZXZpZGVudC1ieSIKICAgIH0KICBdLAogICJzb3VyY2UiOiB7CiAgICAiaWQiOiAiMmRlYTZkZThiM2YwMTI3YzdmM2JlN2M4Y2M4YWIyYjBlNzc0MzhjNjM3ZDMxNDc3M2I2ZTkzOThiMzZjY2EzOCIsCiAgICAidHlwZSI6ICJpbWFnZSIsCiAgICAidGFyZ2V0IjogewogICAgICAidXNlcklucHV0IjogImJ1c3lib3g6MS4zNi4xIiwKICAgICAgImltYWdlSUQiOiAic2hhMjU2OmE0MTZhOThiNzFlMjI0YTMxZWU5OWNmZjhlMTYwNjM1NTQ0OTgyMjdkMmI2OTYxNTJhOWMzZTBhYTY1ZTU4MjQiLAogICAgICAibWFuaWZlc3REaWdlc3QiOiAic2hhMjU2OjJkZWE2ZGU4YjNmMDEyN2M3ZjNiZTdjOGNjOGFiMmIwZTc3NDM4YzYzN2QzMTQ3NzNiNmU5Mzk4YjM2Y2NhMzgiLAogICAgICAibWVkaWFUeXBlIjogImFwcGxpY2F0aW9uL3ZuZC5kb2NrZXIuZGlzdHJpYnV0aW9uLm1hbmlmZXN0LnYyK2pzb24iLAogICAgICAidGFncyI6IFsKICAgICAgICAiYnVzeWJveDoxLjM2LjEiLAogICAgICAgICJidXN5Ym94OmxhdGVzdCIKICAgICAgXSwKICAgICAgImltYWdlU2l6ZSI6IDQyNjE1NTAsCiAgICAgICJsYXllcnMiOiBbCiAgICAgICAgewogICAgICAgICAgIm1lZGlhVHlwZSI6ICJhcHBsaWNhdGlvbi92bmQuZG9ja2VyLmltYWdlLnJvb3Rmcy5kaWZmLnRhci5nemlwIiwKICAgICAgICAgICJkaWdlc3QiOiAic2hhMjU2OjNkMjRlZTI1OGVmYzNiZmU0MDY2YTFhOWZiODNmZWJmNmRjMGIxNTQ4ZGZlODk2MTYxNTMzNjY4MjgxYzlmNGYiLAogICAgICAgICAgInNpemUiOiA0MjYxNTUwCiAgICAgICAgfQogICAgICBdLAogICAgICAibWFuaWZlc3QiOiAiZXlKelkyaGxiV0ZXWlhKemFXOXVJam95TENKdFpXUnBZVlI1Y0dVaU9pSmhjSEJzYVdOaGRHbHZiaTkyYm1RdVpHOWphMlZ5TG1ScGMzUnlhV0oxZEdsdmJpNXRZVzVwWm1WemRDNTJNaXRxYzI5dUlpd2lZMjl1Wm1sbklqcDdJbTFsWkdsaFZIbHdaU0k2SW1Gd2NHeHBZMkYwYVc5dUwzWnVaQzVrYjJOclpYSXVZMjl1ZEdGcGJtVnlMbWx0WVdkbExuWXhLMnB6YjI0aUxDSnphWHBsSWpveE5EVTNMQ0prYVdkbGMzUWlPaUp6YUdFeU5UWTZZVFF4Tm1FNU9HSTNNV1V5TWpSaE16RmxaVGs1WTJabU9HVXhOakEyTXpVMU5EUTVPREl5TjJReVlqWTVOakUxTW1FNVl6TmxNR0ZoTmpWbE5UZ3lOQ0o5TENKc1lYbGxjbk1pT2x0N0ltMWxaR2xoVkhsd1pTSTZJbUZ3Y0d4cFkyRjBhVzl1TDNadVpDNWtiMk5yWlhJdWFXMWhaMlV1Y205dmRHWnpMbVJwWm1ZdWRHRnlMbWQ2YVhBaUxDSnphWHBsSWpvME5Ea3lNamc0TENKa2FXZGxjM1FpT2lKemFHRXlOVFk2TTJReU5HVmxNalU0Wldaak0ySm1aVFF3TmpaaE1XRTVabUk0TTJabFltWTJaR013WWpFMU5EaGtabVU0T1RZeE5qRTFNek0yTmpneU9ERmpPV1kwWmlKOVhYMD0iLAogICAgICAiY29uZmlnIjogImV5SmhjbU5vYVhSbFkzUjFjbVVpT2lKaGJXUTJOQ0lzSW1OdmJtWnBaeUk2ZXlKSWIzTjBibUZ0WlNJNklpSXNJa1J2YldGcGJtNWhiV1VpT2lJaUxDSlZjMlZ5SWpvaUlpd2lRWFIwWVdOb1UzUmthVzRpT21aaGJITmxMQ0pCZEhSaFkyaFRkR1J2ZFhRaU9tWmhiSE5sTENKQmRIUmhZMmhUZEdSbGNuSWlPbVpoYkhObExDSlVkSGtpT21aaGJITmxMQ0pQY0dWdVUzUmthVzRpT21aaGJITmxMQ0pUZEdScGJrOXVZMlVpT21aaGJITmxMQ0pGYm5ZaU9sc2lVRUZVU0QwdmRYTnlMMnh2WTJGc0wzTmlhVzQ2TDNWemNpOXNiMk5oYkM5aWFXNDZMM1Z6Y2k5elltbHVPaTkxYzNJdlltbHVPaTl6WW1sdU9pOWlhVzRpWFN3aVEyMWtJanBiSW5Ob0lsMHNJa2x0WVdkbElqb2ljMmhoTWpVMk9qa3hPV1JsTnpsbE9UUmpaVFEyTkRBNU9HTmxZemhoTkRjNU5tWXlOMkZoTW1Rd1l6a3pPVGcxWlRJM1pqWmhNVFUzWXpoaVltSTFOVGMxTmpnd01UTWlMQ0pXYjJ4MWJXVnpJanB1ZFd4c0xDSlhiM0pyYVc1blJHbHlJam9pSWl3aVJXNTBjbmx3YjJsdWRDSTZiblZzYkN3aVQyNUNkV2xzWkNJNmJuVnNiQ3dpVEdGaVpXeHpJanB1ZFd4c2ZTd2lZMjl1ZEdGcGJtVnlJam9pWVdSbVlUQTFNREl6TjJFMVptTm1PV1l4WlRWaFpEWXpOVEZpTXpZMk5XVTBZams1WlRCak1USm1Nek5pWkdRek5UTTFZamhtWWpBd01XWTVaR1F5WlNJc0ltTnZiblJoYVc1bGNsOWpiMjVtYVdjaU9uc2lTRzl6ZEc1aGJXVWlPaUpoWkdaaE1EVXdNak0zWVRVaUxDSkViMjFoYVc1dVlXMWxJam9pSWl3aVZYTmxjaUk2SWlJc0lrRjBkR0ZqYUZOMFpHbHVJanBtWVd4elpTd2lRWFIwWVdOb1UzUmtiM1YwSWpwbVlXeHpaU3dpUVhSMFlXTm9VM1JrWlhKeUlqcG1ZV3h6WlN3aVZIUjVJanBtWVd4elpTd2lUM0JsYmxOMFpHbHVJanBtWVd4elpTd2lVM1JrYVc1UGJtTmxJanBtWVd4elpTd2lSVzUySWpwYklsQkJWRWc5TDNWemNpOXNiMk5oYkM5elltbHVPaTkxYzNJdmJHOWpZV3d2WW1sdU9pOTFjM0l2YzJKcGJqb3ZkWE55TDJKcGJqb3ZjMkpwYmpvdlltbHVJbDBzSWtOdFpDSTZXeUl2WW1sdUwzTm9JaXdpTFdNaUxDSWpLRzV2Y0NrZ0lpd2lRMDFFSUZ0Y0luTm9YQ0pkSWwwc0lrbHRZV2RsSWpvaWMyaGhNalUyT2preE9XUmxOemxsT1RSalpUUTJOREE1T0dObFl6aGhORGM1Tm1ZeU4yRmhNbVF3WXprek9UZzFaVEkzWmpaaE1UVTNZemhpWW1JMU5UYzFOamd3TVRNaUxDSldiMngxYldWeklqcHVkV3hzTENKWGIzSnJhVzVuUkdseUlqb2lJaXdpUlc1MGNubHdiMmx1ZENJNmJuVnNiQ3dpVDI1Q2RXbHNaQ0k2Ym5Wc2JDd2lUR0ZpWld4eklqcDdmWDBzSW1OeVpXRjBaV1FpT2lJeU1ESXpMVEEzTFRFNFZESXpPakU1T2pNekxqWTFOVEF3TlRrMk1sb2lMQ0prYjJOclpYSmZkbVZ5YzJsdmJpSTZJakl3TGpFd0xqSXpJaXdpYUdsemRHOXllU0k2VzNzaVkzSmxZWFJsWkNJNklqSXdNak10TURjdE1UaFVNak02TVRrNk16TXVOVE00TlRjeE9EVTBXaUlzSW1OeVpXRjBaV1JmWW5raU9pSXZZbWx1TDNOb0lDMWpJQ01vYm05d0tTQkJSRVFnWm1sc1pUbzNaVGt3TURKbFpHRmhabVEwWlRRMU56bGlOalZqT0dZd1lXRmhZbVJsTVdGbFlqZG1aRE5tT0dRNU5UVTNPV1kzWm1Rek5EUXpZMlZtTnpnMVptUXhJR2x1SUM4Z0luMHNleUpqY21WaGRHVmtJam9pTWpBeU15MHdOeTB4T0ZReU16b3hPVG96TXk0Mk5UVXdNRFU1TmpKYUlpd2lZM0psWVhSbFpGOWllU0k2SWk5aWFXNHZjMmdnTFdNZ0l5aHViM0FwSUNCRFRVUWdXMXdpYzJoY0lsMGlMQ0psYlhCMGVWOXNZWGxsY2lJNmRISjFaWDFkTENKdmN5STZJbXhwYm5WNElpd2ljbTl2ZEdaeklqcDdJblI1Y0dVaU9pSnNZWGxsY25NaUxDSmthV1ptWDJsa2N5STZXeUp6YUdFeU5UWTZNMlF5TkdWbE1qVTRaV1pqTTJKbVpUUXdOalpoTVdFNVptSTRNMlpsWW1ZMlpHTXdZakUxTkRoa1ptVTRPVFl4TmpFMU16TTJOamd5T0RGak9XWTBaaUpkZlgwPSIsCiAgICAgICJyZXBvRGlnZXN0cyI6IFsKICAgICAgICAiYnVzeWJveEBzaGEyNTY6M2ZiYzYzMjE2NzQyNGE2ZDk5N2U3NGY1MmI4NzhkN2NjNDc4MjI1Y2ZmYWM2YmM5NzdlZWRmZTUxYzdmNGU3OSIKICAgICAgXSwKICAgICAgImFyY2hpdGVjdHVyZSI6ICJhbWQ2NCIsCiAgICAgICJvcyI6ICJsaW51eCIKICAgIH0KICB9LAogICJkaXN0cm8iOiB7CiAgICAicHJldHR5TmFtZSI6ICJCdXN5Qm94IHYxLjM2LjEiLAogICAgIm5hbWUiOiAiYnVzeWJveCIsCiAgICAiaWQiOiAiYnVzeWJveCIsCiAgICAiaWRMaWtlIjogWwogICAgICAiYnVzeWJveCIKICAgIF0sCiAgICAidmVyc2lvbiI6ICIxLjM2LjEiLAogICAgInZlcnNpb25JRCI6ICIxLjM2LjEiCiAgfSwKICAiZGVzY3JpcHRvciI6IHsKICAgICJuYW1lIjogInN5ZnQiLAogICAgInZlcnNpb24iOiAiW25vdCBwcm92aWRlZF0iLAogICAgImNvbmZpZ3VyYXRpb24iOiB7CiAgICAgICJhdHRlc3QiOiB7fSwKICAgICAgImNhdGFsb2dlcnMiOiBbCiAgICAgICAgImFwa2RiIiwKICAgICAgICAiYmluYXJ5IiwKICAgICAgICAiZG90bmV0IiwKICAgICAgICAiZHBrZyIsCiAgICAgICAgImdvLW1vZCIsCiAgICAgICAgImphdmEiLAogICAgICAgICJqYXZhc2NyaXB0IiwKICAgICAgICAicHl0aG9uIiwKICAgICAgICAici1wYWNrYWdlIiwKICAgICAgICAicnBtIiwKICAgICAgICAicnVieSIsCiAgICAgICAgInJ1c3QiLAogICAgICAgICJzYm9tIgogICAgICBdLAogICAgICAiY2hlY2stZm9yLWFwcC11cGRhdGUiOiB0cnVlLAogICAgICAiY29uZmlnUGF0aCI6ICIiLAogICAgICAiZGVmYXVsdC1pbWFnZS1wdWxsLXNvdXJjZSI6ICIiLAogICAgICAiZGV2IjogewogICAgICAgICJwcm9maWxlLWNwdSI6IGZhbHNlLAogICAgICAgICJwcm9maWxlLW1lbSI6IGZhbHNlCiAgICAgIH0sCiAgICAgICJleGNsdWRlIjogWwogICAgICAgICIqKi8qLnB5YyIsCiAgICAgICAgIioqLy5naXQvKioiCiAgICAgIF0sCiAgICAgICJmaWxlIjogIiIsCiAgICAgICJmaWxlLWNsYXNzaWZpY2F0aW9uIjogewogICAgICAgICJjYXRhbG9nZXIiOiB7CiAgICAgICAgICAiZW5hYmxlZCI6IGZhbHNlLAogICAgICAgICAgInNjb3BlIjogInNxdWFzaGVkIgogICAgICAgIH0KICAgICAgfSwKICAgICAgImZpbGUtY29udGVudHMiOiB7CiAgICAgICAgImNhdGFsb2dlciI6IHsKICAgICAgICAgICJlbmFibGVkIjogZmFsc2UsCiAgICAgICAgICAic2NvcGUiOiAic3F1YXNoZWQiCiAgICAgICAgfSwKICAgICAgICAiZ2xvYnMiOiBbXSwKICAgICAgICAic2tpcC1maWxlcy1hYm92ZS1zaXplIjogMTA0ODU3NgogICAgICB9LAogICAgICAiZmlsZS1tZXRhZGF0YSI6IHsKICAgICAgICAiY2F0YWxvZ2VyIjogewogICAgICAgICAgImVuYWJsZWQiOiBmYWxzZSwKICAgICAgICAgICJzY29wZSI6ICJzcXVhc2hlZCIKICAgICAgICB9LAogICAgICAgICJkaWdlc3RzIjogWwogICAgICAgICAgInNoYTI1NiIKICAgICAgICBdCiAgICAgIH0sCiAgICAgICJnb2xhbmciOiB7CiAgICAgICAgImxvY2FsLW1vZC1jYWNoZS1kaXIiOiAiIiwKICAgICAgICAibm8tcHJveHkiOiAiIiwKICAgICAgICAicHJveHkiOiAiIiwKICAgICAgICAic2VhcmNoLWxvY2FsLW1vZC1jYWNoZS1saWNlbnNlcyI6IGZhbHNlLAogICAgICAgICJzZWFyY2gtcmVtb3RlLWxpY2Vuc2VzIjogZmFsc2UKICAgICAgfSwKICAgICAgImxpbnV4LWtlcm5lbCI6IHsKICAgICAgICAiY2F0YWxvZy1tb2R1bGVzIjogZmFsc2UKICAgICAgfSwKICAgICAgImxvZyI6IHsKICAgICAgICAiZmlsZS1sb2NhdGlvbiI6ICIiLAogICAgICAgICJsZXZlbCI6ICJ3YXJuIiwKICAgICAgICAic3RydWN0dXJlZCI6IGZhbHNlCiAgICAgIH0sCiAgICAgICJuYW1lIjogIiIsCiAgICAgICJvdXRwdXQiOiBbCiAgICAgICAgImpzb24iCiAgICAgIF0sCiAgICAgICJvdXRwdXQtdGVtcGxhdGUtcGF0aCI6ICIiLAogICAgICAicGFja2FnZSI6IHsKICAgICAgICAiY2F0YWxvZ2VyIjogewogICAgICAgICAgImVuYWJsZWQiOiB0cnVlLAogICAgICAgICAgInNjb3BlIjogInNxdWFzaGVkIgogICAgICAgIH0sCiAgICAgICAgImNhdGFsb2dlci1ncm91cCI6ICJpbnN0YWxsIiwKICAgICAgICAiY2F0YWxvZ2VycyI6IFtdLAogICAgICAgICJzZWFyY2gtaW5kZXhlZC1hcmNoaXZlcyI6IHRydWUsCiAgICAgICAgInNlYXJjaC11bmluZGV4ZWQtYXJjaGl2ZXMiOiBmYWxzZQogICAgICB9LAogICAgICAicGFyYWxsZWxpc20iOiAwLAogICAgICAicGxhdGZvcm0iOiAiIiwKICAgICAgInF1aWV0IjogZmFsc2UsCiAgICAgICJyZWdpc3RyeSI6IHsKICAgICAgICAiYXV0aCI6IFsKICAgICAgICAgIHsKICAgICAgICAgICAgImF1dGhvcml0eSI6ICIiCiAgICAgICAgICB9CiAgICAgICAgXSwKICAgICAgICAiaW5zZWN1cmUtc2tpcC10bHMtdmVyaWZ5IjogZmFsc2UsCiAgICAgICAgImluc2VjdXJlLXVzZS1odHRwIjogZmFsc2UKICAgICAgfSwKICAgICAgInNlY3JldHMiOiB7CiAgICAgICAgImFkZGl0aW9uYWwtcGF0dGVybnMiOiB7fSwKICAgICAgICAiY2F0YWxvZ2VyIjogewogICAgICAgICAgImVuYWJsZWQiOiBmYWxzZSwKICAgICAgICAgICJzY29wZSI6ICJhbGwtbGF5ZXJzIgogICAgICAgIH0sCiAgICAgICAgImV4Y2x1ZGUtcGF0dGVybi1uYW1lcyI6IFtdLAogICAgICAgICJyZXZlYWwtdmFsdWVzIjogZmFsc2UsCiAgICAgICAgInNraXAtZmlsZXMtYWJvdmUtc2l6ZSI6IDEwNDg1NzYKICAgICAgfSwKICAgICAgInNvdXJjZS1uYW1lIjogIiIsCiAgICAgICJzb3VyY2UtdmVyc2lvbiI6ICIiLAogICAgICAidmVyYm9zaXR5IjogMAogICAgfQogIH0sCiAgInNjaGVtYSI6IHsKICAgICJ2ZXJzaW9uIjogIjguMC4xIiwKICAgICJ1cmwiOiAiaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL2FuY2hvcmUvc3lmdC9tYWluL3NjaGVtYS9qc29uL3NjaGVtYS04LjAuMS5qc29uIgogIH0KfQ=="
+            }
+          ],
+          "purl": "pkg:file/./syft",
+          "type": "file"
+        }
+      ],
+      "dependencies": [
+        {
+          "dependsOn": [
+            "pkg:layer/index.docker.io/library/busybox:1.36.1@sha256:3d24ee258efc3bfe4066a1a9fb83febf6dc0b1548dfe896161533668281c9f4f?index=0\u0026ID=5412e8561b55cf85"
+          ],
+          "ref": "pkg:docker/index.docker.io/library/busybox:1.36.1@sha256:a416a98b71e224a31ee99cff8e16063554498227d2b696152a9c3e0aa65e5824?arch=amd64\u0026ID=8e3beed25c4b8ac3"
+        },
+        {
+          "dependsOn": [
+            "pkg:binary//bin/busybox@1.36.1?ID=33d80c1419fb210f"
+          ],
+          "ref": "pkg:layer/index.docker.io/library/busybox:1.36.1@sha256:3d24ee258efc3bfe4066a1a9fb83febf6dc0b1548dfe896161533668281c9f4f?index=0\u0026ID=5412e8561b55cf85"
+        }
+      ],
+      "metadata": {
+        "authors": [
+          {}
+        ],
+        "component": {
+          "bom-ref": "pkg:docker/index.docker.io/library/busybox:1.36.1@sha256:a416a98b71e224a31ee99cff8e16063554498227d2b696152a9c3e0aa65e5824?arch=amd64\u0026ID=8e3beed25c4b8ac3",
+          "components": [
+            {
+              "description": "BusyBox v1.36.1",
+              "name": "busybox",
+              "properties": [
+                {
+                  "name": "VersionID",
+                  "value": "1.36.1"
+                },
+                {
+                  "name": "PrettyName",
+                  "value": "BusyBox v1.36.1"
+                },
+                {
+                  "name": "Name",
+                  "value": "busybox"
+                },
+                {
+                  "name": "ID",
+                  "value": "busybox"
+                },
+                {
+                  "name": "Version",
+                  "value": "1.36.1"
+                }
+              ],
+              "swid": {
+                "name": "busybox",
+                "tagId": "busybox",
+                "version": "1.36.1"
+              },
+              "type": "operating-system",
+              "version": "1.36.1"
+            }
+          ],
+          "group": "image",
+          "hashes": [
+            {
+              "alg": "SHA-256",
+              "content": "3fbc632167424a6d997e74f52b878d7cc478225cffac6bc977eedfe51c7f4e79"
+            },
+            {
+              "alg": "SHA-256",
+              "content": "a416a98b71e224a31ee99cff8e16063554498227d2b696152a9c3e0aa65e5824"
+            }
+          ],
+          "mime-type": "application/vnd.docker.distribution.manifest.v2+json",
+          "name": "index.docker.io/library/busybox:1.36.1",
+          "properties": [
+            {
+              "name": "repoDigest_0",
+              "value": "busybox@sha256:3fbc632167424a6d997e74f52b878d7cc478225cffac6bc977eedfe51c7f4e79"
+            },
+            {
+              "name": "imageID",
+              "value": "sha256:a416a98b71e224a31ee99cff8e16063554498227d2b696152a9c3e0aa65e5824"
+            },
+            {
+              "name": "input_tag",
+              "value": "1.36.1"
+            },
+            {
+              "name": "git_ref",
+              "value": "refs/heads/feature/evidence_policy_result4"
+            },
+            {
+              "name": "hostname",
+              "value": "mikey-thinkpad"
+            },
+            {
+              "name": "timestamp",
+              "value": "2023-10-26T11:37:07+03:00"
+            },
+            {
+              "name": "git_commit",
+              "value": "bd47d1b4389751aa3dbb67573d93ccfdd4f9251c"
+            },
+            {
+              "name": "input_scheme",
+              "value": "docker"
+            },
+            {
+              "name": "context_type",
+              "value": "local"
+            },
+            {
+              "name": "git_url",
+              "value": "https://github.com/scribe-security/valint.git"
+            },
+            {
+              "name": "git_branch",
+              "value": "feature/evidence_policy_result4"
+            },
+            {
+              "name": "user",
+              "value": "mikey"
+            },
+            {
+              "name": "name",
+              "value": "valint..TestFailVerifyArtifactPolicyFile.cache.required-packages-policy-fail"
+            },
+            {
+              "name": "input_name",
+              "value": "busybox"
+            },
+            {
+              "name": "architecture",
+              "value": "amd64"
+            },
+            {
+              "name": "OS",
+              "value": "linux"
+            },
+            {
+              "name": "manifest-digest",
+              "value": "sha256:2dea6de8b3f0127c7f3be7c8cc8ab2b0e77438c637d314773b6e9398b36cca38"
+            },
+            {
+              "name": "media-type",
+              "value": "application/vnd.docker.distribution.manifest.v2+json"
+            },
+            {
+              "name": "created",
+              "value": "2023-07-18T23:19:33.655005962Z"
+            },
+            {
+              "name": "entrypoint",
+              "value": "sh"
+            },
+            {
+              "name": "tag_0",
+              "value": "1.36.1"
+            },
+            {
+              "name": "tag_1",
+              "value": "latest"
+            },
+            {
+              "name": "tag_2",
+              "value": "1.36.1"
+            }
+          ],
+          "purl": "pkg:docker/index.docker.io/library/busybox:1.36.1@sha256:a416a98b71e224a31ee99cff8e16063554498227d2b696152a9c3e0aa65e5824?arch=amd64",
+          "type": "container",
+          "version": "sha256:a416a98b71e224a31ee99cff8e16063554498227d2b696152a9c3e0aa65e5824"
+        },
+        "supplier": {
+          "contact": [
+            {}
+          ],
+          "name": "",
+          "url": []
+        },
+        "timestamp": "2023-10-26T11:37:08+03:00",
+        "tools": [
+          {
+            "externalReferences": [
+              {
+                "type": "other",
+                "url": "https://scribesecuriy.jfrog.io/scribe-docker-public-local/valint:0.4.2-SNAPSHOT-bd47d1b"
+              }
+            ],
+            "name": "valint",
+            "vendor": "Scribe security, Inc",
+            "version": "0.4.2-SNAPSHOT-bd47d1b"
+          }
+        ]
+      },
+      "specVersion": "1.4",
+      "version": 1
+    }
+  }
+}

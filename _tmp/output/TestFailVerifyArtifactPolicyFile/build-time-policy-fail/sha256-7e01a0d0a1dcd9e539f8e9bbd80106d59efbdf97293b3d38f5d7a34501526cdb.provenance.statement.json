@@ -1,0 +1,137 @@
+{
+  "_type": "https://in-toto.io/Statement/v0.1",
+  "predicateType": "https://slsa.dev/provenance/v1",
+  "subject": [
+    {
+      "name": "index.docker.io/library/alpine:3.18.3",
+      "digest": {
+        "sha256": "7144f7bab3d4c2648d7e59409f15ec52a18006a128c733fcff20d3a4a54ba44a"
+      }
+    },
+    {
+      "name": "index.docker.io/library/alpine:3.18.3",
+      "digest": {
+        "sha256": "7e01a0d0a1dcd9e539f8e9bbd80106d59efbdf97293b3d38f5d7a34501526cdb"
+      }
+    }
+  ],
+  "predicate": {
+    "buildDefinition": {
+      "buildType": "local",
+      "externalParameters": {
+        "source": {
+          "digest": {
+            "sha1": "bd47d1b4389751aa3dbb67573d93ccfdd4f9251c"
+          },
+          "uri": "https://github.com/scribe-security/valint.git@refs/heads/feature/evidence_policy_result4"
+        }
+      },
+      "internalParameters": {
+        "content_type": "statement-slsa",
+        "context_type": "local",
+        "git_branch": "feature/evidence_policy_result4",
+        "git_commit": "bd47d1b4389751aa3dbb67573d93ccfdd4f9251c",
+        "git_ref": "refs/heads/feature/evidence_policy_result4",
+        "git_url": "https://github.com/scribe-security/valint.git",
+        "hostname": "mikey-thinkpad",
+        "imageID": "sha256:7e01a0d0a1dcd9e539f8e9bbd80106d59efbdf97293b3d38f5d7a34501526cdb",
+        "input_name": "alpine",
+        "input_scheme": "docker",
+        "input_tag": "3.18.3",
+        "name": "valint..TestFailVerifyArtifactPolicyFile.cache.build-time-policy-fail",
+        "repoDigest": [
+          "alpine@sha256:7144f7bab3d4c2648d7e59409f15ec52a18006a128c733fcff20d3a4a54ba44a"
+        ],
+        "sbomgroup": "image",
+        "sbomhashs": [
+          "sha256-7144f7bab3d4c2648d7e59409f15ec52a18006a128c733fcff20d3a4a54ba44a",
+          "sha256-7e01a0d0a1dcd9e539f8e9bbd80106d59efbdf97293b3d38f5d7a34501526cdb"
+        ],
+        "sbomname": "index.docker.io/library/alpine:3.18.3",
+        "sbompurl": "pkg:docker/index.docker.io/library/alpine:3.18.3@sha256:7e01a0d0a1dcd9e539f8e9bbd80106d59efbdf97293b3d38f5d7a34501526cdb?arch=amd64",
+        "sbomversion": "sha256:7e01a0d0a1dcd9e539f8e9bbd80106d59efbdf97293b3d38f5d7a34501526cdb",
+        "tag": [
+          "3.18.3",
+          "latest",
+          "3.18.3"
+        ],
+        "target_type": "image",
+        "timestamp": "2023-10-26T11:37:19+03:00",
+        "user": "mikey"
+      },
+      "resolvedDependencies": [
+        {
+          "uri": "https://github.com/scribe-security/valint.git@refs/heads/feature/evidence_policy_result4",
+          "digest": {
+            "sha1": "bd47d1b4389751aa3dbb67573d93ccfdd4f9251c"
+          },
+          "name": "refs/heads/feature/evidence_policy_result4",
+          "annotations": {
+            "branch": "feature/evidence_policy_result4",
+            "tag": ""
+          }
+        },
+        {
+          "uri": "alpine@sha256:7144f7bab3d4c2648d7e59409f15ec52a18006a128c733fcff20d3a4a54ba44a",
+          "name": "index.docker.io/library/alpine:3.18.3",
+          "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+          "annotations": {
+            "OS": "linux",
+            "architecture": "amd64",
+            "context_type": "local",
+            "created": "2023-08-07T19:20:20.894140623Z",
+            "entrypoint": "/bin/sh",
+            "git_branch": "feature/evidence_policy_result4",
+            "git_commit": "bd47d1b4389751aa3dbb67573d93ccfdd4f9251c",
+            "git_ref": "refs/heads/feature/evidence_policy_result4",
+            "git_url": "https://github.com/scribe-security/valint.git",
+            "hostname": "mikey-thinkpad",
+            "imageID": "sha256:7e01a0d0a1dcd9e539f8e9bbd80106d59efbdf97293b3d38f5d7a34501526cdb",
+            "input_name": "alpine",
+            "input_scheme": "docker",
+            "input_tag": "3.18.3",
+            "manifest-digest": "sha256:6d89667335bb5ba3a5a91fefa901c131f53f8d2ce54aefbe7064ccbbdbd01eb9",
+            "media-type": "application/vnd.docker.distribution.manifest.v2+json",
+            "name": "valint..TestFailVerifyArtifactPolicyFile.cache.build-time-policy-fail",
+            "repoDigest_0": "alpine@sha256:7144f7bab3d4c2648d7e59409f15ec52a18006a128c733fcff20d3a4a54ba44a",
+            "tag_0": "3.18.3",
+            "tag_1": "latest",
+            "tag_2": "3.18.3",
+            "timestamp": "2023-10-26T11:37:19+03:00",
+            "user": "mikey"
+          }
+        }
+      ]
+    },
+    "runDetails": {
+      "builder": {
+        "id": "local",
+        "builderDependencies": [
+          {
+            "uri": "https://scribesecuriy.jfrog.io/scribe-docker-public-local/valint:0.4.2-SNAPSHOT-bd47d1b",
+            "name": "valint",
+            "annotations": {
+              "vendor": "Scribe security, Inc",
+              "version": "0.4.2-SNAPSHOT-bd47d1b"
+            }
+          }
+        ]
+      },
+      "metadata": {},
+      "byproducts": [
+        {
+          "uri": "pkg:layer/index.docker.io/library/alpine:3.18.3@sha256:4693057ce2364720d39e57e85a5b8e0bd9ac3573716237736d6470ec5b7b7230?index=0",
+          "digest": {
+            "sha256": "4693057ce2364720d39e57e85a5b8e0bd9ac3573716237736d6470ec5b7b7230"
+          },
+          "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+          "annotations": {
+            "CreatedBy": "#(nop) ADD file:32ff5e7a78b890996ee4681cc0a26185d3e9acdb4eb1e2aaccb2411f922fed6b in / ",
+            "index": "0",
+            "size": "7330497"
+          }
+        }
+      ]
+    }
+  }
+}

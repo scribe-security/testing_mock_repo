@@ -1,0 +1,41 @@
+attest:
+  config: ""
+  default: ""
+  push: false
+  cocosign:
+    signer:
+      x509:
+        enable: true
+        private: testdata/keys/test.key.pem
+        cert: testdata/keys/test.cert.pem
+        ca: testdata/keys/ca-chain.cert.pem
+    verifier:
+      x509:
+        enable: true
+        cert: testdata/keys/test.cert.pem
+        ca: testdata/keys/ca-chain.cert.pem
+    policies:
+    - enable: true
+      name: no-blind-scripts-policy-fail.mongo-express:0.54.0
+      modules:
+      - enable: true
+        type: verify-artifact
+        name: no-blind-scripts
+        input:
+          format: statement-cyclonedx-json
+          rego:
+            args:
+              blocklist:
+              - curl
+            path: policies/no-blind-scripts.rego
+          signed: false
+  x509: {}
+list:
+  columns: []
+  filters: {}
+  current: false
+download:
+  folder-path: ""
+  format: ""
+  ref: ""
+  store: ""

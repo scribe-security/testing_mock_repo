@@ -1,0 +1,38 @@
+attest:
+  config: ""
+  default: ""
+  push: false
+  cocosign:
+    signer:
+      x509:
+        enable: true
+        private: testdata/keys/test.key.pem
+        cert: testdata/keys/test.cert.pem
+        ca: testdata/keys/ca-chain.cert.pem
+    verifier:
+      x509:
+        enable: true
+        cert: testdata/keys/test.cert.pem
+        ca: testdata/keys/ca-chain.cert.pem
+    policies:
+    - enable: true
+      name: complete-licenses-policy-fail.ubuntu:jammy-20230804
+      modules:
+      - enable: true
+        type: verify-artifact
+        name: complete-licenses
+        input:
+          format: statement-cyclonedx-json
+          rego:
+            path: policies/complete-licenses.rego
+          signed: false
+  x509: {}
+list:
+  columns: []
+  filters: {}
+  current: false
+download:
+  folder-path: ""
+  format: ""
+  ref: ""
+  store: ""
