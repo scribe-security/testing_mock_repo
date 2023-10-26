@@ -35,39 +35,12 @@
                   "LOW"
                 ]
               }
-            }
+            },
           ],
           "version": "0.36.1"
         }
       },
       "results": [
-        {
-          "ruleId": "CVE-2022-3715",
-          "ruleIndex": 0,
-          "level": "note",
-          "message": {
-            "text": "Package: bash\nInstalled Version: 5.1-6ubuntu1\nVulnerability CVE-2022-3715\nSeverity: LOW\nFixed Version: \nLink: [CVE-2022-3715](https://avd.aquasec.com/nvd/cve-2022-3715)"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "library/ubuntu",
-                  "uriBaseId": "ROOTPATH"
-                },
-                "region": {
-                  "startLine": 1,
-                  "startColumn": 1,
-                  "endLine": 1,
-                  "endColumn": 1
-                }
-              },
-              "message": {
-                "text": "library/ubuntu: bash@5.1-6ubuntu1"
-              }
-            }
-          ]
-        },
         {
           "ruleId": "CVE-2016-2781",
           "ruleIndex": 1,
